@@ -1,8 +1,8 @@
 ---
-icon: circle-info
-cover: /assets/images/cover3.jpg
+icon: user
+article: false
 ---
 
-# Intro Page
+# About Me
 
-Place your introduction and profile here.
+Welcome to my blog！
