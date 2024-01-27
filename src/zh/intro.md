@@ -1,8 +1,8 @@
 ---
-icon: circle-info
-cover: /assets/images/cover3.jpg
+icon: user
+article: false
 ---
 
-# 介绍页
+# 关于我
 
-将你的个人介绍和档案放置在此处。
+欢迎来到我的博客！

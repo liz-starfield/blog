@@ -1,9 +1,8 @@
 ---
-title: Features demo
+title: Project
 index: false
-icon: laptop-code
-category:
-  - Guide
+icon: star
+sidebar: false
+article: false
 ---
 
-<AutoCatalog />
