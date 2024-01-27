@@ -2,4 +2,4 @@
 User-agent:*
 Disallow:
 
-Sitemap: https://liz-starfield.github.io/space/sitemap.xml
+Sitemap: https://liz-starfield.github.io/sitemap.xml
