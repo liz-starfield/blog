@@ -2,9 +2,9 @@ import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
 
 export default defineUserConfig({
-  base: "/space/",
+  base: "/",
   head: [
-    ['link', {rel: 'icon', herf: '/logo.png'}]
+    ['link', {rel: 'icon', herf: '/blogger.png'}]
   ],
   
   locales: {
