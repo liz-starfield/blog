@@ -4,7 +4,7 @@ import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
   hostname: "https://liz-starfield.github.io",
-  favicon: "/favicon.ico",
+  favicon: "/blogger.png",
   author: {
     name: "Liz",
     url: "https://github.com/liz-starfield",
