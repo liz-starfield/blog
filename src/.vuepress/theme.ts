@@ -25,6 +25,9 @@ export default hopeTheme({
   },
   sidebar: "heading",
   displayFooter: false,
+  editLink: false,
+  lastUpdated: false,
+  contributors: false,
   locales: {
     "/": {
       navbar: enNavbar,
