@@ -1,4 +1,5 @@
 ---
+icon: lightbulb
 date: 2024-01-28
 ---
 # Understanding LangChain in One Article: Building Powerful Applications with Large Language Models
@@ -38,17 +39,17 @@ The libs directory in the LangChain source code is the primary directory, contai
 
 ## Essential Core Modules You Need to Know
 ### Model I/O
-Function: Abstracts interaction with LLM, divided into Prompts module, Language Model module (LLM module), and Output Parsers module.
+Usage: Abstracts interaction with LLM, divided into Prompts module, Language Model module (LLM module), and Output Parsers module.
 #### Prompts
-Function: Uses Prompt templates as inputs for LLM.
+Usage: Uses Prompt templates as inputs for LLM.
 #### Language Model(LLM)
-Function: An abstraction of the language model, calls LLM through a universal interface.
+Usage: An abstraction of the language model, calls LLM through a universal interface.
 #### Output Parsers
-Function: Parses the output of LLM, able to parse into different formats.
+Usage: Parses the output of LLM, able to parse into different formats.
 ### Chains
-Function: Combines multiple components to create a single cohesive task. Multiple Chains can be nested or combined with other components to build more complex Chains.
+Usage: Combines multiple components to create a single cohesive task. Multiple Chains can be nested or combined with other components to build more complex Chains.
 ### Agents
-Function: Based on user input, plans and makes decisions using LLM. It can divide tasks into smaller parts or decide the behavior of each step, integrating various tools and dynamically choosing whether to use a tool and which tool to use.
+Usage: Based on user input, plans and makes decisions using LLM. It can divide tasks into smaller parts or decide the behavior of each step, integrating various tools and dynamically choosing whether to use a tool and which tool to use.
 
 Key Concepts:
 
@@ -57,11 +58,11 @@ Key Concepts:
 
 AgentExecutor can be seen as an intelligent entity, and Agent is like the brain of this entity. When a user asks a question, AgentExecutor thinks once or multiple times, i.e., it calls the Agent to make decisions until it reaches a satisfactory result or the predefined limit.
 ### Retrieval
-Function: An abstraction of integrated data sources, including data loading, processing, vectorization, storage, and retrieval, allowing users to have their knowledge base.
+Usage: An abstraction of integrated data sources, including data loading, processing, vectorization, storage, and retrieval, allowing users to have their knowledge base.
 ### Callbacks
-Function: Records relevant information during the execution of a Chain, typically used for logging, recording intermediate steps, recording token usage for billing, and controlling flow rate.
+Usage: Records relevant information during the execution of a Chain, typically used for logging, recording intermediate steps, recording token usage for billing, and controlling flow rate.
 ### Memory
-Function: Records historical conversations to supplement historical context in subsequent dialogues, enabling the model to have continuous conversations.
+Usage: Records historical conversations to supplement historical context in subsequent dialogues, enabling the model to have continuous conversations.
 
 ## Experience the Function of Each Module Through Simple Example Code
 Note: Focus on the code flow rather than the details.
