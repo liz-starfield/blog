@@ -1,4 +1,5 @@
 ---
+icon: lightbulb
 date: 2024-01-28
 ---
 # 一文带你了解LangChain: 使用大语言模型构建强大的应用程序
