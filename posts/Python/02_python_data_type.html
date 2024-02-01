@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en-US" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.0" />
+    <meta name="theme" content="VuePress Theme Hope 2.0.0-rc.13" />
+    <style>
+      html {
+        background: var(--bg-color, #fff);
+      }
+
+      html[data-theme="dark"] {
+        background: var(--bg-color, #1d1e1f);
+      }
+
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <meta property="og:url" content="https://liz-starfield.github.io/blog/posts/Python/02_python_data_type.html"><meta property="og:site_name" content="Liz"><meta property="og:title" content="Python Data Types"><meta property="og:description" content="Python Data Types 1. Data Types 2. String Operations 3. List Operations 4. Tuple Operations 5. Set Operations 6. Dictionary Operations"><meta property="og:type" content="article"><meta property="og:locale" content="en-US"><meta property="og:updated_time" content="2024-02-01T08:35:23.000Z"><meta property="article:author" content="Liz"><meta property="article:published_time" content="2022-06-12T00:00:00.000Z"><meta property="article:modified_time" content="2024-02-01T08:35:23.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Python Data Types","image":[""],"datePublished":"2022-06-12T00:00:00.000Z","dateModified":"2024-02-01T08:35:23.000Z","author":[{"@type":"Person","name":"Liz","url":"https://github.com/liz-starfield"}]}</script><link rel="icon" herf="/blogger.png"><link rel="icon" href="/blog/blogger.png"><title>Python Data Types | Liz</title><meta name="description" content="Python Data Types 1. Data Types 2. String Operations 3. List Operations 4. Tuple Operations 5. Set Operations 6. Dictionary Operations">
+    <link rel="preload" href="/blog/assets/style-mq-Wkm9q.css" as="style"><link rel="stylesheet" href="/blog/assets/style-mq-Wkm9q.css">
+    <link rel="modulepreload" href="/blog/assets/app-KkT-fVWF.js"><link rel="modulepreload" href="/blog/assets/02_python_data_type.html-f9OdnHyz.js"><link rel="modulepreload" href="/blog/assets/02_python_data_type.html-Ot2uTaTL.js"><link rel="modulepreload" href="/blog/assets/plugin-vue_export-helper-x3n3nnut.js">
+    <link rel="prefetch" href="/blog/assets/index.html-LFD91XO_.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-E6FIGQFr.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-B5zXeSDr.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-PxUfOlrM.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-s_datAw3.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-3kAZxSDz.js" as="script"><link rel="prefetch" href="/blog/assets/langchain.html-he6tgQ9y.js" as="script"><link rel="prefetch" href="/blog/assets/langchain_source_code.html-YZP6rT5I.js" as="script"><link rel="prefetch" href="/blog/assets/01_python_environment.html-qX3-7k3f.js" as="script"><link rel="prefetch" href="/blog/assets/03_python_operator.html-0nj6GPcL.js" as="script"><link rel="prefetch" href="/blog/assets/04_python_method.html-56syXrRm.js" as="script"><link rel="prefetch" href="/blog/assets/05_python_builtin_module.html-E3buEh2W.js" as="script"><link rel="prefetch" href="/blog/assets/06_python_popular_package.html-yZa2XBwe.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Ua3KwpHC.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-ZYhhb8JE.js" as="script"><link rel="prefetch" href="/blog/assets/langchain.html-FdK9S-7u.js" as="script"><link rel="prefetch" href="/blog/assets/langchain_source_code.html-F066ndZe.js" as="script"><link rel="prefetch" href="/blog/assets/01_python_environment.html-vmn0kjQ_.js" as="script"><link rel="prefetch" href="/blog/assets/02_python_data_type.html-WTYCRdSh.js" as="script"><link rel="prefetch" href="/blog/assets/03_python_operator.html-DudWLfQo.js" as="script"><link rel="prefetch" href="/blog/assets/04_python_method.html-qaKsBDZ3.js" as="script"><link rel="prefetch" href="/blog/assets/05_python_builtin_module.html-jwP9OdkQ.js" as="script"><link rel="prefetch" href="/blog/assets/06_python_popular_package.html-GSW4EfUd.js" as="script"><link rel="prefetch" href="/blog/assets/404.html-_gRo7Dcd.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-UxATL_0T.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Mv3ej2IF.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-kJ320kxl.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-PCaJfeIo.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-VOr9nBXB.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-lMZf9nw6.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-8E67PwBh.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-qostYW_M.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-T-uPJpYq.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-4rWeg-rw.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-dxLqYysi.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-bys25b8k.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-NSZidhQD.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-sh1juioO.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-pkbj6bhU.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-eA3wLwDn.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-wFs-a4At.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-wAfZ32S4.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Jwui_V-N.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-MCehxfD3.js" as="script"><link rel="prefetch" href="/blog/assets/langchain.html-yd4782R5.js" as="script"><link rel="prefetch" href="/blog/assets/langchain_source_code.html-1sNtl1Xj.js" as="script"><link rel="prefetch" href="/blog/assets/01_python_environment.html-kT5hUzGW.js" as="script"><link rel="prefetch" href="/blog/assets/03_python_operator.html-SkonZ-cv.js" as="script"><link rel="prefetch" href="/blog/assets/04_python_method.html-0ViJs9mN.js" as="script"><link rel="prefetch" href="/blog/assets/05_python_builtin_module.html-tFF4D4pM.js" as="script"><link rel="prefetch" href="/blog/assets/06_python_popular_package.html-KhgUXGu6.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-cI9xWR8f.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-p13ddNsM.js" as="script"><link rel="prefetch" href="/blog/assets/langchain.html-BHnfcfYh.js" as="script"><link rel="prefetch" href="/blog/assets/langchain_source_code.html-NvhzJ7gk.js" as="script"><link rel="prefetch" href="/blog/assets/01_python_environment.html-RqZ-aHYl.js" as="script"><link rel="prefetch" href="/blog/assets/02_python_data_type.html-JwhY0CET.js" as="script"><link rel="prefetch" href="/blog/assets/03_python_operator.html-v9C-e-xY.js" as="script"><link rel="prefetch" href="/blog/assets/04_python_method.html-_tI8w7zh.js" as="script"><link rel="prefetch" href="/blog/assets/05_python_builtin_module.html-xz0IcAqO.js" as="script"><link rel="prefetch" href="/blog/assets/06_python_popular_package.html-nzXcPKQ9.js" as="script"><link rel="prefetch" href="/blog/assets/404.html-HMje3LNS.js" as="script"><link rel="prefetch" href="/blog/assets/index.html--LQHu8bq.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-1aVYt84L.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-AYdWCFtN.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-g590AbFk.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-bDUEq5Es.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-sOUcLVQ2.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-LtgLHP23.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Yqp6pa3n.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-PY1d5vhG.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-HjyVmg3C.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-DzgIdLLl.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-27G7CSTK.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Y79I8CHB.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-iboviBMp.js" as="script"><link rel="prefetch" href="/blog/assets/photoswipe.esm-08_zHRDQ.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">Skip to main content</a><!--]--><!--[--><div class="theme-container has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand vp-brand" href="/blog/"><img class="vp-nav-logo" src="/blog/blogger.png" alt><!----><span class="vp-site-name hide-in-pad">Liz</span></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a aria-label="Home" class="vp-link nav-link nav-link" href="/blog/"><span class="font-icon icon fa-fw fa-sm fas fa-home" style=""></span>Home<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="Blog" class="vp-link nav-link active nav-link active" href="/blog/posts/"><span class="font-icon icon fa-fw fa-sm fas fa-book" style=""></span>Blog<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="Project" class="vp-link nav-link nav-link" href="/blog/demo/"><span class="font-icon icon fa-fw fa-sm fas fa-star" style=""></span>Project<!----></a></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><div class="nav-item"><div class="dropdown-wrapper i18n-dropdown"><button type="button" class="dropdown-title" aria-label="Select language"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon i18n-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="i18n icon" style="width:1rem;height:1rem;vertical-align:middle;"><path d="M379.392 460.8 494.08 575.488l-42.496 102.4L307.2 532.48 138.24 701.44l-71.68-72.704L234.496 460.8l-45.056-45.056c-27.136-27.136-51.2-66.56-66.56-108.544h112.64c7.68 14.336 16.896 27.136 26.112 35.84l45.568 46.08 45.056-45.056C382.976 312.32 409.6 247.808 409.6 204.8H0V102.4h256V0h102.4v102.4h256v102.4H512c0 70.144-37.888 161.28-87.04 210.944L378.88 460.8zM576 870.4 512 1024H409.6l256-614.4H768l256 614.4H921.6l-64-153.6H576zM618.496 768h196.608L716.8 532.48 618.496 768z"></path></svg><!--]--><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a aria-label="English" class="vp-link nav-link active nav-link active" href="/blog/posts/Python/02_python_data_type.html"><!---->English<!----></a></li><li class="dropdown-item"><a aria-label="简体中文" class="vp-link nav-link nav-link" href="/blog/zh/"><!---->简体中文<!----></a></li></ul></button></div></div><div class="nav-item vp-repo"><a class="vp-repo-link" href="https://github.com/liz-starfield" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="icon github-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="github icon" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M511.957 21.333C241.024 21.333 21.333 240.981 21.333 512c0 216.832 140.544 400.725 335.574 465.664 24.49 4.395 32.256-10.07 32.256-23.083 0-11.69.256-44.245 0-85.205-136.448 29.61-164.736-64.64-164.736-64.64-22.315-56.704-54.4-71.765-54.4-71.765-44.587-30.464 3.285-29.824 3.285-29.824 49.195 3.413 75.179 50.517 75.179 50.517 43.776 75.008 114.816 53.333 142.762 40.79 4.523-31.66 17.152-53.377 31.19-65.537-108.971-12.458-223.488-54.485-223.488-242.602 0-53.547 19.114-97.323 50.517-131.67-5.035-12.33-21.93-62.293 4.779-129.834 0 0 41.258-13.184 134.912 50.346a469.803 469.803 0 0 1 122.88-16.554c41.642.213 83.626 5.632 122.88 16.554 93.653-63.488 134.784-50.346 134.784-50.346 26.752 67.541 9.898 117.504 4.864 129.834 31.402 34.347 50.474 78.123 50.474 131.67 0 188.586-114.73 230.016-224.042 242.09 17.578 15.232 33.578 44.672 33.578 90.454v135.85c0 13.142 7.936 27.606 32.854 22.87C862.25 912.597 1002.667 728.747 1002.667 512c0-271.019-219.648-490.667-490.71-490.667z"></path></svg></a></div><div class="nav-item hide-in-mobile"><button type="button" id="appearance-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><!----><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"><li><!--[--><a aria-label="Home" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/blog/"><span class="font-icon icon fa-fw fa-sm fas fa-home" style=""></span>Home<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="About Me" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/blog/intro.html"><span class="font-icon icon fa-fw fa-sm fas fa-user" style=""></span>About Me<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><section class="vp-sidebar-group"><p class="vp-sidebar-heading active"><span class="font-icon icon fa-fw fa-sm fas fa-book" style=""></span><span class="vp-sidebar-title">Blog</span><!----></p><ul class="vp-sidebar-links"><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">L L M</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable active" type="button"><!----><span class="vp-sidebar-title">Python</span><span class="vp-arrow down"></span></button><ul class="vp-sidebar-links"><li><!--[--><a aria-label="Setting Up Python Development Environment and Using Pip for Package Management" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/blog/posts/Python/01_python_environment.html"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Setting Up Python Development Environment and Using Pip for Package Management<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Python Data Types" class="vp-link nav-link active vp-sidebar-link vp-sidebar-page active nav-link active vp-sidebar-link vp-sidebar-page active" href="/blog/posts/Python/02_python_data_type.html"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Python Data Types<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="1. Data Types" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-data-types"><!---->1. Data Types<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="1.1. Number 数字" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-1-number-数字"><!---->1.1. Number 数字<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.2. String 字符串" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-2-string-字符串"><!---->1.2. String 字符串<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.3. Boolean 布尔值" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-3-boolean-布尔值"><!---->1.3. Boolean 布尔值<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.4. 空值（None）" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-4-空值-none"><!---->1.4. 空值（None）<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.5. 组合类型汇总:List&amp;Tuple&amp;Set&amp;Dictionary" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-5-组合类型汇总-list-tuple-set-dictionary"><!---->1.5. 组合类型汇总:List&amp;Tuple&amp;Set&amp;Dictionary<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.6. List（有序，允许不同数据类型项）" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-6-list-有序-允许不同数据类型项"><!---->1.6. List（有序，允许不同数据类型项）<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.7. Tuple（创建后无法修改，有序，允许不同数据类型项）" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-7-tuple-创建后无法修改-有序-允许不同数据类型项"><!---->1.7. Tuple（创建后无法修改，有序，允许不同数据类型项）<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.8. Set（唯一，无序，无索引）" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-8-set-唯一-无序-无索引"><!---->1.8. Set（唯一，无序，无索引）<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="1.9. Dictionary（key value 对，无序）" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_1-9-dictionary-key-value-对-无序"><!---->1.9. Dictionary（key value 对，无序）<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2. String Operations" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-string-operations"><!---->2. String Operations<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="2.1. 连接join" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-1-连接join"><!---->2.1. 连接join<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.2. 拆分split" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-2-拆分split"><!---->2.2. 拆分split<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.3. 格式化f-Strings" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-3-格式化f-strings"><!---->2.3. 格式化f-Strings<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.4. String转字符" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-4-string转字符"><!---->2.4. String转字符<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.5. 子串slice" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-5-子串slice"><!---->2.5. 子串slice<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.6. 反转" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-6-反转"><!---->2.6. 反转<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.7. 首字母大写" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-7-首字母大写"><!---->2.7. 首字母大写<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.8. 大小写替换swapcase" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-8-大小写替换swapcase"><!---->2.8. 大小写替换swapcase<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.9.全大写upper/全小写lower" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-9-全大写upper-全小写lower"><!---->2.9.全大写upper/全小写lower<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.10. 替代replace" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-10-替代replace"><!---->2.10. 替代replace<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.11. 去掉头尾strip" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-11-去掉头尾strip"><!---->2.11. 去掉头尾strip<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.12. 统计出现次数count" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-12-统计出现次数count"><!---->2.12. 统计出现次数count<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.13. 查找find" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-13-查找find"><!---->2.13. 查找find<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.14. Tab扩大空格大小expandtabs" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-14-tab扩大空格大小expandtabs"><!---->2.14. Tab扩大空格大小expandtabs<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.15. 是否以xx开头startswith/结尾endswith" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-15-是否以xx开头startswith-结尾endswith"><!---->2.15. 是否以xx开头startswith/结尾endswith<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.16. 是否全是字母或数字isalnum" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-16-是否全是字母或数字isalnum"><!---->2.16. 是否全是字母或数字isalnum<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.17. 是否全是字母isalpha" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-17-是否全是字母isalpha"><!---->2.17. 是否全是字母isalpha<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.18. 是否全是数字" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-18-是否全是数字"><!---->2.18. 是否全是数字<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.19. 是否是合法变量名isidentifier" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-19-是否是合法变量名isidentifier"><!---->2.19. 是否是合法变量名isidentifier<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="2.20. 是否全是大写isupper/小写islower" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_2-20-是否全是大写isupper-小写islower"><!---->2.20. 是否全是大写isupper/小写islower<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3. List Operations" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-list-operations"><!---->3. List Operations<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="3.1. Create" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-1-create"><!---->3.1. Create<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.2. Access&amp;Modify" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-2-access-modify"><!---->3.2. Access&amp;Modify<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.3. Find Index" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-3-find-index"><!---->3.3. Find Index<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.4. Items" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-4-items"><!---->3.4. Items<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.5. Insert" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-5-insert"><!---->3.5. Insert<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.6. Remove" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-6-remove"><!---->3.6. Remove<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.7. Contain" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-7-contain"><!---->3.7. Contain<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.8. Copy" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-8-copy"><!---->3.8. Copy<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.9. Connect" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-9-connect"><!---->3.9. Connect<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.10. Count" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-10-count"><!---->3.10. Count<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.11. Reverse" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-11-reverse"><!---->3.11. Reverse<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.12. Sort" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-12-sort"><!---->3.12. Sort<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.13. index,item循环" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-13-index-item循环"><!---->3.13. index,item循环<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="3.14. zip组合循环" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_3-14-zip组合循环"><!---->3.14. zip组合循环<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="4. Tuple Operations" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-tuple-operations"><!---->4. Tuple Operations<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="4.1. Access" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-1-access"><!---->4.1. Access<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="4.2. Unpack" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-2-unpack"><!---->4.2. Unpack<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="4.3. Slice" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-3-slice"><!---->4.3. Slice<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="4.4. ChangeType" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-4-changetype"><!---->4.4. ChangeType<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="4.5. Contain" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-5-contain"><!---->4.5. Contain<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="4.6. Connect" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-6-connect"><!---->4.6. Connect<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="4.7. Delete" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_4-7-delete"><!---->4.7. Delete<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5. Set Operations" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-set-operations"><!---->5. Set Operations<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="5.1. Create" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-1-create"><!---->5.1. Create<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.2. Access" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-2-access"><!---->5.2. Access<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.3. Contain" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-3-contain"><!---->5.3. Contain<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.4. Add" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-4-add"><!---->5.4. Add<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.5. Remove" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-5-remove"><!---->5.5. Remove<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.6. ChangeType" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-6-changetype"><!---->5.6. ChangeType<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.7. 交集 Intersection" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-7-交集-intersection"><!---->5.7. 交集 Intersection<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.8. 差集 Difference" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-8-差集-difference"><!---->5.8. 差集 Difference<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.9. 是否是子集/父集" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-9-是否是子集-父集"><!---->5.9. 是否是子集/父集<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="5.10. 是否互斥" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_5-10-是否互斥"><!---->5.10. 是否互斥<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="6. Dictionary Operations" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-dictionary-operations"><!---->6. Dictionary Operations<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="6.1. Create" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-1-create"><!---->6.1. Create<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="6.2. Access &amp; Add &amp; Update" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-2-access-add-update"><!---->6.2. Access &amp; Add &amp; Update<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="6.3. Contain" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-3-contain"><!---->6.3. Contain<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="6.4. Remove" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-4-remove"><!---->6.4. Remove<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="6.5. ChangeType" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-5-changetype"><!---->6.5. ChangeType<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="6.6. Copy" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-6-copy"><!---->6.6. Copy<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="6.7. Unpack" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/blog/posts/Python/02_python_data_type.html#_6-7-unpack"><!---->6.7. Unpack<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li></ul><!--]--></li><li><!--[--><a aria-label="Python Operators" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/blog/posts/Python/03_python_operator.html"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Python Operators<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Python Functions" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/blog/posts/Python/04_python_method.html"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Python Functions<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Python Packages and Modules" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/blog/posts/Python/05_python_builtin_module.html"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Python Packages and Modules<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Popular Third-party Python Packages" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/blog/posts/Python/06_python_popular_package.html"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Popular Third-party Python Packages<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li></ul></section></li></ul></section></li></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!--[--><!----><!--]--><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Python Data Types</h1><div class="page-info"><span class="page-author-info" aria-label="Author🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="page-author-item" href="https://github.com/liz-starfield" target="_blank" rel="noopener noreferrer">Liz</a></span><span property="author" content="Liz"></span></span><!----><span class="page-date-info" aria-label="Writing Date📅" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="calendar icon"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 01-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 01-33.473-33.473V143.657H180.6A134.314 134.314 0 0046.66 277.595v535.756A134.314 134.314 0 00180.6 947.289h669.74a134.36 134.36 0 00133.94-133.938V277.595a134.314 134.314 0 00-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 01-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 01-33.472 33.473z"></path></svg><span><!----></span><meta property="datePublished" content="2022-06-12T00:00:00.000Z"></span><!----><span class="page-reading-time-info" aria-label="Reading Time⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>About 14 min</span><meta property="timeRequired" content="PT14M"></span><!----><!----></div><hr></div><div class="toc-place-holder"><aside id="toc"><!--[--><!----><!--]--><div class="toc-header">On This Page<button type="button" class="print-button" title="Print"><svg xmlns="http://www.w3.org/2000/svg" class="icon print-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="print icon"><path d="M819.2 364.8h-44.8V128c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v236.8h-44.8C145.067 364.8 96 413.867 96 473.6v192c0 59.733 49.067 108.8 108.8 108.8h44.8V896c0 17.067 14.933 32 32 32h460.8c17.067 0 32-14.933 32-32V774.4h44.8c59.733 0 108.8-49.067 108.8-108.8v-192c0-59.733-49.067-108.8-108.8-108.8zM313.6 160h396.8v204.8H313.6V160zm396.8 704H313.6V620.8h396.8V864zM864 665.6c0 25.6-19.2 44.8-44.8 44.8h-44.8V588.8c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v121.6h-44.8c-25.6 0-44.8-19.2-44.8-44.8v-192c0-25.6 19.2-44.8 44.8-44.8h614.4c25.6 0 44.8 19.2 44.8 44.8v192z"></path></svg></button></div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_1-data-types">1. Data Types</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-1-number-数字">1.1. Number 数字</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-2-string-字符串">1.2. String 字符串</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-3-boolean-布尔值">1.3. Boolean 布尔值</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-4-空值-none">1.4. 空值（None）</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-5-组合类型汇总-list-tuple-set-dictionary">1.5. 组合类型汇总:List&amp;Tuple&amp;Set&amp;Dictionary</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-6-list-有序-允许不同数据类型项">1.6. List（有序，允许不同数据类型项）</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-7-tuple-创建后无法修改-有序-允许不同数据类型项">1.7. Tuple（创建后无法修改，有序，允许不同数据类型项）</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-8-set-唯一-无序-无索引">1.8. Set（唯一，无序，无索引）</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_1-9-dictionary-key-value-对-无序">1.9. Dictionary（key value 对，无序）</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_2-string-operations">2. String Operations</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-1-连接join">2.1. 连接join</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-2-拆分split">2.2. 拆分split</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-3-格式化f-strings">2.3. 格式化f-Strings</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-4-string转字符">2.4. String转字符</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-5-子串slice">2.5. 子串slice</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-6-反转">2.6. 反转</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-7-首字母大写">2.7. 首字母大写</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-8-大小写替换swapcase">2.8. 大小写替换swapcase</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-9-全大写upper-全小写lower">2.9.全大写upper/全小写lower</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-10-替代replace">2.10. 替代replace</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-11-去掉头尾strip">2.11. 去掉头尾strip</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-12-统计出现次数count">2.12. 统计出现次数count</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-13-查找find">2.13. 查找find</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-14-tab扩大空格大小expandtabs">2.14. Tab扩大空格大小expandtabs</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-15-是否以xx开头startswith-结尾endswith">2.15. 是否以xx开头startswith/结尾endswith</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-16-是否全是字母或数字isalnum">2.16. 是否全是字母或数字isalnum</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-17-是否全是字母isalpha">2.17. 是否全是字母isalpha</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-18-是否全是数字">2.18. 是否全是数字</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-19-是否是合法变量名isidentifier">2.19. 是否是合法变量名isidentifier</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_2-20-是否全是大写isupper-小写islower">2.20. 是否全是大写isupper/小写islower</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_3-list-operations">3. List Operations</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-1-create">3.1. Create</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-2-access-modify">3.2. Access&amp;Modify</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-3-find-index">3.3. Find Index</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-4-items">3.4. Items</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-5-insert">3.5. Insert</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-6-remove">3.6. Remove</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-7-contain">3.7. Contain</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-8-copy">3.8. Copy</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-9-connect">3.9. Connect</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-10-count">3.10. Count</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-11-reverse">3.11. Reverse</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-12-sort">3.12. Sort</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-13-index-item循环">3.13. index,item循环</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-14-zip组合循环">3.14. zip组合循环</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_4-tuple-operations">4. Tuple Operations</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_4-1-access">4.1. Access</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_4-2-unpack">4.2. Unpack</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_4-3-slice">4.3. Slice</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_4-4-changetype">4.4. ChangeType</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_4-5-contain">4.5. Contain</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_4-6-connect">4.6. Connect</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_4-7-delete">4.7. Delete</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_5-set-operations">5. Set Operations</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-1-create">5.1. Create</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-2-access">5.2. Access</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-3-contain">5.3. Contain</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-4-add">5.4. Add</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-5-remove">5.5. Remove</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-6-changetype">5.6. ChangeType</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-7-交集-intersection">5.7. 交集 Intersection</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-8-差集-difference">5.8. 差集 Difference</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-9-是否是子集-父集">5.9. 是否是子集/父集</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_5-10-是否互斥">5.10. 是否互斥</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_6-dictionary-operations">6. Dictionary Operations</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_6-1-create">6.1. Create</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_6-2-access-add-update">6.2. Access &amp; Add &amp; Update</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_6-3-contain">6.3. Contain</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_6-4-remove">6.4. Remove</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_6-5-changetype">6.5. ChangeType</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_6-6-copy">6.6. Copy</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_6-7-unpack">6.7. Unpack</a></li><!----><!--]--></ul></li><!--]--></ul><div class="toc-marker" style="top:-1.7rem;"></div></div><!--[--><!----><!--]--></aside></div><!--[--><!----><!--]--><div class="theme-hope-content"><h1 id="python-data-types" tabindex="-1"><a class="header-anchor" href="#python-data-types" aria-hidden="true">#</a> Python Data Types</h1><ul><li><a href="#1-data-types">1. Data Types</a></li><li><a href="#2-string-operations">2. String Operations</a></li><li><a href="#3-list-operations">3. List Operations</a></li><li><a href="#4-tuple-operations">4. Tuple Operations</a></li><li><a href="#5-set-operations">5. Set Operations</a></li><li><a href="#6-dictionary-operations">6. Dictionary Operations</a></li></ul><!-- more --><h2 id="_1-data-types" tabindex="-1"><a class="header-anchor" href="#_1-data-types" aria-hidden="true">#</a> 1. Data Types</h2><h3 id="_1-1-number-数字" tabindex="-1"><a class="header-anchor" href="#_1-1-number-数字" aria-hidden="true">#</a> 1.1. Number 数字</h3><h4 id="_1-1-1-integer-整数-正整数-负整数-十进制-十六进制" tabindex="-1"><a class="header-anchor" href="#_1-1-1-integer-整数-正整数-负整数-十进制-十六进制" aria-hidden="true">#</a> 1.1.1. Integer 整数（正整数，负整数；十进制，十六进制）</h4><p>Python允许在数字中间以_分隔，因此，写成10_000_000_000和10000000000是完全一样的。十六进制数也可以写成0xa1b2_c3d4。</p><p>注意：Python的整数没有大小限制，而某些语言的整数根据其存储长度是有大小限制的，例如Java对32位整数的范围限制在-2147483648-2147483647。</p><h4 id="_1-1-2-float-浮点数-普通表示-科学计数法表示" tabindex="-1"><a class="header-anchor" href="#_1-1-2-float-浮点数-普通表示-科学计数法表示" aria-hidden="true">#</a> 1.1.2. Float 浮点数（普通表示，科学计数法表示）</h4><p>用科学计数法表示，把10用e替代，1.23x10<sup>9</sup>就是1.23e<sup>9</sup>，0.000012可以写成1.2e<sup>-5</sup>，等等。</p><p>注意：Python的浮点数也没有大小限制，但是超出一定范围就直接表示为inf（无限大）。</p><h3 id="_1-2-string-字符串" tabindex="-1"><a class="header-anchor" href="#_1-2-string-字符串" aria-hidden="true">#</a> 1.2. String 字符串</h3><h4 id="_1-2-1-单行内容和多行内容" tabindex="-1"><a class="header-anchor" href="#_1-2-1-单行内容和多行内容" aria-hidden="true">#</a> 1.2.1. 单行内容和多行内容</h4><h5 id="_1-2-1-1-单行内容" tabindex="-1"><a class="header-anchor" href="#_1-2-1-1-单行内容" aria-hidden="true">#</a> 1.2.1.1. 单行内容</h5><ul><li>用单引号&#39;或双引号&quot;括起来表示单行内容</li><li>单行内容为了美观用反斜杠\换行写，实际还是单行内容</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># 用&#39;表示单行内容
+&gt;&gt;&gt; greeting = &#39;Hello, World!&#39;
+&gt;&gt;&gt; print(greeting)
+Hello, World!
+&gt;&gt;&gt; print(len(greeting))
+13
+
+# 用&quot;表示单行内容
+&gt;&gt;&gt; sentence = &quot;I hope you are enjoying 30 days of Python Challenge&quot;
+&gt;&gt;&gt; print(sentence)
+I hope you are enjoying 30 days of Python Challenge
+
+# 单行内容为了美观用反斜杠\换行写，实际还是单行内容
+&gt;&gt;&gt; sentence1 = &quot;I hope you are\
+... enjoying 30 days\
+... of Python Challenge.&quot;
+&gt;&gt;&gt; print(sentence1)
+I hope you areenjoying 30 daysof Python Challenge.
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h5 id="_1-2-1-2-多行内容" tabindex="-1"><a class="header-anchor" href="#_1-2-1-2-多行内容" aria-hidden="true">#</a> 1.2.1.2. 多行内容</h5><ul><li>用三引号（&#39;&#39;&#39;或&quot;&quot;&quot;）括起来表示多行内容</li><li>单行内容里用\n进行换行</li></ul><div class="language-python line-numbers-mode" data-ext="py"><pre class="language-python"><code><span class="token comment"># 用&#39;&#39;&#39;表示多行内容</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> multiline_string <span class="token operator">=</span> <span class="token triple-quoted-string string">&#39;&#39;&#39;I am a teacher and enjoy teaching.
+... I didn&#39;t find anything as rewarding as empowering people.
+... That is why I created 30 days of python.&#39;&#39;&#39;</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token keyword">print</span><span class="token punctuation">(</span>multiline_string<span class="token punctuation">)</span>
+I am a teacher <span class="token keyword">and</span> enjoy teaching<span class="token punctuation">.</span>
+I didn&#39;t find anything <span class="token keyword">as</span> rewarding <span class="token keyword">as</span> empowering people<span class="token punctuation">.</span>
+That <span class="token keyword">is</span> why I created <span class="token number">30</span> days of python<span class="token punctuation">.</span>
+
+<span class="token comment"># 用&quot;&quot;&quot;表示多行内容</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> multiline_string <span class="token operator">=</span> <span class="token triple-quoted-string string">&quot;&quot;&quot;I am a teacher and enjoy teaching.
+... I didn&#39;t find anything as rewarding as empowering people.
+... That is why I created 30 days of python.&quot;&quot;&quot;</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token keyword">print</span><span class="token punctuation">(</span>multiline_string<span class="token punctuation">)</span>
+I am a teacher <span class="token keyword">and</span> enjoy teaching<span class="token punctuation">.</span>
+I didn&#39;t find anything <span class="token keyword">as</span> rewarding <span class="token keyword">as</span> empowering people<span class="token punctuation">.</span>
+That <span class="token keyword">is</span> why I created <span class="token number">30</span> days of python<span class="token punctuation">.</span>
+
+<span class="token comment"># 单行内容里用\n进行换行表示多行内容</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> sentence <span class="token operator">=</span> <span class="token string">&quot;I hope you are\n enjoying 30 days\n of Python Challenge&quot;</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token keyword">print</span><span class="token punctuation">(</span>sentence<span class="token punctuation">)</span>
+I hope you are
+ enjoying <span class="token number">30</span> days
+ of Python Challenge
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_1-2-2-转义字符和不转义表示" tabindex="-1"><a class="header-anchor" href="#_1-2-2-转义字符和不转义表示" aria-hidden="true">#</a> 1.2.2. 转义字符和不转义表示</h4><h5 id="_1-2-2-1-转义字符" tabindex="-1"><a class="header-anchor" href="#_1-2-2-1-转义字符" aria-hidden="true">#</a> 1.2.2.1. 转义字符 \</h5><table><thead><tr><th>\n</th><th>换行</th></tr></thead><tbody><tr><td>\t</td><td>制表符</td></tr><tr><td>\</td><td>斜杠</td></tr><tr><td>&#39;</td><td>单引号</td></tr><tr><td>&quot;</td><td>双引号</td></tr></tbody></table><h5 id="_1-2-2-2-不转义表示-在字符串前加r-表示内部的字符串默认不转义" tabindex="-1"><a class="header-anchor" href="#_1-2-2-2-不转义表示-在字符串前加r-表示内部的字符串默认不转义" aria-hidden="true">#</a> 1.2.2.2. 不转义表示：在字符串前加r，表示内部的字符串默认不转义</h5><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>&gt;&gt;&gt; print(&#39;\\\t\\&#39;)
+\       \
+
+&gt;&gt;&gt; print(r&#39;\\\t\\&#39;)
+\\\t\\
+
+&gt;&gt;&gt; print(&#39;&#39;&#39;hello,\n
+world&#39;&#39;&#39;)
+hello,
+
+world
+&gt;&gt;&gt; print(r&#39;&#39;&#39;hello,\n
+world&#39;&#39;&#39;)
+hello,\n
+world
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_1-3-boolean-布尔值" tabindex="-1"><a class="header-anchor" href="#_1-3-boolean-布尔值" aria-hidden="true">#</a> 1.3. Boolean 布尔值</h3><p>只有True、False两种值</p><p>首字母要大写</p><h3 id="_1-4-空值-none" tabindex="-1"><a class="header-anchor" href="#_1-4-空值-none" aria-hidden="true">#</a> 1.4. 空值（None）</h3><p>首字母要大写</p><h3 id="_1-5-组合类型汇总-list-tuple-set-dictionary" tabindex="-1"><a class="header-anchor" href="#_1-5-组合类型汇总-list-tuple-set-dictionary" aria-hidden="true">#</a> 1.5. 组合类型汇总:List&amp;Tuple&amp;Set&amp;Dictionary</h3><table><thead><tr><th></th><th>表现</th><th>有序/无序</th><th>唯一/重复</th><th>可变/不可变</th></tr></thead><tbody><tr><td>List</td><td>方括号 []</td><td>有序</td><td>重复</td><td>可变</td></tr><tr><td>Tuple</td><td>圆括号 ()</td><td>有序</td><td>重复</td><td>不可变</td></tr><tr><td>Set</td><td>花括号 {}</td><td>无序</td><td>唯一</td><td>可变</td></tr><tr><td>Dictionary</td><td>花括号 {}</td><td>无序</td><td>唯一</td><td>可变</td></tr></tbody></table><h3 id="_1-6-list-有序-允许不同数据类型项" tabindex="-1"><a class="header-anchor" href="#_1-6-list-有序-允许不同数据类型项" aria-hidden="true">#</a> 1.6. List（有序，允许不同数据类型项）</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>[&#39;Earth&#39;, &#39;Jupiter&#39;, &#39;Neptune&#39;, &#39;Mars&#39;, &#39;Venus&#39;, &#39;Saturn&#39;, &#39;Uranus&#39;, &#39;Mercury&#39;]# planets
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_1-7-tuple-创建后无法修改-有序-允许不同数据类型项" tabindex="-1"><a class="header-anchor" href="#_1-7-tuple-创建后无法修改-有序-允许不同数据类型项" aria-hidden="true">#</a> 1.7. Tuple（创建后无法修改，有序，允许不同数据类型项）</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>(&#39;Earth&#39;, &#39;Jupiter&#39;, &#39;Neptune&#39;, &#39;Mars&#39;, &#39;Venus&#39;, &#39;Saturn&#39;, &#39;Uranus&#39;, &#39;Mercury&#39;) # planets
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_1-8-set-唯一-无序-无索引" tabindex="-1"><a class="header-anchor" href="#_1-8-set-唯一-无序-无索引" aria-hidden="true">#</a> 1.8. Set（唯一，无序，无索引）</h3><p>Set is a collection of unordered and un-indexed distinct elements.</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>{3.14, 9.81, 2.7} # order is not important in set
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_1-9-dictionary-key-value-对-无序" tabindex="-1"><a class="header-anchor" href="#_1-9-dictionary-key-value-对-无序" aria-hidden="true">#</a> 1.9. Dictionary（key value 对，无序）</h3><p>a value could be any data types</p><h2 id="_2-string-operations" tabindex="-1"><a class="header-anchor" href="#_2-string-operations" aria-hidden="true">#</a> 2. String Operations</h2><h3 id="_2-1-连接join" tabindex="-1"><a class="header-anchor" href="#_2-1-连接join" aria-hidden="true">#</a> 2.1. 连接join</h3><p>方式一：+</p><p>方式二：&#39;连接符&#39;.join(序列)</p><p>方式三：&quot;hello&quot;<em>3 字符串</em>3=3个字符串连接 &#39;hellohellohello&#39;</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># +号连接
+full_name = &#39;Asabeneh&#39; + &#39; &#39; + &#39;Yetayeh&#39;
+
+# join函数连接
+name = (&#39;Asabeneh&#39;,&#39;Yetayeh&#39;) # tuple
+full_name = &#39; &#39;.join(name)
+
+web_tech = [&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;, &#39;React&#39;] # list
+result = &#39; &#39;.join(web_tech)
+print(result) # &#39;HTML CSS JavaScript React&#39;
+result1 = &#39;# &#39;.join(web_tech)
+print(result1) # &#39;HTML# CSS# JavaScript# React&#39;
+
+# *号
+&gt;&gt;&gt; &quot;hello&quot;*3		#字符串*3=3个字符串连接
+&#39;hellohellohello&#39;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-2-拆分split" tabindex="-1"><a class="header-anchor" href="#_2-2-拆分split" aria-hidden="true">#</a> 2.2. 拆分split</h3><ul><li>string.split()：默认空格作为分隔符</li><li>string.split(&#39;分隔符&#39;)</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;thirty days of python&#39;
+print(challenge.split()) # [&#39;thirty&#39;, &#39;days&#39;, &#39;of&#39;, &#39;python&#39;]
+challenge = &#39;thirty, days, of, python&#39;
+print(challenge.split(&#39;, &#39;)) # [&#39;thirty&#39;, &#39;days&#39;, &#39;of&#39;, &#39;python&#39;]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-3-格式化f-strings" tabindex="-1"><a class="header-anchor" href="#_2-3-格式化f-strings" aria-hidden="true">#</a> 2.3. 格式化f-Strings</h3><ul><li>f-Strings</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>a = 4
+b = 3
+print(f&#39;{a} + {b} = {a +b}&#39;)
+print(f&#39;{a} - {b} = {a - b}&#39;)
+print(f&#39;{a} * {b} = {a * b}&#39;)
+print(f&#39;{a} / {b} = {a / b:.2f}&#39;)
+print(f&#39;{a} % {b} = {a % b}&#39;)
+print(f&#39;{a} // {b} = {a // b}&#39;)
+print(f&#39;{a} ** {b} = {a ** b}&#39;)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-4-string转字符" tabindex="-1"><a class="header-anchor" href="#_2-4-string转字符" aria-hidden="true">#</a> 2.4. String转字符</h3><p>方式一：unpack</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>language = &#39;Python&#39;
+a,b,c,d,e,f = language # unpacking sequence characters into variables
+print(a) # P
+print(b) # y
+print(c) # t
+print(d) # h
+print(e) # o
+print(f) # n
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>方式二：index 正索引：从左到右 （0，1，2，3） 负索引：从右到左（-1，-2，-3，-4）</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># 正索引
+language = &#39;Python&#39;
+first_letter = language[0]
+print(first_letter) # P
+second_letter = language[1]
+print(second_letter) # y
+last_index = len(language) - 1
+last_letter = language[last_index]
+print(last_letter) # n
+
+# 负索引
+language = &#39;Python&#39;
+last_letter = language[-1]
+print(last_letter) # n
+second_last = language[-2]
+print(second_last) # o
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-5-子串slice" tabindex="-1"><a class="header-anchor" href="#_2-5-子串slice" aria-hidden="true">#</a> 2.5. 子串slice</h3><p>切片 slice</p><ul><li>无步长</li><li>有步长</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># 无步长
+language = &#39;Python&#39;
+first_three = language[0:3] # starts at zero index and up to 3 but not include 3
+print(first_three) #Pyt
+last_three = language[3:6]
+print(last_three) # hon
+# Another way
+last_three = language[-3:]
+print(last_three)   # hon
+last_three = language[3:]
+print(last_three)   # hon
+
+# 有步长
+language = &#39;Python&#39;
+pto = language[0:6:2] #
+print(pto) # Pto
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-6-反转" tabindex="-1"><a class="header-anchor" href="#_2-6-反转" aria-hidden="true">#</a> 2.6. 反转</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>greeting = &#39;Hello, World!&#39;
+print(greeting[::-1]) # !dlroW ,olleH
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-7-首字母大写" tabindex="-1"><a class="header-anchor" href="#_2-7-首字母大写" aria-hidden="true">#</a> 2.7. 首字母大写</h3><ul><li>capitalize() 格式化为非首字母均小写，第一个词首字母大写，其他词首字母小写</li><li>title() 每个词首字母大写，非首字母均小写</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># capitalize
+challenge = &#39;thirty days of python&#39;
+print(challenge.capitalize()) # &#39;Thirty days of python&#39;
+
+# title
+challenge = &#39;thirty days of python&#39;
+print(challenge.title()) # Thirty Days Of Python
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-8-大小写替换swapcase" tabindex="-1"><a class="header-anchor" href="#_2-8-大小写替换swapcase" aria-hidden="true">#</a> 2.8. 大小写替换swapcase</h3><ul><li>swapcase()</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;thirty days of python&#39;
+print(challenge.swapcase())   # THIRTY DAYS OF PYTHON
+challenge = &#39;Thirty Days Of Python&#39;
+print(challenge.swapcase())  # tHIRTY dAYS oF pYTHON
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-9-全大写upper-全小写lower" tabindex="-1"><a class="header-anchor" href="#_2-9-全大写upper-全小写lower" aria-hidden="true">#</a> 2.9.全大写upper/全小写lower</h3><ul><li>upper()</li><li>lower()</li></ul><h3 id="_2-10-替代replace" tabindex="-1"><a class="header-anchor" href="#_2-10-替代replace" aria-hidden="true">#</a> 2.10. 替代replace</h3><ul><li>replace()</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;thirty days of python&#39;
+print(challenge.replace(&#39;python&#39;, &#39;coding&#39;)) # &#39;thirty days of coding&#39;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-11-去掉头尾strip" tabindex="-1"><a class="header-anchor" href="#_2-11-去掉头尾strip" aria-hidden="true">#</a> 2.11. 去掉头尾strip</h3><ul><li>strip()</li><li>strip([chars]) 字符串头尾指定的字符（默认为空格或换行符）或字符序列 该方法只能删除开头或是结尾的字符，不能删除中间部分的字符。</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>&gt;&gt;&gt; str = &quot;00000003210Runoob01230000000&quot;
+&gt;&gt;&gt; str.strip(&#39;0&#39;) # 去除首尾字符 0 
+&#39;3210Runoob0123&#39; 
+
+&gt;&gt;&gt; str2 = &quot; Runoob &quot;
+&gt;&gt;&gt; str2.strip() # 去除首尾空格
+&#39;Runoob&#39;
+ 
+&gt;&gt;&gt; challenge = &#39;thirty days of pythoonnn&#39;
+&gt;&gt;&gt; print(challenge.strip(&#39;noth&#39;)) 
+&#39;irty days of py&#39;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-12-统计出现次数count" tabindex="-1"><a class="header-anchor" href="#_2-12-统计出现次数count" aria-hidden="true">#</a> 2.12. 统计出现次数count</h3><ul><li>count(substring)</li><li>count(substring,start,end)</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;thirty days of python&#39;
+print(challenge.count(&#39;y&#39;)) # 3
+print(challenge.count(&#39;y&#39;, 7, 14)) # 1, 
+print(challenge.count(&#39;th&#39;)) # 2`
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-13-查找find" tabindex="-1"><a class="header-anchor" href="#_2-13-查找find" aria-hidden="true">#</a> 2.13. 查找find</h3><ul><li>安全的查找方法 <ul><li>find(substring) 正向查找，返回第一个；如没有，则返回-1</li><li>find(substring,start)</li><li>find(substring,start,end)</li><li>rfind(substring) 反向查找，返回最后一个；如没有，则返回-1</li><li>rfind(substring,start)</li><li>rfind(substring,start,end)</li></ul></li><li>不安全的查找方法 <ul><li>index(substring) 正向查找，返回第一个；如没有，则报错</li><li>index(substring,start)</li><li>index(substring,start,end)</li><li>rindex(substring) 反向查找，返回最后一个；如没有，则报错</li><li>rindex(substring,start)</li><li>rindex(substring,start,end)</li></ul></li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># find返回第一个
+challenge = &#39;thirty days of python&#39;
+print(challenge.find(&#39;y&#39;))  # 5
+print(challenge.find(&#39;th&#39;)) # 0
+
+# find返回最后一个
+challenge = &#39;thirty days of python&#39;
+print(challenge.rfind(&#39;y&#39;))  # 16
+print(challenge.rfind(&#39;th&#39;)) # 17
+
+# index返回第一个
+challenge = &#39;thirty days of python&#39;
+sub_string = &#39;da&#39;
+print(challenge.index(sub_string))  # 7
+print(challenge.index(sub_string, 9)) # error
+
+# index返回最后一个
+challenge = &#39;thirty days of python&#39;
+sub_string = &#39;da&#39;
+print(challenge.rindex(sub_string))  # 8
+print(challenge.rindex(sub_string, 9)) # error
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-14-tab扩大空格大小expandtabs" tabindex="-1"><a class="header-anchor" href="#_2-14-tab扩大空格大小expandtabs" aria-hidden="true">#</a> 2.14. Tab扩大空格大小expandtabs</h3><ul><li>expandtabs()</li><li>expandtabs(tab_size) 默认tab_size是8</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;thirty\tdays\tof\tpython&#39;
+print(challenge.expandtabs())   # &#39;thirty  days    of      python&#39;
+print(challenge.expandtabs(10)) # &#39;thirty    days      of        python&#39;
+
+&gt;&gt;&gt; str = &quot;Name\tAge\tCountry\tCity\nAsabeneh\t250\tFinland\tHelsinki&quot;
+&gt;&gt;&gt; str
+&#39;Name\tAge\tCountry\tCity\nAsabeneh\t250\tFinland\tHelsinki&#39;
+&gt;&gt;&gt; print(str)
+Name    Age     Country City
+Asabeneh        250     Finland Helsinki
+&gt;&gt;&gt; print(str.expandtabs())
+Name    Age     Country City
+Asabeneh        250     Finland Helsinki
+&gt;&gt;&gt; print(str.expandtabs(10))
+Name      Age       Country   City
+Asabeneh  250       Finland   Helsinki
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-15-是否以xx开头startswith-结尾endswith" tabindex="-1"><a class="header-anchor" href="#_2-15-是否以xx开头startswith-结尾endswith" aria-hidden="true">#</a> 2.15. 是否以xx开头startswith/结尾endswith</h3><ul><li>startswith(substring)</li><li>endswith(substring)</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># startswith
+challenge = &#39;thirty days of python&#39;
+print(challenge.startswith(&#39;thirty&#39;)) # True
+
+challenge = &#39;30 days of python&#39;
+print(challenge.startswith(&#39;thirty&#39;)) # False
+
+# endswith
+challenge = &#39;thirty days of python&#39;
+print(challenge.endswith(&#39;on&#39;))   # True
+print(challenge.endswith(&#39;tion&#39;)) # False
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-16-是否全是字母或数字isalnum" tabindex="-1"><a class="header-anchor" href="#_2-16-是否全是字母或数字isalnum" aria-hidden="true">#</a> 2.16. 是否全是字母或数字isalnum</h3><ul><li>isalnum()</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;ThirtyDaysPython&#39;
+print(challenge.isalnum()) # True
+
+challenge = &#39;30DaysPython&#39;
+print(challenge.isalnum()) # True
+
+challenge = &#39;thirty days of python&#39;
+print(challenge.isalnum()) # False, space is not an alphanumeric character
+
+challenge = &#39;thirty days of python 2019&#39;
+print(challenge.isalnum()) # False
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-17-是否全是字母isalpha" tabindex="-1"><a class="header-anchor" href="#_2-17-是否全是字母isalpha" aria-hidden="true">#</a> 2.17. 是否全是字母isalpha</h3><ul><li>isalpha()</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;thirty days of python&#39;
+print(challenge.isalpha()) # False, space is once again excluded
+challenge = &#39;ThirtyDaysPython&#39;
+print(challenge.isalpha()) # True
+num = &#39;123&#39;
+print(num.isalpha())      # False
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-18-是否全是数字" tabindex="-1"><a class="header-anchor" href="#_2-18-是否全是数字" aria-hidden="true">#</a> 2.18. 是否全是数字</h3><ul><li>isdecimal()：只有0-9</li><li>isdigit()：0-9 and some other unicode characters for numbers</li><li>isnumeric()：just like isdigit(), just accepts more symbols, like ½</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># 不包括小数
+&gt;&gt;&gt; challenge = &#39;3.14&#39;
+&gt;&gt;&gt; challenge.isdecimal()
+False
+&gt;&gt;&gt; challenge.isdigit()
+False
+&gt;&gt;&gt; challenge.isnumeric()
+False
+
+# isdecimal
+challenge = &#39;thirty days of python&#39;
+print(challenge.isdecimal())  # False
+challenge = &#39;123&#39;
+print(challenge.isdecimal())  # True
+challenge = &#39;\u00B2&#39;
+print(challenge.isdigit())   # False
+challenge = &#39;12 3&#39;
+print(challenge.isdecimal())  # False, space not allowed
+
+# isdigit
+challenge = &#39;Thirty&#39;
+print(challenge.isdigit()) # False
+challenge = &#39;30&#39;
+print(challenge.isdigit())   # True
+challenge = &#39;\u00B2&#39;
+print(challenge.isdigit())   # True
+
+# isnumeric
+num = &#39;10&#39;
+print(num.isnumeric()) # True
+num = &#39;\u00BD&#39; # ½
+print(num.isnumeric()) # True
+num = &#39;10.5&#39;
+print(num.isnumeric()) # False
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-19-是否是合法变量名isidentifier" tabindex="-1"><a class="header-anchor" href="#_2-19-是否是合法变量名isidentifier" aria-hidden="true">#</a> 2.19. 是否是合法变量名isidentifier</h3><ul><li>isidentifier()</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>challenge = &#39;30DaysOfPython&#39;
+print(challenge.isidentifier()) # False, because it starts with a number
+challenge = &#39;thirty_days_of_python&#39;
+print(challenge.isidentifier()) # True
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-20-是否全是大写isupper-小写islower" tabindex="-1"><a class="header-anchor" href="#_2-20-是否全是大写isupper-小写islower" aria-hidden="true">#</a> 2.20. 是否全是大写isupper/小写islower</h3><ul><li>isupper()</li><li>islower()</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># islower
+challenge = &#39;thirty days of python&#39;
+print(challenge.islower()) # True
+challenge = &#39;Thirty days of python&#39;
+print(challenge.islower()) # False
+
+# isupper
+challenge = &#39;thirty days of python&#39;
+print(challenge.isupper()) #  False
+challenge = &#39;THIRTY DAYS OF PYTHON&#39;
+print(challenge.isupper()) # True
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_3-list-operations" tabindex="-1"><a class="header-anchor" href="#_3-list-operations" aria-hidden="true">#</a> 3. List Operations</h2><h3 id="_3-1-create" tabindex="-1"><a class="header-anchor" href="#_3-1-create" aria-hidden="true">#</a> 3.1. Create</h3><p>方式一：内置函数 list()</p><p>方式二：方括号 []</p><p>[i for i in iterable if expression]</p><p>方式三：List Comprehension</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># empty
+lst = list()
+lst = []
+
+# init
+nums = [0, 1, 2, 3, 4, 5]  # all are the same data types - a list of numbers
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;] # all the same data types - a list of strings (fruits)
+diffs = [&#39;Banana&#39;, 10, False, 9.81] # different data types in the list - string, integer, boolean and float
+
+language = &#39;Python&#39;
+lst = list(language) # changing the string to list
+print(type(lst))     # list
+print(lst)           # [&#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;]
+
+# Print the lists and its length
+print(&#39;Fruits:&#39;, fruits)
+print(&#39;Number of fruits:&#39;, len(fruits))
+
+language = &#39;Python&#39;
+lst = [i for i in language]
+print(type(lst)) # list
+print(lst)       # [&#39;P&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;, &#39;n&#39;]
+
+# Generating numbers
+numbers = [i for i in range(11)]  # to generate numbers from 0 to 10
+print(numbers)                    # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# It is possible to do mathematical operations during iteration
+squares = [i * i for i in range(11)]
+print(squares)                    # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+# It is also possible to make a list of tuples
+numbers = [(i, i * i) for i in range(11)]
+print(numbers)                             # [(0, 0), (1, 1), (2, 4), (3, 9), (4, 16), (5, 25)]
+
+
+# Generating even numbers
+even_numbers = [i for i in range(21) if i % 2 == 0]  # to generate even numbers list in range 0 to 21
+print(even_numbers)                    # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+# Generating odd numbers
+odd_numbers = [i for i in range(21) if i % 2 != 0]  # to generate odd numbers in range 0 to 21
+print(odd_numbers)                      # [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+# Filter numbers: let&#39;s filter out positive even numbers from the list below
+positive_even_numbers = [i for i in range(21) if i % 2 == 0 and i &gt; 0]
+print(positive_even_numbers)                    # [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+# Flattening a three dimensional array
+list_of_lists = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flattened_list = [ number for row in list_of_lists for number in row]
+print(flattened_list)    # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-2-access-modify" tabindex="-1"><a class="header-anchor" href="#_3-2-access-modify" aria-hidden="true">#</a> 3.2. Access&amp;Modify</h3><p>lst[index]</p><p>• 正索引</p><p>• 负索引</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># 正索引
+second_fruit = fruits[1]
+print(second_fruit)     # orange
+fruits[0] = &#39;avocado&#39;
+print(fruits)       #  [&#39;avocado&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+
+# 负索引
+first_fruit = fruits[-4]
+print(first_fruit)      # banana
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-3-find-index" tabindex="-1"><a class="header-anchor" href="#_3-3-find-index" aria-hidden="true">#</a> 3.3. Find Index</h3><p>lst.index(item)</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+print(fruits.index(&#39;orange&#39;))   # 1
+ages = [22, 19, 24, 25, 26, 24, 25, 24]
+print(ages.index(24))           # 2, the first occurrence
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-4-items" tabindex="-1"><a class="header-anchor" href="#_3-4-items" aria-hidden="true">#</a> 3.4. Items</h3><p>1、Unpack List Items</p><p>1）item1,item2,*rest = list</p><p>2）*list</p><p>2、Slice List Items</p><p>list[start：end：step]</p><p>start和end可以是正索引，也可以是负索引</p><p>左闭右开：[start，end）</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># First Example
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;,&#39;lime&#39;,&#39;apple&#39;]
+first_fruit, second_fruit, third_fruit, *rest = lst
+print(first_fruit)     # banana
+print(second_fruit)    # orange
+print(third_fruit)     # mango
+print(rest)           # [&#39;lemon&#39;,&#39;lime&#39;,&#39;apple&#39;]
+
+# Second Example about unpacking list
+first, second, third,*rest, tenth = [1,2,3,4,5,6,7,8,9,10]
+print(first)          # 1
+print(second)         # 2
+print(third)          # 3
+print(rest)           # [4,5,6,7,8,9]
+print(tenth)          # 10
+
+# Third Example
+def sum_of_five_nums(a, b, c, d, e):
+    return a + b + c + d + e
+
+lst = [1, 2, 3, 4, 5]
+print(sum_of_five_nums(*lst))  # 15
+
+
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+all_fruits = fruits[0:4] # it returns all the fruits
+# this will also give the same result as the one above
+all_fruits = fruits[0:] # if we don&#39;t set where to stop it takes all the rest
+orange_and_mango = fruits[1:3] # it does not include the first index
+orange_mango_lemon = fruits[1:]
+orange_and_lemon = fruits[::2] # here we used a 3rd argument, step. It will take every 2cnd item - [&#39;banana&#39;, &#39;mango&#39;]
+
+all_fruits = fruits[-4:] # it returns all the fruits
+orange_and_mango = fruits[-3:-1] # it does not include the last index,[&#39;orange&#39;, &#39;mango&#39;]
+orange_mango_lemon = fruits[-3:] # this will give starting from -3 to the end,[&#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+reverse_fruits = fruits[::-1] # a negative step will take the list in reverse order,[&#39;lemon&#39;, &#39;mango&#39;, &#39;orange&#39;, &#39;banana&#39;]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-5-insert" tabindex="-1"><a class="header-anchor" href="#_3-5-insert" aria-hidden="true">#</a> 3.5. Insert</h3><p>1、在末尾添加</p><p>list.append(item)</p><p>2、在index位置添加</p><p>list.insert(index,item)</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>fruits.append(&#39;apple&#39;)
+fruits.insert(2, &#39;apple&#39;)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-6-remove" tabindex="-1"><a class="header-anchor" href="#_3-6-remove" aria-hidden="true">#</a> 3.6. Remove</h3><p>1、按item</p><p>list.remove(item) 去掉出现的第一个item</p><p>2、按index</p><p>list.pop() 去掉最后一项</p><p>list.pop(index) 去掉index那项</p><p>3、按index，range，all</p><p>del 关键字</p><p>del list[index]</p><p>del list[start:end]</p><p>del list</p><p>4、clear</p><p>list.clear()</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># remove
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;, &#39;banana&#39;]
+fruits.remove(&#39;banana&#39;)
+print(fruits)  # [&#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;, &#39;banana&#39;] - this method removes the first occurrence of the item in the list
+
+# pop
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+fruits.pop()
+print(fruits)       # [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;]
+
+fruits.pop(0)
+print(fruits)       # [&#39;orange&#39;, &#39;mango&#39;]
+
+# del
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;, &#39;kiwi&#39;, &#39;lime&#39;]
+del fruits[0]
+print(fruits)       # [&#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;, &#39;kiwi&#39;, &#39;lime&#39;]
+del fruits[1]
+print(fruits)       # [&#39;orange&#39;, &#39;lemon&#39;, &#39;kiwi&#39;, &#39;lime&#39;]
+del fruits[1:3]     # this deletes items between given indexes, so it does not delete the item with index 3!
+print(fruits)       # [&#39;orange&#39;, &#39;lime&#39;]
+del fruits
+print(fruits)       # This should give: NameError: name &#39;fruits&#39; is not defined
+
+# clear
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+fruits.clear()
+print(fruits)       # []
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-7-contain" tabindex="-1"><a class="header-anchor" href="#_3-7-contain" aria-hidden="true">#</a> 3.7. Contain</h3><ul><li>in</li></ul><p>item in list</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+does_exist = &#39;banana&#39; in fruits
+print(does_exist)  # True
+does_exist = &#39;lime&#39; in fruits
+print(does_exist)  # False
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-8-copy" tabindex="-1"><a class="header-anchor" href="#_3-8-copy" aria-hidden="true">#</a> 3.8. Copy</h3><p>list.copy()</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+fruits_copy = fruits.copy()
+print(fruits_copy)       # [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-9-connect" tabindex="-1"><a class="header-anchor" href="#_3-9-connect" aria-hidden="true">#</a> 3.9. Connect</h3><p>方式一：Plus Operator (+)</p><p>list3 = list1 + list2 + list3</p><p>方式二：extend()</p><p>list1.extend(list2)</p><p>方式三：unpack：*list</p><p>lst = [*list_one, *list_two]</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>positive_numbers = [1, 2, 3, 4, 5]
+zero = [0]
+negative_numbers = [-5,-4,-3,-2,-1]
+
+# plus operator
+integers = negative_numbers + zero + positive_numbers
+print(integers) # [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+
+# extend
+negative_numbers.extend(zero)
+negative_numbers.extend(positive_numbers)
+print(&#39;Integers:&#39;, negative_numbers) # Integers: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+
+# unpack
+lst_one = [1, 2, 3]
+lst_two = [4, 5, 6, 7]
+lst = [0, *list_one, *list_two]
+print(lst)          # [0, 1, 2, 3, 4, 5, 6, 7]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-10-count" tabindex="-1"><a class="header-anchor" href="#_3-10-count" aria-hidden="true">#</a> 3.10. Count</h3><p>list.count(item)</p><h3 id="_3-11-reverse" tabindex="-1"><a class="header-anchor" href="#_3-11-reverse" aria-hidden="true">#</a> 3.11. Reverse</h3><p>list.reverse()</p><p>Note：会在原本list上生效</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+print(fruits.index(&#39;orange&#39;))   # 1
+ages = [22, 19, 24, 25, 26, 24, 25, 24]
+print(ages.index(24))           # 2, the first occurrence
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-12-sort" tabindex="-1"><a class="header-anchor" href="#_3-12-sort" aria-hidden="true">#</a> 3.12. Sort</h3><p>方式一：sort() List函数</p><p>Note：会在原本list上生效</p><p>lst.sort() # ascending</p><p>lst.sort(reverse=True) # descending</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># sort
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+fruits.sort()
+print(fruits)             # sorted in alphabetical order, [&#39;banana&#39;, &#39;lemon&#39;, &#39;mango&#39;, &#39;orange&#39;]
+fruits.sort(reverse=True)
+print(fruits) # [&#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;, &#39;banana&#39;]
+ages = [22, 19, 24, 25, 26, 24, 25, 24]
+ages.sort()
+print(ages) #  [19, 22, 24, 24, 24, 25, 25, 26]
+
+ages.sort(reverse=True)
+print(ages) #  [26, 25, 25, 24, 24, 24, 22, 19]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>方式二：sorted() 内置函数</p><p>Note：不会在原本list上生效</p><p>sorted(list)</p><p>sorted(list,reverse=True)</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># sorted
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+print(sorted(fruits))   # [&#39;banana&#39;, &#39;lemon&#39;, &#39;mango&#39;, &#39;orange&#39;]
+# Reverse order
+fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;]
+fruits = sorted(fruits,reverse=True)
+print(fruits)     # [&#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;, &#39;banana&#39;]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-13-index-item循环" tabindex="-1"><a class="header-anchor" href="#_3-13-index-item循环" aria-hidden="true">#</a> 3.13. index,item循环</h3><p>语法</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>for index,item in enumerate(list):
+    print(index, item)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>示例</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>for index, i in enumerate(countries):
+    print(&#39;hi&#39;)
+    if i == &#39;Finland&#39;:
+        print(&#39;The country {i} has been found at index {index}&#39;)
+
+&quot;&quot;&quot; 输出结果
+The country Finland has been found at index 1.
+&quot;&quot;&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-14-zip组合循环" tabindex="-1"><a class="header-anchor" href="#_3-14-zip组合循环" aria-hidden="true">#</a> 3.14. zip组合循环</h3><p>语法</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>for f, v in zip(fruits, vegetables):
+    fruits_and_veges.append({&#39;fruit&#39;:f, &#39;veg&#39;:v})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>示例</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>fruits = [&#39;banana&#39;, &#39;orange&#39;, &#39;mango&#39;, &#39;lemon&#39;, &#39;lime&#39;]                    
+vegetables = [&#39;Tomato&#39;, &#39;Potato&#39;, &#39;Cabbage&#39;,&#39;Onion&#39;, &#39;Carrot&#39;]
+fruits_and_veges = []
+for f, v in zip(fruits, vegetables):
+    fruits_and_veges.append({&#39;fruit&#39;:f, &#39;veg&#39;:v})
+
+print(fruits_and_veges)
+
+&quot;&quot;&quot; 输出结果
+[{&#39;fruit&#39;: &#39;banana&#39;, &#39;veg&#39;: &#39;Tomato&#39;}, {&#39;fruit&#39;: &#39;orange&#39;, &#39;veg&#39;: &#39;Potato&#39;}, {&#39;fruit&#39;: &#39;mango&#39;, &#39;veg&#39;: &#39;Cabbage&#39;}, {&#39;fruit&#39;: &#39;lemon&#39;, &#39;veg&#39;: &#39;Onion&#39;}, {&#39;fruit&#39;: &#39;lime&#39;, &#39;veg&#39;: &#39;Carrot&#39;}]
+&quot;&quot;&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_4-tuple-operations" tabindex="-1"><a class="header-anchor" href="#_4-tuple-operations" aria-hidden="true">#</a> 4. Tuple Operations</h2><h3 id="_4-1-access" tabindex="-1"><a class="header-anchor" href="#_4-1-access" aria-hidden="true">#</a> 4.1. Access</h3><p>tpl[index]</p><p>• 正索引</p><p>• 负索引</p><figure><img src="/blog/assets/positive_index-u3W5LQ1U.png" alt="正索引" tabindex="0" loading="lazy"><figcaption>正索引</figcaption></figure><figure><img src="/blog/assets/negative_index-X0T7VD_c.png" alt="负索引" tabindex="0" loading="lazy"><figcaption>负索引</figcaption></figure><h3 id="_4-2-unpack" tabindex="-1"><a class="header-anchor" href="#_4-2-unpack" aria-hidden="true">#</a> 4.2. Unpack</h3><p>tuple同list一致</p><p>1）item1,item2,*rest = tpl</p><p>2）*tpl</p><h3 id="_4-3-slice" tabindex="-1"><a class="header-anchor" href="#_4-3-slice" aria-hidden="true">#</a> 4.3. Slice</h3><p>tpl[start🔚step]</p><h3 id="_4-4-changetype" tabindex="-1"><a class="header-anchor" href="#_4-4-changetype" aria-hidden="true">#</a> 4.4. ChangeType</h3><p>lst = list(tpl)</p><p>tpl=tuple(list)</p><h3 id="_4-5-contain" tabindex="-1"><a class="header-anchor" href="#_4-5-contain" aria-hidden="true">#</a> 4.5. Contain</h3><p>item in tpl</p><h3 id="_4-6-connect" tabindex="-1"><a class="header-anchor" href="#_4-6-connect" aria-hidden="true">#</a> 4.6. Connect</h3><p>tpl3 = tpl1 + tpl2 + tpl3</p><h3 id="_4-7-delete" tabindex="-1"><a class="header-anchor" href="#_4-7-delete" aria-hidden="true">#</a> 4.7. Delete</h3><p>del关键字</p><p>del tpl</p><h2 id="_5-set-operations" tabindex="-1"><a class="header-anchor" href="#_5-set-operations" aria-hidden="true">#</a> 5. Set Operations</h2><h3 id="_5-1-create" tabindex="-1"><a class="header-anchor" href="#_5-1-create" aria-hidden="true">#</a> 5.1. Create</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1. empty
+
+set1 = set()
+
+Note:不可使用set1 = {}初始化，这会是dict类型
+
+2. init
+
+set1 = {&#39;item1&#39;, &#39;item2&#39;, &#39;item3&#39;, &#39;item4&#39;}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-2-access" tabindex="-1"><a class="header-anchor" href="#_5-2-access" aria-hidden="true">#</a> 5.2. Access</h3><p>loops</p><h3 id="_5-3-contain" tabindex="-1"><a class="header-anchor" href="#_5-3-contain" aria-hidden="true">#</a> 5.3. Contain</h3><p>item in set</p><h3 id="_5-4-add" tabindex="-1"><a class="header-anchor" href="#_5-4-add" aria-hidden="true">#</a> 5.4. Add</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1. one item
+
+set.add(item)
+
+2.multiple items
+
+set.update(list/tuple/set1)
+
+set.union(set1)  join
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-5-remove" tabindex="-1"><a class="header-anchor" href="#_5-5-remove" aria-hidden="true">#</a> 5.5. Remove</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1.指定
+
+set.remove(item)
+
+没有会报错
+
+set.discard(item)
+
+没有不报错
+
+2.随机
+
+removed_item = set.pop()
+
+pop会返回删除项
+
+3.清空
+
+set.clear()
+
+4.完全删除
+
+del关键字
+
+del set
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-6-changetype" tabindex="-1"><a class="header-anchor" href="#_5-6-changetype" aria-hidden="true">#</a> 5.6. ChangeType</h3><p>set = set(list)</p><p>list = list(set)</p><h3 id="_5-7-交集-intersection" tabindex="-1"><a class="header-anchor" href="#_5-7-交集-intersection" aria-hidden="true">#</a> 5.7. 交集 Intersection</h3><p>set1.intersection(set2)</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># syntax
+st1 = {&#39;item1&#39;, &#39;item2&#39;, &#39;item3&#39;, &#39;item4&#39;}
+st2 = {&#39;item3&#39;, &#39;item2&#39;}
+st1.intersection(st2) # {&#39;item3&#39;, &#39;item2&#39;}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-8-差集-difference" tabindex="-1"><a class="header-anchor" href="#_5-8-差集-difference" aria-hidden="true">#</a> 5.8. 差集 Difference</h3><p>1.单向</p><p>Note：以下两个结果不同</p><p>set1.difference(set2)</p><p>set2.difference(set1)</p><p>2.双向</p><p>Note：以下两个结果相同，均返回单向差集的和</p><p>set1.symmetric_difference(set2)</p><p>set2.symmetric_difference(set1)</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>&gt;&gt;&gt; python = {&#39;p&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;,&#39;n&#39;}
+&gt;&gt;&gt; dragon = {&#39;d&#39;, &#39;r&#39;, &#39;a&#39;, &#39;g&#39;, &#39;o&#39;,&#39;n&#39;}
+
+# 单向
+&gt;&gt;&gt; python.difference(dragon)
+{&#39;t&#39;, &#39;p&#39;, &#39;y&#39;, &#39;h&#39;}
+&gt;&gt;&gt; dragon.difference(python)
+{&#39;r&#39;, &#39;d&#39;, &#39;g&#39;, &#39;a&#39;}
+
+# 双向
+&gt;&gt;&gt; python.symmetric_difference(dragon)
+{&#39;r&#39;, &#39;g&#39;, &#39;p&#39;, &#39;d&#39;, &#39;y&#39;, &#39;h&#39;, &#39;t&#39;, &#39;a&#39;}
+&gt;&gt;&gt; dragon.symmetric_difference(python)
+{&#39;r&#39;, &#39;g&#39;, &#39;d&#39;, &#39;p&#39;, &#39;y&#39;, &#39;h&#39;, &#39;t&#39;, &#39;a&#39;}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-9-是否是子集-父集" tabindex="-1"><a class="header-anchor" href="#_5-9-是否是子集-父集" aria-hidden="true">#</a> 5.9. 是否是子集/父集</h3><p>Subset: issubset()</p><p>set1.issubset(set2)</p><p>Super set: issuperset()</p><p>set1.issuperset(set2)</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># syntax
+st1 = {&#39;item1&#39;, &#39;item2&#39;, &#39;item3&#39;, &#39;item4&#39;}
+st2 = {&#39;item2&#39;, &#39;item3&#39;}
+st2.issubset(st1) # True
+st1.issuperset(st2) # True
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-10-是否互斥" tabindex="-1"><a class="header-anchor" href="#_5-10-是否互斥" aria-hidden="true">#</a> 5.10. 是否互斥</h3><p>set1.isdisjoint(set2)</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>even_numbers = {0, 2, 4 ,6, 8}
+even_numbers = {1, 3, 5, 7, 9}
+even_numbers.isdisjoint(odd_numbers) # True, because no common item
+
+python = {&#39;p&#39;, &#39;y&#39;, &#39;t&#39;, &#39;h&#39;, &#39;o&#39;,&#39;n&#39;}
+dragon = {&#39;d&#39;, &#39;r&#39;, &#39;a&#39;, &#39;g&#39;, &#39;o&#39;,&#39;n&#39;}
+python.isdisjoint(dragon)  # False, there are common items {&#39;o&#39;, &#39;n&#39;}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_6-dictionary-operations" tabindex="-1"><a class="header-anchor" href="#_6-dictionary-operations" aria-hidden="true">#</a> 6. Dictionary Operations</h2><h3 id="_6-1-create" tabindex="-1"><a class="header-anchor" href="#_6-1-create" aria-hidden="true">#</a> 6.1. Create</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1、empty
+
+empty_dict = {}
+
+2、init
+
+dict = {&#39;key1&#39;:&#39;value1&#39;, &#39;key2&#39;:&#39;value2&#39;, &#39;key3&#39;:&#39;value3&#39;, &#39;key4&#39;:&#39;value4&#39;}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>person = {
+    &#39;first_name&#39;:&#39;Asabeneh&#39;,
+    &#39;last_name&#39;:&#39;Yetayeh&#39;,
+    &#39;age&#39;:250,
+    &#39;country&#39;:&#39;Finland&#39;,
+    &#39;is_marred&#39;:True,
+    &#39;skills&#39;:[&#39;JavaScript&#39;, &#39;React&#39;, &#39;Node&#39;, &#39;MongoDB&#39;, &#39;Python&#39;],
+    &#39;address&#39;:{
+        &#39;street&#39;:&#39;Space street&#39;,
+        &#39;zipcode&#39;:&#39;02210&#39;
+    }
+    }
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_6-2-access-add-update" tabindex="-1"><a class="header-anchor" href="#_6-2-access-add-update" aria-hidden="true">#</a> 6.2. Access &amp; Add &amp; Update</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1、查询、新增、修改
+
+dict[&#39;key&#39;]
+
+Note：原本有key，可查询，可修改；原本没key，可新增
+
+Note：如果不是新增，key不存在，则报错
+
+2、只查询
+
+dict.get(&#39;key&#39;)
+
+Note：如果key不存在，则返回None
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># dict[&#39;key&#39;]
+print(person[&#39;first_name&#39;]) # Asabeneh
+print(person[&#39;country&#39;])    # Finland
+print(person[&#39;skills&#39;])     # [&#39;JavaScript&#39;, &#39;React&#39;, &#39;Node&#39;, &#39;MongoDB&#39;, &#39;Python&#39;]
+print(person[&#39;skills&#39;][0])  # JavaScript
+print(person[&#39;address&#39;][&#39;street&#39;]) # Space street
+print(person[&#39;city&#39;])       # Error
+
+# Add key
+person[&#39;job_title&#39;] = &#39;Instructor&#39;
+# Update value
+person[&#39;skills&#39;].append(&#39;HTML&#39;)
+person[&#39;first_name&#39;] = &#39;Eyob&#39;
+person[&#39;age&#39;] = 252
+
+
+# dict.get(&#39;key&#39;)
+print(person.get(&#39;first_name&#39;)) # Asabeneh
+print(person.get(&#39;country&#39;))    # Finland
+print(person.get(&#39;skills&#39;)) #[&#39;HTML&#39;,&#39;CSS&#39;,&#39;JavaScript&#39;, &#39;React&#39;, &#39;Node&#39;, &#39;MongoDB&#39;, &#39;Python&#39;]
+print(person.get(&#39;city&#39;))   # None
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_6-3-contain" tabindex="-1"><a class="header-anchor" href="#_6-3-contain" aria-hidden="true">#</a> 6.3. Contain</h3><p>key in dict</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># syntax
+dct = {&#39;key1&#39;:&#39;value1&#39;, &#39;key2&#39;:&#39;value2&#39;, &#39;key3&#39;:&#39;value3&#39;, &#39;key4&#39;:&#39;value4&#39;}
+print(&#39;key2&#39; in dct) # True
+print(&#39;key5&#39; in dct) # False
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_6-4-remove" tabindex="-1"><a class="header-anchor" href="#_6-4-remove" aria-hidden="true">#</a> 6.4. Remove</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1、去除key
+
+dict.pop(key)
+
+2、去除最后一项
+
+dict.popitem()
+
+3、清空
+
+dict.clear()
+
+4、去除key或完全去除
+
+del 关键字
+
+del dict[key]
+
+del dict
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_6-5-changetype" tabindex="-1"><a class="header-anchor" href="#_6-5-changetype" aria-hidden="true">#</a> 6.5. ChangeType</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1、tuples list
+
+dict.items()
+
+2、keys list
+
+keys = dict.keys()
+
+3、values list
+
+values = dict.values()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code># tuples list
+dct = {&#39;key1&#39;:&#39;value1&#39;, &#39;key2&#39;:&#39;value2&#39;, &#39;key3&#39;:&#39;value3&#39;, &#39;key4&#39;:&#39;value4&#39;}
+print(dct.items()) # dict_items([(&#39;key1&#39;, &#39;value1&#39;), (&#39;key2&#39;, &#39;value2&#39;), (&#39;key3&#39;, &#39;value3&#39;), (&#39;key4&#39;, &#39;value4&#39;)])
+
+
+# keys
+dct = {&#39;key1&#39;:&#39;value1&#39;, &#39;key2&#39;:&#39;value2&#39;, &#39;key3&#39;:&#39;value3&#39;, &#39;key4&#39;:&#39;value4&#39;}
+keys = dct.keys()
+print(keys)     # dict_keys([&#39;key1&#39;, &#39;key2&#39;, &#39;key3&#39;, &#39;key4&#39;])
+
+# values
+dct = {&#39;key1&#39;:&#39;value1&#39;, &#39;key2&#39;:&#39;value2&#39;, &#39;key3&#39;:&#39;value3&#39;, &#39;key4&#39;:&#39;value4&#39;}
+values = dct.values()
+print(values)     # dict_values([&#39;value1&#39;, &#39;value2&#39;, &#39;value3&#39;, &#39;value4&#39;])
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_6-6-copy" tabindex="-1"><a class="header-anchor" href="#_6-6-copy" aria-hidden="true">#</a> 6.6. Copy</h3><p>dict_copy = dict.copy()</p><h3 id="_6-7-unpack" tabindex="-1"><a class="header-anchor" href="#_6-7-unpack" aria-hidden="true">#</a> 6.7. Unpack</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>**dict
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>def unpacking_person_info(name, country, city, age):
+    return f&#39;{name} lives in {country}, {city}. He is {age} year old.&#39;
+dct = {&#39;name&#39;:&#39;Asabeneh&#39;, &#39;country&#39;:&#39;Finland&#39;, &#39;city&#39;:&#39;Helsinki&#39;, &#39;age&#39;:250}
+print(unpacking_person_info(**dct)) # Asabeneh lives in Finland, Helsinki. He is 250 years old.
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div><!--[--><!----><!--]--><footer class="page-meta"><!----><div class="meta-item git-info"><!----><!----></div></footer><nav class="vp-page-nav"><a aria-label="Setting Up Python Development Environment and Using Pip for Package Management" class="vp-link nav-link prev nav-link prev" href="/blog/posts/Python/01_python_environment.html"><div class="hint"><span class="arrow start"></span>Prev</div><div class="link"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Setting Up Python Development Environment and Using Pip for Package Management</div></a><a aria-label="Python Operators" class="vp-link nav-link next nav-link next" href="/blog/posts/Python/03_python_operator.html"><div class="hint">Next<span class="arrow end"></span></div><div class="link">Python Operators<span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span></div></a></nav><!----><!--[--><!----><!--]--><!--]--></main><!--]--><!----></div><!--]--><!--]--><!----><!--]--></div>
+    <script type="module" src="/blog/assets/app-KkT-fVWF.js" defer></script>
+  </body>
+</html>
