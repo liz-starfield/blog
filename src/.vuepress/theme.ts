@@ -24,6 +24,7 @@ export default hopeTheme({
     },
   },
   sidebar: "heading",
+  sidebarSorter:["date","filename"],  
   displayFooter: false,
   editLink: false,
   lastUpdated: false,
