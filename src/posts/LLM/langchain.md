@@ -4,6 +4,10 @@ date: 2024-01-28
 ---
 # Understanding LangChain in One Article: Building Powerful Applications with Large Language Models
 > Starting with the architecture diagram, step by step, this article helps you understand all aspects of LangChain.
+  - [What is LangChain?](#what-is-langchain)
+  - [What Information Does the LangChain Architecture Diagram Tell Us?](#what-information-does-the-langchain-architecture-diagram-tell-us)
+  - [Essential Core Modules You Need to Know](#essential-core-modules-you-need-to-know)
+  - [Experience the Function of Each Module Through Simple Example Code](#experience-the-function-of-each-module-through-simple-example-code)
 
 <!-- more -->
 

@@ -4,10 +4,14 @@ date: 2024-01-29
 ---
 # 从源码视角，窥探LangChain的运行逻辑
 > 通过解读Chain的源码和AgentExecutor的源码，带你了解各个模块是如何关联在一起的
+  - [1. LangChain的基类](#1-langchain的基类)
+  - [2. LCEL与Runnable](#2-lcel与runnable)
+  - [3. Chain](#3-chain)
+  - [4. AgentExecutor](#4-agentexecutor)
 
 <!-- more -->
 
-## LangChain的基类
+## 1. LangChain的基类
 Python的抽象基类是ABC，LangChain的基类是其子类Runnable。
 
 基类的继承关系如下图：
@@ -29,17 +33,17 @@ RunnableSerializable的子类如下：
     - BaseRetriever
     - BaseTool
 
-## LCEL与Runnable
+## 2. LCEL与Runnable
 直观理解：
 - Runnable是一个零件
 - LCEL是将零件组装为成品的方式
-### LCEL(LangChain的表达式语言) 
+### 2.1. LCEL(LangChain的表达式语言) 
 LCEL，是LangChain Expression Language的缩写，即LangChain的表达式语言。
 
 LCEL是一种轻松地将Runnable组合为Chain的声明性方式。
 
-#### 组合Runnable的方式
-##### 串行(RunnableSequence)
+#### 2.1.1. 组合Runnable的方式
+##### 2.1.1.1. 串行(RunnableSequence)
 - 特点
   - 顺序调用一系列Runnable
   - 上一个Runnable的输出作为下一个Runnable的输入
@@ -54,7 +58,7 @@ sequence = RunnableLambda(lambda x: x + 1) | RunnableLambda(lambda x: x * 2)
 sequence.invoke(1) # 输出 4
 sequence.batch([1, 2, 3]) # 输出 [4, 6, 8]
 ```
-##### 并行(RunnableParallel)
+##### 2.1.1.2. 并行(RunnableParallel)
 - 特点
   - 并行Runnable有同一个输入
   - 并行Runnable有各自的输出
@@ -71,19 +75,19 @@ sequence = RunnableLambda(lambda x: x + 1) | {
 }
 sequence.invoke(1) # 输出 {'mul_2': 4, 'mul_5': 10}
 ```
-### Runnable
-#### What
+### 2.2. Runnable
+#### 2.2.1. What
 Runnable是一个可以被调用、批处理、流式处理、转换和组合的工作单元，也就是可以组合成链(Chain)的零件。
-#### 功能
+#### 2.2.2. 功能
 - 支持同步和异步
 - 支持批处理
 - 支持流式处理
-#### 关键方法
+#### 2.2.3. 关键方法
 - invoke/ainvoke：一个输入=>一个输出
 - batch/abatch：多个输入=>多个输出
 - stream/astream：一个输入=>流式输出
 - astream_log：一个输入=>流式输出和选定的中间结果
-### Runnable的子类
+### 2.3. Runnable的子类
 - Chain
   - AgentExecutor
 - BasePromptTemplate
@@ -93,8 +97,8 @@ Runnable是一个可以被调用、批处理、流式处理、转换和组合的
 - BaseOutputParser    
 - BaseRetriever
 - BaseTool
-#### Runnable子类的输入和输出类型
-##### Chain
+### 2.4. Runnable子类的输入和输出类型
+#### 2.4.1. Chain
 - invoke
   - input:Dict[str, Any]
   - output:Dict[str, Any]
@@ -104,42 +108,42 @@ Runnable是一个可以被调用、批处理、流式处理、转换和组合的
 - run
   - input:Any
   - output:Any
-##### BasePromptTemplate
+#### 2.4.2. BasePromptTemplate
 - invoke
   - input:Dict
   - output:PromptValue
-##### BaseLLM
+#### 2.4.3. BaseLLM
 - invoke
   - input:Union[PromptValue, str, Sequence[BaseMessage]]
   - output:str
-##### BaseChatModel
+#### 2.4.4. BaseChatModel
 - invoke
   - input:Union[PromptValue, str, Sequence[BaseMessage]]
   - output:BaseMessage
-##### BaseOutputParser
+#### 2.4.5. BaseOutputParser
 - invoke
   - input:Union[str, BaseMessage]
   - output:T
-##### BaseRetriever
+#### 2.4.6. BaseRetriever
 - invoke
   - input:str
   - output:List[Document]
-##### BaseTool
+#### 2.4.7. BaseTool
 - invoke
   - input:Union[str, Dict]
   - output:Any
-## Chain
-### What
+## 3. Chain
+### 3.1. What
 - 抽象基类
 - 作用：构造组件的调用序列
 - 特点
   - 有状态（Stateful）：为任何 Chain 添加 Memory，即可为其赋予状态。
   - 可观察（Observable）：为任何 Chain 添加 Callbacks，即可在组件调用序列外附加额外的功能，如日志记录。
   - 可组合（Composable）：Chain API 足够灵活，便于将 Chain 与其他组件结合，包括其他 Chain。
-### Chain的属性
+### 3.2. Chain的属性
 - Memory：在chain开始的时候组装inputs，在chain结束的时候保存inputs和outputs。
 - Callbacks：在Chain的调用生命周期中，从on_chain_start开始，以on_chain_end或on_chain_error结束，都会调用Callbacks处理程序。
-### Chain的源码解读
+### 3.3. Chain的源码解读
 源码入口：Chain的invoke方法
 
 源码位置：langchain.chains.base.py中
@@ -201,20 +205,20 @@ invoke源码逻辑：
 - callback.on_chain_end: callback相关
 - prep_outputs: 验证和准备chain的输出，并将此次运行的信息保存到memory中
   - memory.save_context: memory相关，将inputs, outputs保存到memory
-## AgentExecutor
-### What
+## 4. AgentExecutor
+### 4.1. What
 - Chain的子类
 - 可以使用工具、拥有记忆、动态决策的智能体
 - AgentExecutor = Agent + Memory + Tools
 - 对用户的问题，进行多轮迭代执行，最终返回结果
-### AgentExecutor的属性
+### 4.2. AgentExecutor的属性
 - Memory：继承自父类Chain
 - Callbacks：继承自父类Chain
 - Agent：决定迭代执行的每一步的行为
 - Tools：可以使用的工具
 - Max Iterations：最大迭代轮次
 - Max Execution Time：最大执行时间
-### AgentExecutor的源码解读
+### 4.3. AgentExecutor的源码解读
 #### Step1：Chain.invoke
 AgentExecutor没有重写invoke方法，会调用父类的invoke方法。
 #### Step2：AgentExecutor._call(迭代器，循环迭代执行)
@@ -324,5 +328,5 @@ def _consume_next_step(
 _consume_next_step源码逻辑：
 - 如果是AgentFinish，直接返回
 - 如果是AgentStep，则转换为List[Tuple[AgentAction,str]]后返回
-### AgentExecutor的源码总结
+### 4.4. AgentExecutor的源码总结
 ![AgentExecutor Source Code](images/AgentExecutor_Source_Code.jpg)
