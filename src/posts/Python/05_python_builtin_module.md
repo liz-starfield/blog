@@ -1,13 +1,17 @@
 ---
 icon: lightbulb
 date: 2022-06-28
+category:
+  - Python
+tag:
+  - Python
 ---
 
 # Python Packages and Modules
-  - [1. Packages, Modules,and __init__.py](#1-packages-modulesand-initpy)
-  - [2. Inside Python Files](#2-inside-python-files)
-  - [3. Python Built-in Modules](#3-python-built-in-modules)
-  - [4. Practice](#4-practice)
+  - 1. Packages, Modules,and __init__.py
+  - 2. Inside Python Files
+  - 3. Python Built-in Modules
+  - 4. Practice
 <!-- more -->
 ## 1. Packages, Modules,and __init__.py
 

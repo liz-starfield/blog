@@ -34,7 +34,7 @@ export default hopeTheme({
       navbar: enNavbar,
       sidebar: enSidebar,
       blog: {
-        description: "A BackEnd programmer",
+        description: "",
         intro: "/intro.html",
       },
       metaLocales: {
@@ -45,7 +45,7 @@ export default hopeTheme({
       navbar: zhNavbar,
       sidebar: zhSidebar,
       blog: {
-        description: "一个后端开发者",
+        description: "",
         intro: "/zh/intro.html",
       },
       metaLocales: {

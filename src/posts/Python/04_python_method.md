@@ -1,13 +1,17 @@
 ---
 icon: lightbulb
 date: 2022-06-22
+category:
+  - Python
+tag:
+  - Python
 ---
 # Python Functions
-  - [1. Sequence/Selection/Iteration Statements](#1-sequenceselectioniteration-statements)
-  - [2. Functions](#2-functions)
-  - [3. Built-in Functions](#3-built-in-functions)
-  - [4. Higher-order Functions](#4-higher-order-functions)
-  - [5. Built-in Higher-order Functions](#5-built-in-higher-order-functions)
+  - 1. Sequence/Selection/Iteration Statements
+  - 2. Functions
+  - 3. Built-in Functions
+  - 4. Higher-order Functions
+  - 5. Built-in Higher-order Functions
 <!-- more -->
 ## 1. Sequence/Selection/Iteration Statements
 
@@ -304,6 +308,8 @@ f.close() # 手动关闭
 ```
 
 #### 3.2.6. 打开文件——自动关闭方式
+
+with语句适用于对资源进行访问的场合，能自动处理上下文环境产生的异常。确保不管使用过程中是否发生异常，都会执行必要的“清理”操作，释放资源。
 
 ```python
 with open('./files/reading_file_example.txt') as f:

@@ -1,12 +1,16 @@
 ---
 icon: lightbulb
 date: 2022-06-05
+category:
+  - Python
+tag:
+  - Python
 ---
 # 搭建Python开发环境，使用pip进行包管理
-  - [1. 适用范围](#1-适用范围)
-  - [2. Python开发环境](#2-python开发环境)
-  - [3. 包管理工具pip](#3-包管理工具pip)
-  - [4. pip 命令](#4-pip-命令)
+  - 1. 适用范围
+  - 2. Python开发环境
+  - 3. 包管理工具pip
+  - 4. pip 命令
 <!-- more -->
 
 ## 1. 适用范围

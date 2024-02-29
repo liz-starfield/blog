@@ -1,13 +1,17 @@
 ---
 icon: lightbulb
 date: 2022-06-22
+category:
+  - Python
+tag:
+  - Python
 ---
 # Python的函数
-  - [1. 顺序/选择/循环语句](#1-顺序选择循环语句)
-  - [2. 函数 Functions](#2-函数-functions)
-  - [3. 内置函数 built-in functions](#3-内置函数-built-in-functions)
-  - [4. 高阶函数](#4-高阶函数)
-  - [5. 内置高阶函数](#5-内置高阶函数)
+  - 1. 顺序/选择/循环语句
+  - 2. 函数 Functions
+  - 3. 内置函数 built-in functions
+  - 4. 高阶函数
+  - 5. 内置高阶函数
 <!-- more -->
 ## 1. 顺序/选择/循环语句
 

@@ -1,12 +1,16 @@
 ---
 icon: lightbulb
 date: 2022-06-05
+category:
+  - Python
+tag:
+  - Python
 ---
 # Setting Up Python Development Environment and Using Pip for Package Management
-  - [1. Applicable Scope](#1-applicable-scope)
-  - [2. Python Development Environment](#2-python-development-environment)
-  - [3. Package Management Tool: pip](#3-package-management-tool-pip)
-  - [4. Pip Commands](#4-pip-commands)
+  - 1. Applicable Scope
+  - 2. Python Development Environment
+  - 3. Package Management Tool: pip
+  - 4. Pip Commands
 
 <!-- more -->
 

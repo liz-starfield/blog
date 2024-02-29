@@ -1,13 +1,17 @@
 ---
 icon: lightbulb
 date: 2022-07-03
+category:
+  - Python
+tag:
+  - Python
 ---
 # Python受欢迎的第三方包
-  - [1. Numpy](#1-numpy)
-  - [2. Pandas](#2-pandas)
-  - [3. Requests](#3-requests)
-  - [4. Flask](#4-flask)
-  - [5. 更多](#5-更多)
+  - 1. Numpy
+  - 2. Pandas
+  - 3. Requests
+  - 4. Flask
+  - 5. 更多
 <!-- more -->
 ## 1. Numpy
 numpy, called numeric python. It is one of the most popular packages in machine learning and data science community. It contains among other things:a powerful N-dimensional array objectsophisticated (broadcasting) functionstools for integrating C/C++ and Fortran codeuseful linear algebra, Fourier transform, and random number capabilities
