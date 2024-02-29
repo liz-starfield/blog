@@ -1,58 +1,64 @@
 ---
 icon: lightbulb
 date: 2024-01-28
+sticky: true
+star: true
+category:
+  - LLM
+tag:
+  - LLM
 ---
 # Understanding LangChain in One Article: Building Powerful Applications with Large Language Models
 > Starting with the architecture diagram, step by step, this article helps you understand all aspects of LangChain.
-  - [What is LangChain?](#what-is-langchain)
-  - [What Information Does the LangChain Architecture Diagram Tell Us?](#what-information-does-the-langchain-architecture-diagram-tell-us)
-  - [Essential Core Modules You Need to Know](#essential-core-modules-you-need-to-know)
-  - [Experience the Function of Each Module Through Simple Example Code](#experience-the-function-of-each-module-through-simple-example-code)
+  - 1. What is LangChain?
+  - 2. What Information Does the LangChain Architecture Diagram Tell Us?
+  - 3. Essential Core Modules You Need to Know
+  - 4. Experience the Function of Each Module Through Simple Example Code
 
 <!-- more -->
 
-## What is LangChain?
+## 1. What is LangChain?
 LangChain is an open-source framework for quickly building LLM (Large Language Model) applications.
 
 It abstracts some common behaviors used in LLMs, encapsulates them as APIs, unifies the usage methods, and simplifies the development process.
 
-## What Information Does the LangChain Architecture Diagram Tell Us?
+## 2. What Information Does the LangChain Architecture Diagram Tell Us?
 The architecture diagram of LangChain is as follows:
 
 ![LangChain Architecture Diagram](images/LangChain_Architecture_Diagram.png)
 
 What information can we obtain from the architecture diagram?
-### The Ecosystem of LangChain
+### 2.1. The Ecosystem of LangChain
 The ecosystem of LangChain, besides LangChain itself, also includes LangServe and LangSmith.
 - LangChain focuses on development
 - LangServe is used for deployment
 - LangSmith serves as an observability platform
 
 Note: For beginners, LangServe and LangSmith can be initially overlooked. This article focuses only on LangChain itself.
-### Development Language of LangChain Source Code
+### 2.2. Development Language of LangChain Source Code
 The source code of LangChain is developed in two languages: Python and JavaScript.
 - The GitHub repository for the Python source code:[https://github.com/langchain-ai/langchain](https://github.com/langchain-ai/langchain)
 - The GitHub repository for the JavaScript source code:[https://github.com/langchain-ai/langchainjs](https://github.com/langchain-ai/langchainjs)
 
 Note: This article will focus on LangChain's Python source code.
-### Organization of LangChain's Source Code
+### 2.3. Organization of LangChain's Source Code
 The libs directory in the LangChain source code is the primary directory, containing three main packages: LangChain, LangChain-Community, and LangChain-Core.
 - LangChain-Core package: The foundation of the framework
 - LangChain-Community package: Integrated components/third-party components
 - LangChain package: Core components. The contents of both LangChain-Core and LangChain-Community packages are imported into this LangChain package. LangChain package serves as the entry point, calling components from both LangChain-Core and LangChain-Community packages
 
-## Essential Core Modules You Need to Know
-### Model I/O
+## 3. Essential Core Modules You Need to Know
+### 3.1. Model I/O
 Usage: Abstracts interaction with LLM, divided into Prompts module, Language Model module (LLM module), and Output Parsers module.
-#### Prompts
+#### 3.1.1. Prompts
 Usage: Uses Prompt templates as inputs for LLM.
-#### Language Model(LLM)
+#### 3.1.2. Language Model(LLM)
 Usage: An abstraction of the language model, calls LLM through a universal interface.
-#### Output Parsers
+#### 3.1.3. Output Parsers
 Usage: Parses the output of LLM, able to parse into different formats.
-### Chains
+### 3.2. Chains
 Usage: Combines multiple components to create a single cohesive task. Multiple Chains can be nested or combined with other components to build more complex Chains.
-### Agents
+### 3.3. Agents
 Usage: Based on user input, plans and makes decisions using LLM. It can divide tasks into smaller parts or decide the behavior of each step, integrating various tools and dynamically choosing whether to use a tool and which tool to use.
 
 Key Concepts:
@@ -61,16 +67,16 @@ Key Concepts:
 - **AgentExecutor**: Essentially a Chain, AgentExecutor is an iterator for the Agent. It repeatedly calls the Agent to make decisions until a satisfactory result is achieved or a predefined limit is reached.
 
 AgentExecutor can be seen as an intelligent entity, and Agent is like the brain of this entity. When a user asks a question, AgentExecutor thinks once or multiple times, i.e., it calls the Agent to make decisions until it reaches a satisfactory result or the predefined limit.
-### Retrieval
+### 3.4. Retrieval
 Usage: An abstraction of integrated data sources, including data loading, processing, vectorization, storage, and retrieval, allowing users to have their knowledge base.
-### Callbacks
+### 3.5. Callbacks
 Usage: Records relevant information during the execution of a Chain, typically used for logging, recording intermediate steps, recording token usage for billing, and controlling flow rate.
-### Memory
+### 3.6. Memory
 Usage: Records historical conversations to supplement historical context in subsequent dialogues, enabling the model to have continuous conversations.
 
-## Experience the Function of Each Module Through Simple Example Code
+## 4. Experience the Function of Each Module Through Simple Example Code
 Note: Focus on the code flow rather than the details.
-### Application of Model I/O and Chains Module: Combining Prompt, LLM, and Output Parser into a Chain
+### 4.1. Application of Model I/O and Chains Module: Combining Prompt, LLM, and Output Parser into a Chain
 ```python
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
@@ -94,7 +100,7 @@ chain = prompt | llm | output_parser
 # invoke Chain
 chain.invoke({"input": "how can langsmith help with testing?"})
 ```
-### Application of Retrieval Module: Building a knowledge base and retrieving relevant information as part of the Prompt
+### 4.2. Application of Retrieval Module: Building a knowledge base and retrieving relevant information as part of the Prompt
 - This case demonstrates the nested combination of Chains
 - The Retrieval Chain receives user input, searches for relevant documents, then combines these documents with the original user input to form a Prompt, which is then passed to the large language model (LLM) to answer the original question
 ```python
@@ -145,7 +151,7 @@ response = retrieval_chain.invoke({"input": "how can langsmith help with testing
 # output result
 print(response["answer"])
 ```
-### Application of Agents Module: Using the ability to retrieve from a knowledge base, search capabilities, and other skills as tools for AgentExecutor, which decomposes the user's question into multiple steps, with the Agent deciding what to do at each step
+### 4.3. Application of Agents Module: Using the ability to retrieve from a knowledge base, search capabilities, and other skills as tools for AgentExecutor, which decomposes the user's question into multiple steps, with the Agent deciding what to do at each step
 - A retriever can be used as a tool
 ```python
 from langchain.tools.retriever import create_retriever_tool

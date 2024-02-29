@@ -1,11 +1,15 @@
 ---
 icon: lightbulb
 date: 2022-06-18
+category:
+  - Python
+tag:
+  - Python
 ---
 # Python的运算符
-  - [1. 变量与常量](#1-变量与常量)
-  - [2. 运算符 Operators](#2-运算符-operators)
-  - [3. 注释 Comment](#3-注释-comment)
+  - 1. 变量与常量
+  - 2. 运算符 Operators
+  - 3. 注释 Comment
 <!-- more -->
 ## 1. 变量与常量
 ### 1.1. 变量Variable

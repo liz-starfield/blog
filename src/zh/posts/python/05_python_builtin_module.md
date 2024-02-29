@@ -1,13 +1,17 @@
 ---
 icon: lightbulb
 date: 2022-06-28
+category:
+  - Python
+tag:
+  - Python
 ---
 
 # Python的包与模块
-  - [1. 包、模块与\_\_init\_\_.py](#1-包模块与__init__py)
-  - [2. Python文件内部](#2-python文件内部)
-  - [3. python内置模块](#3-python内置模块)
-  - [4. 应用](#4-应用)
+  - 1. 包、模块与\_\_init\_\_.py
+  - 2. Python文件内部
+  - 3. python内置模块
+  - 4. 应用
 <!-- more -->
 ## 1. 包、模块与__init__.py
 

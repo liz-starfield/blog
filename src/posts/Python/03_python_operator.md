@@ -1,11 +1,15 @@
 ---
 icon: lightbulb
 date: 2022-06-18
+category:
+  - Python
+tag:
+  - Python
 ---
 # Python Operators
-  - [1. Variables and Constants](#1-variables-and-constants)
-  - [2. Operators](#2-operators)
-  - [3. Comments](#3-comments)
+  - 1. Variables and Constants
+  - 2. Operators
+  - 3. Comments
 
 <!-- more -->
 ## 1. Variables and Constants

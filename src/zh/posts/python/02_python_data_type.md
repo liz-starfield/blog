@@ -1,14 +1,18 @@
 ---
 icon: lightbulb
 date: 2022-06-12
+category:
+  - Python
+tag:
+  - Python
 ---
 # Python的数据类型
-  - [1. 数据类型](#1-数据类型)
-  - [2. String操作](#2-string操作)
-  - [3. List操作](#3-list操作)
-  - [4. Tuple操作](#4-tuple操作)
-  - [5. Set操作](#5-set操作)
-  - [6. Dictionary操作](#6-dictionary操作)
+  - 1. 数据类型
+  - 2. String操作
+  - 3. List操作
+  - 4. Tuple操作
+  - 5. Set操作
+  - 6. Dictionary操作
 <!-- more -->
 
 

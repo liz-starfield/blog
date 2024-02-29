@@ -1,13 +1,19 @@
 ---
 icon: lightbulb
 date: 2024-01-28
+sticky: true
+star: true
+category:
+  - LLM
+tag:
+  - LLM
 ---
 # 一文带你了解LangChain: 使用大语言模型构建强大的应用程序
 > 从架构图入手，一步步带你了解LangChain的方方面面
-  - [1. LangChain是什么](#1-langchain是什么)
-  - [2. LangChain的架构图告诉了我们什么信息](#2-langchain的架构图告诉了我们什么信息)
-  - [3. 你不得不知的一些核心模块](#3-你不得不知的一些核心模块)
-  - [4. 通过简单的示例代码感受下各模块的作用](#4-通过简单的示例代码感受下各模块的作用)
+  - 1. LangChain是什么
+  - 2. LangChain的架构图告诉了我们什么信息
+  - 3. 你不得不知的一些核心模块
+  - 4. 通过简单的示例代码感受下各模块的作用
 
 <!-- more -->
 

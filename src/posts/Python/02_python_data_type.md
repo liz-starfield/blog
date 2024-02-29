@@ -1,14 +1,18 @@
 ---
 icon: lightbulb
 date: 2022-06-12
+category:
+  - Python
+tag:
+  - Python
 ---
 # Python Data Types
-  - [1. Data Types](#1-data-types)
-  - [2. String Operations](#2-string-operations)
-  - [3. List Operations](#3-list-operations)
-  - [4. Tuple Operations](#4-tuple-operations)
-  - [5. Set Operations](#5-set-operations)
-  - [6. Dictionary Operations](#6-dictionary-operations)
+  - 1. Data Types
+  - 2. String Operations
+  - 3. List Operations
+  - 4. Tuple Operations
+  - 5. Set Operations
+  - 6. Dictionary Operations
 <!-- more -->
 
 

@@ -1,13 +1,19 @@
 ---
 icon: lightbulb
 date: 2024-01-29
+sticky: true
+star: true
+category:
+  - LLM
+tag:
+  - LLM
 ---
 # 从源码视角，窥探LangChain的运行逻辑
 > 通过解读Chain的源码和AgentExecutor的源码，带你了解各个模块是如何关联在一起的
-  - [1. LangChain的基类](#1-langchain的基类)
-  - [2. LCEL与Runnable](#2-lcel与runnable)
-  - [3. Chain](#3-chain)
-  - [4. AgentExecutor](#4-agentexecutor)
+  - 1. LangChain的基类
+  - 2. LCEL与Runnable
+  - 3. Chain
+  - 4. AgentExecutor
 
 <!-- more -->
 

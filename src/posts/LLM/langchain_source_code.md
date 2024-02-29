@@ -1,16 +1,22 @@
 ---
 icon: lightbulb
 date: 2024-01-29
+sticky: true
+star: true
+category:
+  - LLM
+tag:
+  - LLM
 ---
 # From the Source Code Perspective, Peering into the Operation Logic of LangChain
 > By interpreting the source code of Chain and AgentExecutor, let's understand how various modules are interconnected.
-  - [Base Class of LangChain](#base-class-of-langchain)
-  - [LCEL与Runnable](#lcel与runnable)
-  - [Chain](#chain-1)
-  - [AgentExecutor](#agentexecutor)
+  - 1. Base Class of LangChain
+  - 2. LCEL与Runnable
+  - 3. Chain
+  - 4. AgentExecutor
 <!-- more -->
 
-## Base Class of LangChain
+## 1. Base Class of LangChain
 Python's abstract base class is **ABC**, and LangChain's base class is its subclass, **Runnable**。
 
 The inheritance relationship of the base class is shown in the following diagram:
@@ -32,15 +38,15 @@ Extracting the important classes, we have the following inheritance relationship
     - BaseRetriever
     - BaseTool
 
-## LCEL与Runnable
+## 2. LCEL与Runnable
 Intuitive understanding:
 - Runnable is a component
 - LCEL is a way to assemble components into a finished product
-### LCEL(LangChain Expression Language) 
+### 2.1. LCEL(LangChain Expression Language) 
 LCEL is a declarative way to easily combine Runnables into a Chain.
 
-#### The Way to Compose Runnables
-##### Serial(RunnableSequence)
+#### 2.1.1. The Way to Compose Runnables
+##### 2.1.1.1. Serial(RunnableSequence)
 - feature
   - Sequentially calls a series of Runnables
   - The output of one Runnable is used as the input for the next Runnable
@@ -55,7 +61,7 @@ sequence = RunnableLambda(lambda x: x + 1) | RunnableLambda(lambda x: x * 2)
 sequence.invoke(1) # output 4
 sequence.batch([1, 2, 3]) # output [4, 6, 8]
 ```
-##### Parallel(RunnableParallel)
+##### 2.1.1.2. Parallel(RunnableParallel)
 - feature
   - Parallel Runnables have the same input
   - Parallel Runnables each have their own output
@@ -72,19 +78,19 @@ sequence = RunnableLambda(lambda x: x + 1) | {
 }
 sequence.invoke(1) # output {'mul_2': 4, 'mul_5': 10}
 ```
-### Runnable
-#### What
+### 2.2. Runnable
+#### 2.2.1. What
 Runnable is a unit of work that can be invoked, batched, streamed, transformed and composed, meaning it can be assembled into a Chain.
-#### Function
+#### 2.2.2. Function
 - sync and async support
 - batch support
 - streaming support
-#### Key Methods
+#### 2.2.3. Key Methods
 - invoke/ainvoke：an input => an output
 - batch/abatch：multiple input => multiple output
 - stream/astream：an input => streams output
 - astream_log：an input => streams output and selected intermediate results
-### Subclasses of Runnable
+### 2.3. Subclasses of Runnable
 - Chain
   - AgentExecutor
 - BasePromptTemplate
@@ -94,8 +100,8 @@ Runnable is a unit of work that can be invoked, batched, streamed, transformed a
 - BaseOutputParser    
 - BaseRetriever
 - BaseTool
-#### Input and output types for subclasses of Runnable
-##### Chain
+### 2.4. Input and output types for subclasses of Runnable
+#### 2.4.1. Chain
 - invoke
   - input:Dict[str, Any]
   - output:Dict[str, Any]
@@ -105,42 +111,42 @@ Runnable is a unit of work that can be invoked, batched, streamed, transformed a
 - run
   - input:Any
   - output:Any
-##### BasePromptTemplate
+#### 2.4.2. BasePromptTemplate
 - invoke
   - input:Dict
   - output:PromptValue
-##### BaseLLM
+#### 2.4.3. BaseLLM
 - invoke
   - input:Union[PromptValue, str, Sequence[BaseMessage]]
   - output:str
-##### BaseChatModel
+#### 2.4.4. BaseChatModel
 - invoke
   - input:Union[PromptValue, str, Sequence[BaseMessage]]
   - output:BaseMessage
-##### BaseOutputParser
+#### 2.4.5. BaseOutputParser
 - invoke
   - input:Union[str, BaseMessage]
   - output:T
-##### BaseRetriever
+#### 2.4.6. BaseRetriever
 - invoke
   - input:str
   - output:List[Document]
-##### BaseTool
+#### 2.4.7. BaseTool
 - invoke
   - input:Union[str, Dict]
   - output:Any
-## Chain
-### What
+## 3. Chain
+### 3.1. What
 - Abstract base class
 - Usage：Construct sequences of calls
 - Feature
   - Stateful: add Memory to any Chain to give it state
   - Observable: pass Callbacks to a Chain to execute additional functionality, like logging, outside the main sequence of component calls
   - Composable: the Chain API is flexible enough that it is easy to combine Chains with other components, including other Chains
-### Attributes of Chain
+### 3.2. Attributes of Chain
 - Memory：At the start, memory loads variables and passes them along in the chain. At the end, it saves any returned variables(inputs and outputs).
 - Callbacks：Callback handlers are called throughout the lifecycle of a call to a chain, starting with on_chain_start, ending with on_chain_end or on_chain_error.
-### The Source Code Interpretation of Chain
+### 3.3. The Source Code Interpretation of Chain
 Source Code Entrance：Chain.invoke method
 
 Source code Location：in langchain.chains.base.py
@@ -202,20 +208,20 @@ source code logic of invoke method：
 - callback.on_chain_end: related to callback
 - prep_outputs: Validating and preparing the output of the chain and saving the information of this run into memory
   - memory.save_context: related to memory，saving inputs and outputs into memory
-## AgentExecutor
-### What
+## 4. AgentExecutor
+### 4.1. What
 - Subclass of Chain
 - Intelligent agents that can use tools, have memory, and make dynamic decisions
 - AgentExecutor = Agent + Memory + Tools
 - Carrying out multiple rounds of iterative execution in response to user questions, ultimately returning results
-### Attribute of AgentExecutor
+### 4.2. Attribute of AgentExecutor
 - Memory：Inherits from the parent class Chain
 - Callbacks：Inherits from the parent class Chain
 - Agent：Deciding the behavior of each step in iterative execution
 - Tools：Tools that can be used
 - Max Iterations
 - Max Execution Time
-### The Source Code Interpretation of AgentExecutor
+### 4.3. The Source Code Interpretation of AgentExecutor
 #### Step1：Chain.invoke
 AgentExecutor does not override the invoke method and will call the parent class's invoke method.
 #### Step2：AgentExecutor._call(Iterator, executing iteratively in a loop)
@@ -325,5 +331,5 @@ def _consume_next_step(
 source code logic of _consume_next_step method：
 - If it's AgentFinish, return directly.
 - If it's AgentStep, then convert to List[Tuple[AgentAction, str]] and return.
-### Summary of the AgentExecutor Source Code
+### 4.4. Summary of the AgentExecutor Source Code
 ![AgentExecutor Source Code](images/AgentExecutor_Source_Code.jpg)

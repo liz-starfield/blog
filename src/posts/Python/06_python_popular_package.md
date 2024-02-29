@@ -1,13 +1,17 @@
 ---
 icon: lightbulb
 date: 2022-07-03
+category:
+  - Python
+tag:
+  - Python
 ---
 # Popular Third-party Python Packages
-  - [1. Numpy](#1-numpy)
-  - [2. Pandas](#2-pandas)
-  - [3. Requests](#3-requests)
-  - [4. Flask](#4-flask)
-  - [5. More](#5-More)
+  - 1. Numpy
+  - 2. Pandas
+  - 3. Requests
+  - 4. Flask
+  - 5. More
 <!-- more -->
 ## 1. Numpy
 numpy, called numeric python. It is one of the most popular packages in machine learning and data science community. It contains among other things:a powerful N-dimensional array objectsophisticated (broadcasting) functionstools for integrating C/C++ and Fortran codeuseful linear algebra, Fourier transform, and random number capabilities
