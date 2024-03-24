@@ -503,6 +503,24 @@ Counter('abracadabra').most_common(3) # [('a', 5), ('b', 2), ('r', 2)]
 
 Counter('abracadabra').most_common(5) # [('a', 5), ('b', 2), ('r', 2), ('c', 1), ('d', 1)]
 ```
+### 3.12.2. deque 双端队列（double-end queue）
+```
+from collections import deque
+
+queue = deque()
+
+queue = deque(list/tuple/string/dict)
+```
+
+```
+queue.append(item) # 从右端添加元素
+queue.extend(list/tuple/string/dict) # 从右端添加可迭代对象
+queue.pop() # 从右端移除元素并返回
+
+queue.appendleft(item) # 从左端添加元素
+queue.extendleft(list/tuple/string/dict)# 从左端添加可迭代对象
+queue.popleft() # 从左端移除元素并返回
+```
 
 ## 4. 应用
 

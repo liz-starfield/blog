@@ -615,6 +615,15 @@ start和end可以是正索引，也可以是负索引
 左闭右开：[start，end）
 
 ```
+list1 = [1,2,3]
+list2 = [4,5,6]
+list2[:] = list1 # 将list2完全替换为list1
+print(list2) # [1, 2, 3]
+list2[2:] = list1 # 将list2的下标2及之后的元素用list1替换
+print(list2) # [1, 2, 1, 2, 3]
+```
+
+```
 # First Example
 fruits = ['banana', 'orange', 'mango', 'lemon','lime','apple']
 first_fruit, second_fruit, third_fruit, *rest = lst
