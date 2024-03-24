@@ -474,9 +474,35 @@ There is nothing as rewarding as educating and empowering people.
 I found teaching more interesting than any other jobs. Does this motivate you to be a teacher?
 """
 ```
-#### 3.11.1 正则表达式规则
+#### 3.11.1. 正则表达式规则
 
 ![正则表达式规则](images/regular_expression.png)
+
+### 3.12. collections
+### 3.12.1. Counter 计数
+
+Counter是dict的子类，用于计数可哈希对象。
+
+```
+from collections import Counter
+
+# 字符串
+s = "loveleetcode"
+counter = Counter(s)
+print(counter) # Counter({'e': 4, 'l': 2, 'o': 2, 'v': 1, 't': 1, 'c': 1, 'd': 1})
+
+# 列表
+lst = ['red', 'blue', 'red', 'green', 'blue', 'blue']
+counter = Counter(lst)
+print(counter) # Counter({'blue': 3, 'red': 2, 'green': 1})
+```
+Counter的方法most_common(),返回top k的列表
+
+```
+Counter('abracadabra').most_common(3) # [('a', 5), ('b', 2), ('r', 2)]
+
+Counter('abracadabra').most_common(5) # [('a', 5), ('b', 2), ('r', 2), ('c', 1), ('d', 1)]
+```
 
 ## 4. 应用
 
