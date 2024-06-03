@@ -12,9 +12,9 @@ tag:
 
   - 1. About
   - 2. 模型总体架构
-  - 3. 张量维度转换
-  - 4. 可训练参数量   
-  - 5. 超参数
+  - 3. 超参数
+  - 4. 张量维度转换
+  - 5. 可训练参数量     
   - 6. 源码
    
 
@@ -44,14 +44,17 @@ https://nlp.seas.harvard.edu/annotated-transformer/
 
 ![源码对照模型架构](images/Transformer_Source_Code_Architecture.jpg)
 
-## 3. 张量维度转换
+## 3. 超参数
+![超参数](images/Transformer_Hyperparameters.png)
+
+## 4. 张量维度转换
 ![编码器张量维度转换](images/Encoder_Tensor_Dimension_Transformation.png)
 
 ![解码器张量维度转换](images/Decoder_Tensor_Dimension_Transformation.png)
 
-## 4. 可训练参数量
+## 5. 可训练参数量
 ![可训练参数量](images/Trainable_Parameters.png)
-### 4.1. MultiHeadedAttention
+### 5.1. MultiHeadedAttention
 该块的模型参数：MultiHeadedAttention的4个线性变换的权重和偏置。$Q、K、V$的权重矩阵$W_Q、W_K、W_V$和对应偏置，以及输出权重矩阵$W_O$和对应偏置
 
 该块的参数量大小：4个权重矩阵的形状为$[d=512,d=512]$, 4个偏置的形状为$[d=512]$, MultiHeadedAttention块总的参数量为$4*(d^2+d)$
@@ -60,7 +63,7 @@ https://nlp.seas.harvard.edu/annotated-transformer/
 
 Transformer中该块总的参数量：$18*4*(d^2+d)=72*(d^2+d)=18*4*(512^2+512)=18911232$
 
-### 4.2. PositionwiseFeedForward
+### 5.2. PositionwiseFeedForward
 该块的模型参数：PositionwiseFeedForward的2个线性变换的权重和偏置。第一个线性层是先将维度从$d=512$映射到$4d=2048$,第二个线性层再将维度从$4d=2048$映射到$d=512$
 
 该块的参数量大小：第一个线性层的权重矩阵$W_1$的形状为$[d=512,4d=2048]$,偏置的形状为$[4d=2048]$, 第二个线性层的权重矩阵$W_2$的形状为$[4d=2048,d=512]$,偏置的形状为$[d=512]$, PositionwiseFeedForward块总的参数量为$d*4d+4d+4d*d+d=8d^2+5d$
@@ -69,7 +72,7 @@ Transformer中该块总的参数量：$18*4*(d^2+d)=72*(d^2+d)=18*4*(512^2+512)=
 
 Transformer中该块总的参数量：$12*(8d^2+5d)=96d^2+60d=96*512^2+60*512=25196544$
 
-### 4.3. LayerNorm
+### 5.3. LayerNorm
 该块的模型参数：LayerNorm包含2个可训练参数：缩放参数$\gamma$和平移参数$\beta$
 
 该块的参数量大小：两个参数形状都为$[d]$, LayerNorm块总的参数量为$d+d=2d$
@@ -78,7 +81,7 @@ Transformer中该块总的参数量：$12*(8d^2+5d)=96d^2+60d=96*512^2+60*512=25
 
 Transformer中该块总的参数量：$32*2d=64d=64*512=32768$
 
-### 4.4. Embeddings
+### 5.4. Embeddings
 该块的模型参数：该块出现在Transformer中的3个位置（Input Embeddings、Output Embeddings、Generator），但是参数共享，所以只有一份参数
 
 该块的参数量大小：形状为$[vocab,d=512]$, Embeddings块总的参数量为$vocab*d$
@@ -87,11 +90,8 @@ Transformer中该块总的参数量：$32*2d=64d=64*512=32768$
 
 Transformer中该块总的参数量：$vocab*d=vocab*512$
 
-### 4.5. 总的可训练参数量
+### 5.5. 总的可训练参数量
 $72*(d^2+d)+96d^2+60d+64d+vocab*d=168*d^2+196*d+vocab*d=168*512^2+196*512+vocab*512=44140544+vocab*512$
-
-## 5. 超参数
-![超参数](images/Transformer_Hyperparameters.png)
 
 ## 6. 源码
 ### 6.1. 完整模型

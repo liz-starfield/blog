@@ -12,9 +12,9 @@ tag:
 
   - 1. About
   - 2. Transformer Overall Architecture
-  - 3. Tensor Dimensionality Transformation
-  - 4. Number of Trainable Parameters
-  - 5. Hyperparameters
+  - 3. Hyperparameters
+  - 4. Tensor Dimensionality Transformation
+  - 5. Number of Trainable Parameters  
   - 6. Source Code
    
 
@@ -44,14 +44,17 @@ In summary, the encoder transforms the input sequence into a series of vector re
 
 ![Source Code Corresponding to Model Architecture](images/Transformer_Source_Code_Architecture.jpg)
 
-## 3. Tensor Dimensionality Transformation
+## 3. Hyperparameters
+![Hyperparameters](images/Transformer_Hyperparameters.png)
+
+## 4. Tensor Dimensionality Transformation
 ![Encoder Tensor Dimension Transformation](images/Encoder_Tensor_Dimension_Transformation.png)
 
 ![Decoder Tensor Dimension Transformation](images/Decoder_Tensor_Dimension_Transformation.png)
 
-## 4. Number of Trainable Parameters
+## 5. Number of Trainable Parameters
 ![Number of Trainable Parameters](images/Trainable_Parameters.png)
-### 4.1. MultiHeadedAttention
+### 5.1. MultiHeadedAttention
 Model Parameters for this Block：The weights and biases for the 4 linear transformations in the MultiHeadedAttention. The weight matrices$W_Q、W_K、W_V$ for $Q、K、V$ and the corresponding biases, as well as the output weight matrix $W_O$ and its corresponding bias
 
 Parameter Size of this Block: The shape of the 4 weight matrices is $[d=512,d=512]$, and the shape of the 4 biases is $[d=512]$,  The total number of parameters for the MultiHeadedAttention block is $4*(d^2+d)$
@@ -60,7 +63,7 @@ Number of Blocks：The encoder layer has one MultiHeadedAttention sub-layer, and
 
 Total Parameter Quantity of this Block in Transformer：$18*4*(d^2+d)=72*(d^2+d)=18*4*(512^2+512)=18911232$
 
-### 4.2. PositionwiseFeedForward
+### 5.2. PositionwiseFeedForward
 Model Parameters for this Block：The weights and biases of two linear transformations in the PositionwiseFeedForward. The first linear layer maps the dimensions from $d=512$ to $4d=2048$, and the second linear layer maps dimensions back down from $4d=2048$ to $d=512$
 
 Parameter Size of this Block：The weight matrix $W_1$ of the first linear layer has the shape of $[d=512,4d=2048]$, and the bias has the shape of $[4d=2048]$, The weight matrix $W_2$ of the second linear layer has the shape of $[4d=2048,d=512]$, and the bias has the shape of $[d=512]$, The total number of parameters in the PositionwiseFeedForward block is $d*4d+4d+4d*d+d=8d^2+5d$
@@ -69,7 +72,7 @@ Number of Blocks：There is one PositionwiseFeedForward sublayer in each of the 
 
 Total Parameter Quantity of this Block in Transformer：$12*(8d^2+5d)=96d^2+60d=96*512^2+60*512=25196544$
 
-### 4.3. LayerNorm
+### 5.3. LayerNorm
 Model Parameters for this Block：The LayerNorm contains two trainable parameters: the scaling parameter $\gamma$ and the shifting parameter $\beta$
 
 Parameter Size of this Block：Both parameters have the shape $[d]$, and the total number of parameters in the LayerNorm block is $d+d=2d$
@@ -78,7 +81,7 @@ Number of Blocks：Each sublayer in the encoder and decoder layers is followed b
 
 Total Parameter Quantity of this Block in Transformer：$32*2d=64d=64*512=32768$
 
-### 4.4. Embeddings
+### 5.4. Embeddings
 Model Parameters for this Block： This block appears in 3 locations in the Transformer (Input Embeddings, Output Embeddings, Generator), but the parameters are shared, so there is only one set of parameters
 
 Parameter Size of this Block：The shape is $[vocab,d=512]$, The shape is $vocab*d$
@@ -87,11 +90,8 @@ Number of Blocks：1
 
 Total Parameter Quantity of this Block in Transformer：$vocab*d=vocab*512$
 
-### 4.5. Total Trainable Parameters
+### 5.5. Total Trainable Parameters
 $72*(d^2+d)+96d^2+60d+64d+vocab*d=168*d^2+196*d+vocab*d=168*512^2+196*512+vocab*512=44140544+vocab*512$
-
-## 5. Hyperparameters
-![Hyperparameters](images/Transformer_Hyperparameters.png)
 
 ## 6. Source Code
 ### 6.1. Complete Model
