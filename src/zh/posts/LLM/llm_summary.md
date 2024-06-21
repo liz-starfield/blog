@@ -19,11 +19,12 @@ tag:
 组织:   
 LMSYS 和 UC Berkeley SkyLab
 
-评估方式: 
-Chatbot Arena - 一个众包的随机对战平台。
+评估方式:  
+Chatbot Arena - 一个众包的随机对战平台。   
 在真实世界中通过人类偏好评估 LLMs，向两个匿名模型（例如，ChatGPT、Gemini、Claude、Llama）提出任何问题，并为更好的一个投票！ 
 
-评估结果：Arena Elo  
+评估结果：    
+Arena Elo  
 Elo 评级系统是以其发明者、匈牙利裔美国物理学家 Arpad Elo 的名字命名的。它最初是在 20 世纪 60 年代为评级国际象棋棋手开发的。
 
 网址:  
