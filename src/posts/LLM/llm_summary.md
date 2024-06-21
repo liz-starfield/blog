@@ -19,12 +19,13 @@ tag:
 Organization:   
 LMSYS and UC Berkeley SkyLab
 
-Evaluate Way: 
-Chatbot Arena - a crowdsourced, randomized battle platform.   
+Evaluate Way:    
+Chatbot Arena - a crowdsourced, randomized battle platform.      
 Evaluate LLMs by human preference in the real-world.  
 Ask any question to two anonymous models (e.g., ChatGPT, Gemini, Claude, Llama) and vote for the better one!   
 
-Evaluate Result: Arena Elo  
+Evaluate Result:    
+Arena Elo   
 Elo, short for Elo rating system, is named after its inventor, Hungarian-American physicist Arpad Elo. It was originally developed for ranking chess players in the 1960s.
 
 Website:  
