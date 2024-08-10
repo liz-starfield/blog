@@ -486,23 +486,43 @@ a university
 - in
   - space
     - I am in the room.
-  - time
+  - time (time period)
     - We are in 2023.
     - You go to school in August.
     - She eats in the morning.
+    - in the morning/afternoon/evening
+    - in that time
 - on
   - space
     - It is on the table.
-  - time
+    - on the road
+    - on my way to work
+    - on my way to and from work
+  - time (one day)
     - I go home on Friday.
-    - My birthday is on August first.
+    - My birthday is on August first. (August 1th)
+    - on Monday/Sunday
+    - on Monday morning || on Staurday afternoon
+    - on my 9th birthday
+    - on my birthday
+    - on the weekend || on weekends (at the weekend || at weekends)
 - at
   - space
     - She is at home.
     - I am at the school.
     - He waits at the tree.
-  - time
+  - time (moment)
     - Meet me at three thrity.
+    - at three o'clock
+    - at five p.m.
+    - at night
+    - at that time
+    - at the party
+    - at my birthday party
+    - at the weekend || at weekends (on the weekend || on weekends)
+- during
+  - time
+    - during the day
 - under
   - space
     - The dog is under the sofa.
@@ -516,6 +536,13 @@ a university
     - She is not with them.
   - way
     - He eats with a fork.
+  - no preposition
+    - space
+    - It's beautiful there.
+    - time
+      - last year
+      - last week
+      - next month
 
 ### 2.10. Conjunctions
 #### 2.10.1. Most Common Conjunctions
