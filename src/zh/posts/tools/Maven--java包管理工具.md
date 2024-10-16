@@ -351,7 +351,7 @@ A -> B -> X(1.0) A -> C -> X(2.0) <br/>
 子 POM 内声明的依赖优先于父 POM 中声明的依赖。 <br/>
 （3）解决依赖冲突 <br/>
 1.使用 mvn dependency:tree 查看依赖树 <br/>
-2.解决方案都可以是把冲突用<exclousion>的排除掉或根据依赖原则来调整依赖在 POM 文件的声明顺序 <br/>
+2.解决方案都可以是把冲突用\<exclousion\>的排除掉或根据依赖原则来调整依赖在 POM 文件的声明顺序 <br/>
 
 #### 排包: maven helper
 
@@ -364,7 +364,7 @@ A -> B -> X(1.0) A -> C -> X(2.0) <br/>
 
 - **import** <br/>
 
-虽然是<dependency>中的属性，但只能用在<dependencyManagement>中 <br/>
+虽然是\<dependency\>中的属性，但只能用在\<dependencyManagement\>中 <br/>
 ```xml
 <dependencyManagement> <br/>
   <dependency> <br/>
