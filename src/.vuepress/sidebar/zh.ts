@@ -10,7 +10,7 @@ export const zhSidebar = sidebar({
       prefix: "posts/",
       collapsible: true,      
       children: [
-        {text:"LLM", collapsible: true, link:"llm/",prefix: "llm/", children:"structure"},
+        {text:"LLM", collapsible: true, link:"LLM/",prefix: "LLM/", children:"structure"},
         {text:"LangChain", collapsible: true, link:"langchain/",prefix: "langchain/", children:"structure"},
         {text:"RAG", collapsible: true, link:"rag/",prefix: "rag/", children:"structure"},
         {text:"Python", collapsible: true, link:"python/",prefix: "python/", children:"structure"},
@@ -30,7 +30,7 @@ export const zhSidebar = sidebar({
         {text:"CS", collapsible: true, link:"cs/",prefix: "cs/", children:"structure"}, 
         {text:"MicroService", collapsible: true, link:"micro_service/",prefix: "micro_service/", children:"structure"}, 
         {text:"Tools", collapsible: true, link:"tools/",prefix: "tools/", children:"structure"}, 
-        {text:"Language", collapsible: true, link:"language/", prefix: "language/", children:"structure"},
+        {text:"Language", collapsible: true, link:"Language/", prefix: "Language/", children:"structure"},
       ]
     },
   ],
