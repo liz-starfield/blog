@@ -57,7 +57,7 @@ export default hopeTheme({
     blog: true,
     copyCode: {},
     components: {
-      components: ["Badge", "VPCard"],
+      components: ["Badge", "VPCard", "PDF"],
     },
     mdEnhance: {
       align: true,

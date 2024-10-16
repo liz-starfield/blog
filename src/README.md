@@ -2,7 +2,7 @@
 home: true
 layout: BlogHome
 icon: home
-title: Home
+title: Blog
 bgImage: /home.jpg
 heroImage: /blogger.png
 heroText: Liz

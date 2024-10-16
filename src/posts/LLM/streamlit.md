@@ -15,24 +15,24 @@ tag:
 
 ## 1. Components Required for Constructing a Dialogue Interface
 
-- 1.两个聊天消息容器：分别显示来自用户和机器人的消息
-- 2.聊天输入小部件：以便用户输入消息
-- 3.存储聊天历史消息的列表：在每次用户或机器人发送消息时附加到该列表中。
+- 1. Two chat message containers: to display messages from the user and the robot respectively.
+- 2. Chat input widget: for the user to input messages.
+- 3. A list to store chat history messages: appended to this list each time a message is sent by the user or the robot.
 
-### 1.1. st.chat_message 聊天消息容器，显示双方聊天消息
+### 1.1. st.chat_message Chat message container, displays chat messages from both parties
 
-- 可以包含任何streamlit元素，包括图表、表格、文本等
-- 要将元素添加到返回的容器中，可以使用with符号，也可以直接进行方法调用
+- Can include any Streamlit elements, including charts, tables, text, etc.
+- To add elements to the returned container, you can use the `with` statement or call methods directly.
 
-### 1.2. st.chat_input 聊天输入组件，用户输入消息
+### 1.2. st.chat_input Chat input component, user inputs messages
 
-- 返回值是用户的输入
-- 可以传入默认提示显示在输入框内
+- The return value is the user's input.
+- A default prompt can be passed to display in the input box.
 
-### 1.3. st.session_state.messages 聊天历史消息列表
+### 1.3. st.session_state.messages Chat history message list
 
-- 列表中每个条目都包含2个信息：角色role和消息内容content。
-  
+- Each entry in the list contains two pieces of information: role and message content.
+
 ## 2. Complete Process of Dialogue Interface
 ```python
 import streamlit as st

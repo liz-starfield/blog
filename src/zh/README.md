@@ -2,7 +2,7 @@
 home: true
 layout: BlogHome
 icon: home
-title: 首页
+title: 博客
 bgImage: /home.jpg
 heroImage: /blogger.png
 heroText: 莉芝
