@@ -30,7 +30,7 @@ export const zhSidebar = sidebar({
         {text:"CS", collapsible: true, link:"cs/",prefix: "cs/", children:"structure"}, 
         {text:"MicroService", collapsible: true, link:"micro_service/",prefix: "micro_service/", children:"structure"}, 
         {text:"Tools", collapsible: true, link:"tools/",prefix: "tools/", children:"structure"}, 
-        {text:"Language", collapsible: true, link:"Language/", prefix: "Language/", children:"structure"},
+        {text:"Language", collapsible: true, link:"language/", prefix: "language/", children:"structure"},
       ]
     },
   ],
