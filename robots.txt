@@ -2,4 +2,4 @@
 User-agent:*
 Disallow:
 
-Sitemap: https://liz-starfield.github.io/blog/sitemap.xml
+Sitemap: https://liz-in-tech.github.io/blog/sitemap.xml
