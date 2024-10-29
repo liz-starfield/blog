@@ -1,7 +1,7 @@
 ---
-title: 博客
+title: LLM
 index: false
-icon: book
+icon: signs-post
 article: false
 ---
 

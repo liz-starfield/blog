@@ -14,8 +14,8 @@ export default defineUserConfig({
       lang: "en-US", 
     },
     "/zh/": {
-      title: "莉芝",
-      description: "趁早把生活折腾成你想要的样子",
+      title: "Liz",
+      description: "Follow your heart",
       lang: "zh-CN",
     },
   },

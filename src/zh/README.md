@@ -2,12 +2,12 @@
 home: true
 layout: BlogHome
 icon: home
-title: 博客
+title: 首页
 bgImage: /home.jpg
 heroImage: /blogger.png
-heroText: 莉芝
+heroText: Liz
 heroFullScreen: true
-tagline: 趁早把生活折腾成你想要的样子
+tagline: Follow your heart
 article: false
 ---
 

@@ -3,24 +3,24 @@ import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: "https://liz-starfield.github.io",
+  hostname: "https://liz-in-tech.github.io",
   favicon: "/blogger.png",
   author: {
     name: "Liz",
-    url: "https://github.com/liz-starfield",
+    url: "https://github.com/liz-in-tech",
   },
 
   iconAssets: "fontawesome-with-brands",
 
   logo: "/blogger.png",
 
-  repo: "https://github.com/liz-starfield",
+  repo: "https://github.com/liz-in-tech",
 
   docsDir: "src",
 
   blog: {
     medias: {
-      GitHub: "https://github.com/liz-starfield",
+      GitHub: "https://github.com/liz-in-tech",
     },
   },
   sidebar: "heading",
@@ -33,6 +33,7 @@ export default hopeTheme({
     "/": {
       navbar: enNavbar,
       sidebar: enSidebar,
+
       blog: {
         description: "",
         intro: "/intro.html",
