@@ -2,7 +2,7 @@
 icon: lightbulb
 sidebar: false
 date: 2024-06-20
-prev: false
+prev: ./007_computer_use
 next: ./005_llama
 category:
   - LLM
