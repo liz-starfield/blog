@@ -2,7 +2,7 @@
 icon: lightbulb
 sidebar: false
 date: 2024-10-30
-prev: false
+prev: ./008_rag_challenge
 next: ./006_llm_leaderboard
 category:
   - LLM
