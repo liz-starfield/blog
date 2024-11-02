@@ -2,7 +2,7 @@
 icon: lightbulb
 sidebar: false
 date: 2024-10-31
-prev: false
+prev: ./009_llm_challenge
 next: ./007_computer_use
 category:
   - LLM
