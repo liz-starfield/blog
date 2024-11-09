@@ -32,7 +32,7 @@ tag:
       - Higher dimensionality with better quality, reaching thousands of dimensions.
     - Cohere Embedding API
       - Known for high-quality multilingual embedding models that outperform open-source variants.
-- Embedding Evaluation Leaderboard: https://huggingface.co/spaces/mteb/leaderboard
+- Embedding Evaluation Leaderboard： MTEB LeaderBoard: https://huggingface.co/spaces/mteb/leaderboard
   
 ## 2. Similarity (Distance) Calculation Between Vectors
 The greater the similarity, the smaller the distance; the two metrics are inversely related.
@@ -247,6 +247,9 @@ Inverted Index: Value -> DocId
 4. When querying a sentence, which has multiple keywords, recall the corresponding documents for each keyword, then take the intersection, rank them, and return the top k documents as results.
 
 ## 8. KNN (K-Nearest Neighbors Algorithm, KNN Search, Brute Force Search)
+nickname
+- a flat index
+- a brute force
 
 Brute force search: Calculates similarity with every vector.
 

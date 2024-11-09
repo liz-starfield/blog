@@ -2,7 +2,7 @@
 icon: lightbulb
 sidebar: false
 date: 2024-11-02
-prev: false
+prev: ./014_rag_evaluation
 next: ./012_prompt_engineering
 category:
   - LLM
@@ -60,33 +60,10 @@ tag:
 - 提供参考样例
 - 使用外部工具
 
-## 使用RAG好处
+## 6. 使用RAG好处
 - 可以减少幻觉
 - 不必重新训练或微调LLM
 - 解决知识密集型任务，引用已有资源
-
-## 6. 如何评估RAG
-![RAG评估指标](../../../assets/013_rag_metrics.png)
-
-RAG可以通过四个指标来评估。其中两个指标偏向于LLM，另外两个偏向于上下文。
-
-### 6.1 与LLM相关的指标
-- 忠实性 Faithfulness
-  - 将答案拆分，并尝试将其与事实对照
-  - 如果答案无法与事实匹配，则视为幻觉Hallucinate 生成
-- 答案相关性 Answer Relevancy
-  - 假设模型提供了大量上下文，模型利用这些上下文来回答问题，但答案与用户的原始需求相差甚远
-  - 因此，此指标评估模型提供的答案的相关性。
-
-### 6.2 与上下文相关的指标
-- 上下文准确率 Context Precision
-  - 从客户的角度来看是最有用的，因为在某些情况下模型的准确性可能很高，但上下文精度较低。
-  - 经典RAG场景可以是将更多上下文加入到上下文窗口中，但当模型获得更多上下文时，可能会出现更多幻觉（参见论文：《Lost in the Middle: How Language Models Use Long Contexts》）
-  - 因此，上下文精度评估检索内容的信噪比。它记录内容日志并与答案进行比较，以确定检索的内容是否符合“应有答案”。
-- 上下文召回率 Context Recall
-  - 模型是否能够检索出回答问题所需的所有相关信息？
-  - 模型置顶的搜索结果是否满足问题的需求？
-  - 上下文召回率显示是否需要优化搜索，可能需要增加重排 (Reranking)、微调嵌入(Fine-tune Embeddings)，或者需要使用不同的嵌入 (Embeddings) 来提取更相关的内容。
 
 ## 7. 通过微调进行优化
 微调是通过在更小的特定领域数据集上继续训练模型，以优化模型以适应特定任务的过程。
@@ -178,5 +155,5 @@ RAG可以通过四个指标来评估。其中两个指标偏向于LLM，另外�
 - 7.因此，简单的微调 + RAG结合简单的提示工程将模型准确率提升至83.5%
 
 ## 12. 参考内容
-[OpenAI:A Survey of Techniques for Maximizing LLM Performance](https://www.youtube.com/watch?v=ahnGLM-RC1Y)  
-[Optimizing LLMs: Best Practices](https://medium.com/@luvverma2011/optimizing-llms-best-practices-prompt-engineering-rag-and-fine-tuning-8def58af8dcc)
+- [OpenAI:A Survey of Techniques for Maximizing LLM Performance](https://www.youtube.com/watch?v=ahnGLM-RC1Y)  
+- [Optimizing LLMs: Best Practices](https://medium.com/@luvverma2011/optimizing-llms-best-practices-prompt-engineering-rag-and-fine-tuning-8def58af8dcc)

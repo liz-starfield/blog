@@ -2,7 +2,7 @@
 icon: lightbulb
 sidebar: false
 date: 2024-11-02
-prev: false
+prev: ./014_rag_evaluation
 next: ./012_prompt_engineering
 category:
   - LLM
@@ -60,26 +60,10 @@ Optimizing LLMs can be thought of as a two-axis problem
 - Providing Examples
 - Using external Tools
 
-## 6. How to Evaluate RAG
-![RAG Metrics](../../assets/013_rag_metrics.png)
-
-RAG can be evaluated using 4 metrics. Two of the metrics are inclined towards LLMs and two towards context.
-### 6.1. LLM-related Metrics
-- Faithfulness
-  - Takes the answer, chunk it, and tries to reconcile the answer with the facts
-  - If the answer can’t be reconciled as a fact, then the answer is hallucinated
-- Answer Relevancy
-  - Let’s say that the model is provided with a lot of context, now the model makes use of that context and provides the answer, but the answer is nothing near to what the user wanted or originally asked
-  - Thus, this metric looks at the relevancy of the answer provided by the model.
-### 6.2. Context-related Metrics
-- Context Precision
-  - Most useful from the customer perspective, as there can be scenarios where model accuracy is high, but context precision is low.
-  - Classic RAG scenario can be thought of as being able to put more and more context in the context window, however as the model gets more context, the model hallucinations might increase (Refer paper: Lost in the Middle: How Language Models Use Long Contexts)
-  - Thus, context precision evaluates the signal-to-noise ratio of the retrieved content. It takes the content log and compares it with the answer, and figures out whether the retrieved content matches the “to be answer”.
-- Context Recall
-  - Can the model retrieve all the relevant information required to answer the question?
-  - Does the search which is put at the top by the model is answering the question?
-  - context recalls tell if the search needs to be optimized, may need to add reranking, fine-tune embeddings, or may be different embeddings are needed to surface more relevant content.
+## 6. Benefits of Using RAG
+- Can reduce hallucinations
+- No need to retrain or fine-tune LLM
+- Solves knowledge-intensive tasks by referencing existing resources
 
 ## 7. Optimization via Fine-Tuning
 Fine-tuning is a process of continuing the training of a model on a smaller domain-specific dataset to optimize the model for a specific task.
@@ -171,5 +155,5 @@ The approach was first followed with the GPT 3.5 Turbo Model
 - 7.Thus, simple fine-tuning + RAG combined with simple prompt engineering brought the model accuracy to 83.5%
 
 ## 12. Reference
-[OpenAI:A Survey of Techniques for Maximizing LLM Performance](https://www.youtube.com/watch?v=ahnGLM-RC1Y)  
-[Optimizing LLMs: Best Practices](https://medium.com/@luvverma2011/optimizing-llms-best-practices-prompt-engineering-rag-and-fine-tuning-8def58af8dcc)
+- [OpenAI:A Survey of Techniques for Maximizing LLM Performance](https://www.youtube.com/watch?v=ahnGLM-RC1Y)  
+- [Optimizing LLMs: Best Practices](https://medium.com/@luvverma2011/optimizing-llms-best-practices-prompt-engineering-rag-and-fine-tuning-8def58af8dcc)

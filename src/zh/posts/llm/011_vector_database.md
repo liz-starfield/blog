@@ -32,7 +32,7 @@ tag:
       - 维度较高，具有更高的质量，达到几千维
     - Cohere 嵌入 API
       - Cohere 以拥有高质量的多语言嵌入模型而闻名，其性能优于开源变体
-- Embeddings评测排行榜：https://huggingface.co/spaces/mteb/leaderboard
+- Embeddings评测排行榜 ：MTEB排行榜：https://huggingface.co/spaces/mteb/leaderboard
   
 ## 2. 向量之间相似度（距离）计算
 相似度越大，距离越小，两者的大小是相反的。
@@ -242,8 +242,9 @@ tag:
 - 4.查询一句话，一句话有多个关键词，根据每个关键词召回对应文档，再取交集，排序（ranking）后返回top k的文档作为结果
   
 ## 8. KNN (最近邻算法, KNN搜索，蛮力搜索) 
-
-蛮力搜索：和每个向量进行相似度计算
+别名
+- a flat index （Flat索引）
+- a brute force 蛮力搜索：和每个向量进行相似度计算
 
 在经典机器学习中，这被称为K-最近邻算法（KNN，K Nearest Neighbours）
 
