@@ -2,17 +2,17 @@
 icon: lightbulb
 sidebar: false
 date: 2024-11-02
-prev: false
+prev: ./015_fine_tune
 next: ./013_optimizing_llm
 category:
   - LLM
 tag:
-  - LLM
-  - Prompt Engineering
   - RAG
-  - Fine-tuning
 ---
 # RAG评估指标
+  - 如何评估RAG
+  - Generation Evaluation
+  - Retrieval Evaluation
 <!-- more -->
 
 ## 1. 如何评估RAG
@@ -190,7 +190,7 @@ MAP@5就是上面分数的平均
 
 #### 3.3.2. MAP 均值平均精度（多个查询的平均值）
 
-![alt text](../../../assets/014_map_formula.png)
+![](../../../assets/014_map_formula.png)
 
 其中，P(k) 是列表中截止 k 处的精确度，rel(k) 是一个指标函数，如果排名 k 的项目是相关文档，则该函数等于 1，否则等于 0，n 是检索文档的数量。
 

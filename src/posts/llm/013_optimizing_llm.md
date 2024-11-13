@@ -13,6 +13,10 @@ tag:
   - Fine-tuning
 ---
 # Best Practices for Optimizing LLMs (Prompt Engineering, RAG and Fine-tuning)
+- The Optimization Strategies
+- Typical Optimization Pipeline
+- Comparison of Optimisation Approaches
+- OpenAI RAG Use Case
 <!-- more -->
 
 ## 1. The Challenges of Optimizing LLMs

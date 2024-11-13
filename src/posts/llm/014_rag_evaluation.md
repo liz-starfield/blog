@@ -2,17 +2,17 @@
 icon: lightbulb
 sidebar: false
 date: 2024-11-02
-prev: false
+prev: ./015_fine_tune
 next: ./013_optimizing_llm
 category:
   - LLM
 tag:
-  - LLM
-  - Prompt Engineering
   - RAG
-  - Fine-tuning
 ---
 # RAG Evaluation Metrics
+  - How to Evaluate RAG
+  - Generation Evaluation
+  - Retrieval Evaluation
 <!-- more -->
 
 ## 1. How to Evaluate RAG
@@ -197,7 +197,7 @@ MAP@5 is the average of the scores above.
 
 #### 3.3.2. MAP 
 
-![alt text](../../assets/014_map_formula.png)
+![](../../assets/014_map_formula.png)
 
 where P(k) is the precision at cutoff k in the list, rel(k) is an indicator function
 equaling 1 if the item at rank k is a relevant document, 0 otherwise, and n is the

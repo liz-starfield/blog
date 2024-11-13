@@ -669,3 +669,5 @@ def data_gen(V, batch_size, nbatches):
         yield Batch(src, tgt, 0)
 ```
 
+## 7. References
+https://jalammar.github.io/illustrated-transformer/
