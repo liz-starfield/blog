@@ -47,6 +47,12 @@ tag:
 - 7. LLM generates an answer based on the user's query and the retrieved data
 - 8. User receives the answer
 
+![](../../assets/010_rag_overall.png)
+
+The RAG construction and Q&A steps are generally summarised in three points
+- Indexing
+- Retrieval
+- Generation
 ## 3. RAG Optimization Points
 ### 3.1. Optimization Points for Native Data Processing Flow
 - For step1: Native Data
@@ -255,5 +261,35 @@ This approach is the reverse logic of the Hypothetical Answer method in Query op
 ### Reference Citations
 Determine whether it is possible to accurately trace back to the source of the answer.
 
-## 11. References
+## 11. GraphRAG  
+Leveraging Knowledge Graphs to Capture Complex Relationships Between Entities, Especially Suitable for Handling Data Rich in Relations
+
+Scenario: Suppose we are developing an intelligent question-answering system to answer questions about historical figures and their interrelationships.
+
+Question: The user asks, "Who were Alexander the Great's generals, and what battles did they participate in together?"
+
+Traditional RAG Challenges:  
+- Traditional RAG might retrieve documents about Alexander the Great and his generals, but these documents might contain only partial information or be scattered across different documents.  
+- It may struggle to extract and integrate all relevant information from the retrieved texts, especially when this information spans multiple documents and contexts.
+
+GraphRAG Solution:  
+- 1. **Constructing the Knowledge Graph**: GraphRAG first extracts entities (such as Alexander the Great and his generals) and relationships (such as command relationships and participation in battles) from historical literature and materials to build a knowledge graph.  
+- 2. **Graph Querying**: The user's query is converted into a graph query, where the system searches the knowledge graph for nodes related to Alexander the Great's generals and the battle nodes connected to them.  
+- 3. **Extracting Subgraphs**: The system retrieves not only individual nodes but also the relationships between those nodes, forming a subgraph that includes all relevant generals and battle information.  
+- 4. **Generating the Answer**: GraphRAG uses this subgraph as context to guide the language model in generating a detailed answer that includes not only the names of the generals but also the battles they participated in together.
+
+Pros and Cons  
+- Pros: Able to capture and represent complex relationships between entities, integrating and retrieving information spread across different documents.  
+- Cons: High cost of building and maintaining the knowledge graph, as well as the technical challenges of managing complex graph structures. It also faces difficulties when handling abstract concepts.
+
+## 12. HybridRAG  
+Paper Name: HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction
+
+Paper: https://arxiv.org/pdf/2408.04948v1
+
+- 1. **Information Retrieval**: Information related to the query is retrieved from external documents using vector databases for broad, similarity-based retrieval (VectorRAG part), and at the same time, structured and relationship-rich contextual data is retrieved from the knowledge graph (GraphRAG part).  
+- 2. **Context Integration**: The information retrieval results from VectorRAG are integrated with the precise relationship data from GraphRAG to form a unified context.  
+- 3. **Generating the Answer**: The large language model (LLM) generates the final answer based on the integrated context.
+
+## 13. References
 - [Advanced RAG Techniques: an Illustrated Overview](https://pub.towardsai.net/advanced-rag-techniques-an-illustrated-overview-04d193d8fec6) 

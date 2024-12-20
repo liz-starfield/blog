@@ -68,6 +68,9 @@ Optimizing LLMs can be thought of as a two-axis problem
 - Can reduce hallucinations
 - No need to retrain or fine-tune LLM
 - Solves knowledge-intensive tasks by referencing existing resources
+- Data security: as an external knowledge base, no data needs to be put into the model and access rights can be set
+- Updating knowledge: not limited to the model's training data cut-off time
+
 
 ## 7. Optimization via Fine-Tuning
 Fine-tuning is a process of continuing the training of a model on a smaller domain-specific dataset to optimize the model for a specific task.

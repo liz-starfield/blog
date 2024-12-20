@@ -21,9 +21,33 @@ tag:
   - https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/
 - RAGChecker
 
+Ragas: RAG可以通过四个指标来评估。其中两个指标偏向于LLM，另外两个偏向于上下文。
 ![RAG评估指标](../../../assets/014_rag_metrics.png)
 
-RAG可以通过四个指标来评估。其中两个指标偏向于LLM，另外两个偏向于上下文。
+
+
+这张图表展示了RAG（检索增强生成）评估的指标和框架，分为三个主要部分：检索、生成/幻觉和端到端。
+
+更多参考：https://www.cnblogs.com/ting1/p/18451762
+
+检索部分的评估指标有：
+- 召回率（Recall）
+- 平均倒数排名（MRR）
+- 平均精度（MAP）
+
+生成/幻觉部分的评估类型有三种：
+- 基于n-gram的评估：如BLEU、ROUGE、METEOR等。
+- 基于模型的评估：如BERTScore、BARTScore等。
+- 基于LLM的评估：如G-Eval、UniEval、GPTScore、TRUE、SelfCheckGPT、ChatProtect、Chainpoll等。
+
+端到端部分包含多个框架和指标：
+- Ragas框架：评估上下文召回、上下文精度、上下文相关性、答案语义相似性、答案正确性、忠实度、答案相关性。
+- promptfoo框架：评估上下文依从性、上下文召回、上下文相关性、真实性、答案相关性。
+- RAG Triad框架：评估上下文相关性、答案相关性、扎实性。
+- ARES框架：评估上下文相关性、答案忠实度、答案相关性。
+- EXAM框架：评估上下文相关性。
+
+![](../../../assets/014_rag_evaluation_metrics_frameworks.png)
 
 - 生成评估
   - Faithfulness 忠实性(准确性)
@@ -40,6 +64,7 @@ RAG可以通过四个指标来评估。其中两个指标偏向于LLM，另外�
     - Noise Robustness（噪声鲁棒性）
     - Negative Rejection（负面拒绝）
     - Counterfactual Robustness（反事实鲁棒性）
+    - Information Integration（信息集成）
 - 检索评估
   - Context Precision 上下文准确率
   - Context Recall 上下文召回率 
@@ -127,19 +152,21 @@ BertScore利用来自预训练的(transformers)（如(BERT)）的上下文嵌入
 ### 2.7. 其他
 - Latency（延迟）
   - 测量RAG系统完成一次查询响应所需的时间。它是用户体验的关键因素，尤其是在交互式应用中，例如聊天机器人或搜索引擎。
-  - **Single Query Latency（单查询延迟）**：处理单个查询的平均时间，包括检索和生成阶段。
+  - Single Query Latency（单查询延迟）：处理单个查询的平均时间，包括检索和生成阶段。
 - Diversity（多样性）
   - 评估RAG系统检索和生成信息的多样性和广度。它确保系统能够提供广泛的视角，并避免在响应中出现冗余。
   - Cosine Similarity / Cosine Distance（余弦相似度/余弦距离）：通过计算检索到的文档或生成的响应的嵌入来衡量相似性。较低的余弦相似度分数表示更高的多样性，表明系统能够检索或生成更广泛的信息。
 - Noise Robustness（噪声鲁棒性）
   - 衡量RAG系统在处理无关或误导性信息时，不降低响应质量的能力
-  - **Misleading Rate（误导率）** 和 **Mistake Reappearance Rate（错误重现率）** 
+  - Misleading Rate（误导率） 和 Mistake Reappearance Rate（错误重现率） 
 - Negative Rejection（负面拒绝）
   - 评估系统在可用信息不足或过于模糊无法提供准确答案时，拒绝生成响应的能力 
-  - **Rejection Rate（拒绝率）**：系统拒绝生成响应的频率。
+  - Rejection Rate（拒绝率）：系统拒绝生成响应的频率。
 - Counterfactual Robustness（反事实鲁棒性）
   - 评估系统识别和忽略检索文档中错误或反事实信息的能力。
-  - **Error Detection Rate（错误检测率）**：检索信息中检测到的反事实陈述的比例。
+  - Error Detection Rate（错误检测率）：检索信息中检测到的反事实陈述的比例。
+- Information Integration （信息集成）
+  - 从多个文档中整合答案的能力
 
 
 ## 3 与上下文相关的指标 Retrieval Evaluation
@@ -268,3 +295,4 @@ Normalized Discounted Cumulative Gain: 归一化折扣累积增益
 
 ## 4. 参考内容
 - [Evaluation of Retrieval-Augmented Generation:A Survey （By Tencent）](https://arxiv.org/abs/2405.07437)
+- [Benchmarking Large Language Models in Retrieval-Augmented Generation](https://arxiv.org/pdf/2309.01431)

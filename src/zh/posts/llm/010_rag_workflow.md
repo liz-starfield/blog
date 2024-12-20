@@ -46,6 +46,12 @@ tag:
 - 7.LLM 根据用户问题和检索到的数据信息给出问题的答案
 - 8.用户得到答案
 
+![](../../../assets/010_rag_overall.png)
+
+RAG的构建与问答步骤总体概括为三点
+- Indexing
+- Retrieval
+- Generation
 ## 3. RAG优化点
 ### 3.1. 原生数据处理流优化点
 - For step1: 原生数据
@@ -255,6 +261,36 @@ Embeddings (HyDE)
 ### Reference citations  参考引用
 是否能准确地反向找到答案的来源处
 
-## 11. References
+## 11. GraphRAG
+利用知识图谱捕捉实体间复杂关系，特别适用于处理关系丰富的数据
+
+场景：假设我们正在开发一个智能问答系统，用于回答有关历史人物及其相互关系的问题。
+
+问题：用户问：“亚历山大大帝的将军是谁，他们共同参与了哪些战役？”
+
+传统RAG的挑战：
+- 传统RAG可能在检索阶段找到关于亚历山大大帝及其将军的文档，但这些文档可能只包含部分信息，或者信息分散在不同的文档中。
+- 它可能难以从检索到的文本中提取并整合所有相关信息，尤其是当这些信息需要跨越多个文档和上下文时。
+
+GraphRAG的解决方案：
+- 1.构建知识图谱：GraphRAG首先从历史文献和资料中提取实体（如亚历山大大帝、他的将军们）和关系（如指挥关系、参与战役），构建一个知识图谱。
+- 2.图查询：用户的查询被转换为图查询，系统在知识图谱中搜索与亚历山大大帝相关的将军节点，以及与这些节点相连的战役节点。
+- 3.提取子图：系统不仅检索到单独的节点，还检索到节点间的连接关系，形成一个子图，这个子图包含了所有相关的将军和战役信息。
+- 4.生成回答：GraphRAG利用这个子图作为上下文，指导语言模型生成一个详细的回答，这个回答不仅包括将军的名字，还包括他们共同参与的战役。
+
+优缺点
+- 优：能够捕捉和表示实体间的复杂关系，整合和检索分散在不同文档中的信息。
+- 缺：构建和维护知识图谱的高成本以及对复杂图结构管理的技术挑战，在处理抽象概念时也存在困难。
+
+## 12. HybirdRAG
+Paper Name: HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction
+
+Paper: https://arxiv.org/pdf/2408.04948v1
+
+- 1.信息检索：从外部文档中检索与查询相关的信息，使用向量数据库进行广泛、基于相似性的检索（VectorRAG部分），同时从知识图谱中检索结构化、关系丰富的上下文数据（GraphRAG部分）。
+- 2.上下文整合：将VectorRAG提供的广泛信息检索结果与GraphRAG提供的精确关系数据相结合，形成统一的上下文。
+- 3.生成回答：利用大型语言模型（LLM）根据整合后的上下文生成最终的回答。
+
+## 13. References
 - [Advanced RAG Techniques: an Illustrated Overview](https://pub.towardsai.net/advanced-rag-techniques-an-illustrated-overview-04d193d8fec6) 
 

@@ -21,9 +21,10 @@ Evaluation Framework
   - https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/
 - RAGChecker
 
+Ragas: RAG can be evaluated using 4 metrics. Two of the metrics are inclined towards LLMs and two towards context.
 ![RAG Metrics](../../assets/014_rag_metrics.png)
 
-RAG can be evaluated using 4 metrics. Two of the metrics are inclined towards LLMs and two towards context.
+![](../../assets/014_rag_evaluation_metrics_frameworks.png)
 
 - Generation Evaluation
   - Faithfulness
@@ -40,6 +41,7 @@ RAG can be evaluated using 4 metrics. Two of the metrics are inclined towards LL
     - Noise Robustness
     - Negative Rejection
     - Counterfactual Robustness
+    - Information Integration
 - Retrieval Evaluation
   - Context Precision
   - Context Recall
@@ -132,21 +134,23 @@ context of answer evaluation and query formulation.
 ### 2.7. Other
 - Latency
   - Latency measures the time taken by the RAG system to finish the response of one query. It is a critical factor for user experience, especially in interactive applications such as chatbots or search engines.
-  - **Single Query Latency**： The mean time is taken to process a single query, including both retrieval and generating phases.
+  - Single Query Latency： The mean time is taken to process a single query, including both retrieval and generating phases.
 - Diversity
   - Diversity evaluates the variety and breadth of information retrieved and generated
 by the RAG system. It ensures that the system can provide a wide range of perspectives and avoid redundancy in responses.
   - Cosine Similarity / Cosine Distance: The cosine similarity/distance calculates embeddings of retrieved documents or generated responses. Lower cosine similarity scores indicate higher diversity, suggesting that the system can retrieve or generate a broader spectrum of information.
 - Noise Robustness
   - Noise Robustness measures the RAG system’s ability to handle irrelevant or misleading information without compromising the quality of the response.
-  - **Misleading Rate** 和 **Mistake Reappearance Rate** 
+  - Misleading Rate 和 Mistake Reappearance Rate 
 - Negative Rejection
   - Negative Rejection evaluates the system’s capability to withhold responses when
 the available information is insufficient or too ambiguous to provide an accurate answer 
-  - **Rejection Rate**：The rate at which the system refrains from generating a response.
+  - Rejection Rate：The rate at which the system refrains from generating a response.
 - Counterfactual Robustness
   - Counterfactual robustness assesses the system’s ability to identify and disregard incorrect or counterfactual information within the retrieved documents
-  - **Error Detection Rate**：The ratio of counterfactual statements detected in retrieved information.
+  - Error Detection Rate：The ratio of counterfactual statements detected in retrieved information.
+- Information Integration
+  - integrate answers from multiple document
 
 ## 3 Context-related Metrics / Retrieval Evaluation
 ### 3.1. Context Precision
@@ -273,3 +277,4 @@ Comparison with MAP and MRR:
   
 ## 4. Reference
 - [Evaluation of Retrieval-Augmented Generation:A Survey （By Tencent）](https://arxiv.org/abs/2405.07437)
+- [Benchmarking Large Language Models in Retrieval-Augmented Generation](https://arxiv.org/pdf/2309.01431)
