@@ -2,7 +2,7 @@
 icon: lightbulb
 sidebar: false
 date: 2024-11-14
-prev: false
+prev: ./019_ollama
 next: ./017_agent_and_multiagent
 category:
   - LLM

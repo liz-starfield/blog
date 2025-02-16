@@ -56,6 +56,7 @@ export default hopeTheme({
   },
   plugins: {
     blog: true,
+    search: true,
     copyCode: {},
     components: {
       components: ["Badge", "VPCard", "PDF"],
