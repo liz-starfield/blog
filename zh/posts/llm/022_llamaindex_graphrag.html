@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.0" />
+    <meta name="theme" content="VuePress Theme Hope 2.0.0-rc.13" />
+    <style>
+      html {
+        background: var(--bg-color, #fff);
+      }
+
+      html[data-theme="dark"] {
+        background: var(--bg-color, #1d1e1f);
+      }
+
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="alternate" hreflang="en-us" href="https://liz-in-tech.github.io/blog/posts/llm/022_llamaindex_graphrag.html"><meta property="og:url" content="https://liz-in-tech.github.io/blog/zh/posts/llm/022_llamaindex_graphrag.html"><meta property="og:site_name" content="Liz"><meta property="og:title" content="LlamaIndex + GraphRAG + Ollama + Neo4j"><meta property="og:description" content="LlamaIndex + GraphRAG + Ollama + Neo4j"><meta property="og:type" content="article"><meta property="og:locale" content="zh-CN"><meta property="og:locale:alternate" content="en-US"><meta property="og:updated_time" content="2025-03-08T14:32:06.000Z"><meta property="article:author" content="Liz"><meta property="article:tag" content="GraphRAG"><meta property="article:tag" content="LlamaIndex"><meta property="article:published_time" content="2025-02-22T00:00:00.000Z"><meta property="article:modified_time" content="2025-03-08T14:32:06.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"LlamaIndex + GraphRAG + Ollama + Neo4j","image":[""],"datePublished":"2025-02-22T00:00:00.000Z","dateModified":"2025-03-08T14:32:06.000Z","author":[{"@type":"Person","name":"Liz","url":"https://github.com/liz-in-tech"}]}</script><link rel="icon" herf="/blogger.png"><link rel="icon" href="/blog/blogger.png"><title>LlamaIndex + GraphRAG + Ollama + Neo4j | Liz</title><meta name="description" content="LlamaIndex + GraphRAG + Ollama + Neo4j">
+    <link rel="preload" href="/blog/assets/style-m_obra2h.css" as="style"><link rel="stylesheet" href="/blog/assets/style-m_obra2h.css">
+    <link rel="modulepreload" href="/blog/assets/app-dpf1czaz.js"><link rel="modulepreload" href="/blog/assets/022_llamaindex_graphrag.html-AiRwjg9s.js"><link rel="modulepreload" href="/blog/assets/022_llamaindex_graphrag.html-zD3oU5qx.js"><link rel="modulepreload" href="/blog/assets/plugin-vue_export-helper-x3n3nnut.js">
+    <link rel="prefetch" href="/blog/assets/index.html-YbPtte5_.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-CGfhr1vY.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-FUMOuem4.js" as="script"><link rel="prefetch" href="/blog/assets/index.html--TTjrkIy.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-g4Nfr7z1.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-bitGHKd2.js" as="script"><link rel="prefetch" href="/blog/assets/001_langchain.html-nrisQopy.js" as="script"><link rel="prefetch" href="/blog/assets/002_langchain_sourcecode.html-9XtwFAwc.js" as="script"><link rel="prefetch" href="/blog/assets/003_streamlit.html-oji9upQP.js" as="script"><link rel="prefetch" href="/blog/assets/004_transformer.html-xrin91s2.js" as="script"><link rel="prefetch" href="/blog/assets/005_llama.html-q7LEGqjL.js" as="script"><link rel="prefetch" href="/blog/assets/006_llm_leaderboard.html-c628DmZb.js" as="script"><link rel="prefetch" href="/blog/assets/007_computer_use.html-4RcS3hxb.js" as="script"><link rel="prefetch" href="/blog/assets/008_rag_challenge.html-_8stdYVV.js" as="script"><link rel="prefetch" href="/blog/assets/009_llm_challenge.html-eluz3bTT.js" as="script"><link rel="prefetch" href="/blog/assets/010_rag_workflow.html-Ft0RQWf3.js" as="script"><link rel="prefetch" href="/blog/assets/011_vector_database.html-CImz0KSx.js" as="script"><link rel="prefetch" href="/blog/assets/012_prompt_engineering.html-1CqW55t5.js" as="script"><link rel="prefetch" href="/blog/assets/013_optimizing_llm.html-6CxOIR84.js" as="script"><link rel="prefetch" href="/blog/assets/014_rag_evaluation.html-l_kCYUI1.js" as="script"><link rel="prefetch" href="/blog/assets/015_fine_tune.html-JrbwEhT3.js" as="script"><link rel="prefetch" href="/blog/assets/016_multimodal.html-XtD4OMNh.js" as="script"><link rel="prefetch" href="/blog/assets/017_agent_and_multiagent.html-VmsqVzZn.js" as="script"><link rel="prefetch" href="/blog/assets/018_autorag.html-azoAgFGI.js" as="script"><link rel="prefetch" href="/blog/assets/019_ollama.html-8h4F60kB.js" as="script"><link rel="prefetch" href="/blog/assets/020_neo4j.html-61m3-6IM.js" as="script"><link rel="prefetch" href="/blog/assets/021_microsoft_graphrag.html-0d0frUhq.js" as="script"><link rel="prefetch" href="/blog/assets/022_llamaindex_graphrag.html-FazlUPBT.js" as="script"><link rel="prefetch" href="/blog/assets/023_agent_framework.html-5MCDM_Sd.js" as="script"><link rel="prefetch" href="/blog/assets/024_distribution_and_parallelism.html-uCefT9T7.js" as="script"><link rel="prefetch" href="/blog/assets/025_distribution_and_parallelism_1.html-32IzAErP.js" as="script"><link rel="prefetch" href="/blog/assets/026_distribution_and_parallelism_2.html-MEZ1JY2b.js" as="script"><link rel="prefetch" href="/blog/assets/027_distribution_and_parallelism_3.html-IYByZhbZ.js" as="script"><link rel="prefetch" href="/blog/assets/028_distribution_and_parallelism_4.html-Kub1JEXd.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-ZDCSnlc1.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-ZYw6WxxA.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-OavE9BET.js" as="script"><link rel="prefetch" href="/blog/assets/001_langchain.html-hE_T0u_5.js" as="script"><link rel="prefetch" href="/blog/assets/002_langchain_sourcecode.html-iH0mq6XB.js" as="script"><link rel="prefetch" href="/blog/assets/003_streamlit.html-WyFhRqF6.js" as="script"><link rel="prefetch" href="/blog/assets/004_transformer.html-YaT0PR6o.js" as="script"><link rel="prefetch" href="/blog/assets/005_llama.html-x2qtCXhJ.js" as="script"><link rel="prefetch" href="/blog/assets/006_llm_leaderboard.html-WHPR-17-.js" as="script"><link rel="prefetch" href="/blog/assets/007_computer_use.html-hz6Q-DAA.js" as="script"><link rel="prefetch" href="/blog/assets/008_rag_challenge.html-3KMCwhrh.js" as="script"><link rel="prefetch" href="/blog/assets/009_llm_challenge.html-7gxKMp_3.js" as="script"><link rel="prefetch" href="/blog/assets/010_rag_workflow.html-KndRvZAj.js" as="script"><link rel="prefetch" href="/blog/assets/011_vector_database.html-Akmj-Ub_.js" as="script"><link rel="prefetch" href="/blog/assets/012_prompt_engineering.html-bXz0YlpJ.js" as="script"><link rel="prefetch" href="/blog/assets/013_optimizing_llm.html-W-CdR_ck.js" as="script"><link rel="prefetch" href="/blog/assets/014_rag_evaluation.html-aq7YkQ-T.js" as="script"><link rel="prefetch" href="/blog/assets/015_fine_tune.html-V8hUrR0F.js" as="script"><link rel="prefetch" href="/blog/assets/016_multimodal.html-DCPUUxWe.js" as="script"><link rel="prefetch" href="/blog/assets/017_agent_and_multiagent.html--6PmCjyW.js" as="script"><link rel="prefetch" href="/blog/assets/018_autorag.html-QupCTUgH.js" as="script"><link rel="prefetch" href="/blog/assets/019_ollama.html-6hLqoXkg.js" as="script"><link rel="prefetch" href="/blog/assets/020_neo4j.html-qFyQHNwt.js" as="script"><link rel="prefetch" href="/blog/assets/021_microsoft_graphrag.html-kvlLpO3f.js" as="script"><link rel="prefetch" href="/blog/assets/023_agent_framework.html-VZsN2kO8.js" as="script"><link rel="prefetch" href="/blog/assets/024_distribution_and_parallelism.html-MO4kg9bC.js" as="script"><link rel="prefetch" href="/blog/assets/025_distribution_and_parallelism_1.html-ZR9kuXUl.js" as="script"><link rel="prefetch" href="/blog/assets/026_distribution_and_parallelism_2.html-GkjDPoeT.js" as="script"><link rel="prefetch" href="/blog/assets/027_distribution_and_parallelism_3.html-5kFJGreK.js" as="script"><link rel="prefetch" href="/blog/assets/028_distribution_and_parallelism_4.html-38Gbieji.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-wh_dBtOR.js" as="script"><link rel="prefetch" href="/blog/assets/404.html-cxLWDy2T.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-kf4JCRaf.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-RkA-insV.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-4kI_oqSd.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-WhuidxNt.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-OqGkeUA_.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-5GeN-sdD.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-c4Rf4yh1.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-2r0jUs7o.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-BSKRXRQc.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-KjTsJ0Hg.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-TteIwMx3.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-g00XXzrL.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-YxbJgo4L.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-3T79Cy0i.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-A5tlQHan.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-04ff5e0O.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-vgZ6rfFh.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-OmipPplE.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-E1KrJL6a.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-oPH9QkTj.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-cHRqZSs8.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-74SU9ZTn.js" as="script"><link rel="prefetch" href="/blog/assets/index.html--iJiA8oX.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-oZPWb_Fc.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-FUIWSLsp.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-5ERWyusD.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Zjn0JNqd.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-jcvPTrgB.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-9t2TsyuQ.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-CcLVFNIv.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-DVoYOOaL.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-V52ipvRm.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-9If_KW0o.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-kUk1kAMU.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-GYH0QUoo.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-JVTfeijx.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-_C1QVNqX.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-L_IXFmna.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-nZWHmXY7.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-x4gPgqE4.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-bWnVyuyA.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-LHukpLS7.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-howjHe2f.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-DeN_iOWx.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-cnlzR0a7.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-0P_c_pcU.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-dy_CcFmq.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-FzFytZ_p.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-2KSwV7xp.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-F1coElwg.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-ffflqCb9.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-F8ZuLYgH.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-HeYWaFeL.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-xKYeJEc5.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-xB-iS7Ql.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-OEUPqfTV.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-EE4iQI9m.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-g1PUF_BG.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-nUBcs85a.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-9Y3la5Sf.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-wufIFDPM.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-bXZQIxRE.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-wd6ZkEHi.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Xlk0AXmC.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-bGhIpy0C.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-mSPhZxqB.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-51HoKD5A.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Q5_K6Vux.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-jkWPo860.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-kTEqch5G.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-y4iBqBqc.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-mDjwyff2.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-rlPv-U40.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Xozbilpx.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-rQSkUpmB.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-5mHlpcIA.js" as="script"><link rel="prefetch" href="/blog/assets/intro.html-MDqcApPy.js" as="script"><link rel="prefetch" href="/blog/assets/001_langchain.html-svn8VaJE.js" as="script"><link rel="prefetch" href="/blog/assets/002_langchain_sourcecode.html-t1ZKIaFi.js" as="script"><link rel="prefetch" href="/blog/assets/003_streamlit.html-svNDcpfY.js" as="script"><link rel="prefetch" href="/blog/assets/004_transformer.html-ibPgsQe-.js" as="script"><link rel="prefetch" href="/blog/assets/005_llama.html-12Wld-D8.js" as="script"><link rel="prefetch" href="/blog/assets/006_llm_leaderboard.html-gg6HeTG1.js" as="script"><link rel="prefetch" href="/blog/assets/007_computer_use.html-_9L9rGol.js" as="script"><link rel="prefetch" href="/blog/assets/008_rag_challenge.html-afDMONW6.js" as="script"><link rel="prefetch" href="/blog/assets/009_llm_challenge.html-OYo1zSVw.js" as="script"><link rel="prefetch" href="/blog/assets/010_rag_workflow.html-eukxPDTz.js" as="script"><link rel="prefetch" href="/blog/assets/011_vector_database.html-5ahBfiJs.js" as="script"><link rel="prefetch" href="/blog/assets/012_prompt_engineering.html-h7f4lbQ3.js" as="script"><link rel="prefetch" href="/blog/assets/013_optimizing_llm.html-iRQW1OIW.js" as="script"><link rel="prefetch" href="/blog/assets/014_rag_evaluation.html-1KF03aF2.js" as="script"><link rel="prefetch" href="/blog/assets/015_fine_tune.html-O9tsguRd.js" as="script"><link rel="prefetch" href="/blog/assets/016_multimodal.html-z6HAoRZE.js" as="script"><link rel="prefetch" href="/blog/assets/017_agent_and_multiagent.html-IfCt6cQN.js" as="script"><link rel="prefetch" href="/blog/assets/018_autorag.html-QHkLO_Uc.js" as="script"><link rel="prefetch" href="/blog/assets/019_ollama.html-A8rSneDc.js" as="script"><link rel="prefetch" href="/blog/assets/020_neo4j.html-lewZvDbY.js" as="script"><link rel="prefetch" href="/blog/assets/021_microsoft_graphrag.html-pDAOS03B.js" as="script"><link rel="prefetch" href="/blog/assets/022_llamaindex_graphrag.html-5gR9Z1Ha.js" as="script"><link rel="prefetch" href="/blog/assets/023_agent_framework.html-nVD6mEoW.js" as="script"><link rel="prefetch" href="/blog/assets/024_distribution_and_parallelism.html-QSMoIwEI.js" as="script"><link rel="prefetch" href="/blog/assets/025_distribution_and_parallelism_1.html-_9D7bYHB.js" as="script"><link rel="prefetch" href="/blog/assets/026_distribution_and_parallelism_2.html-pqRrl5fs.js" as="script"><link rel="prefetch" href="/blog/assets/027_distribution_and_parallelism_3.html-wKs_50DK.js" as="script"><link rel="prefetch" href="/blog/assets/028_distribution_and_parallelism_4.html-yEsL0eWX.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-LspvVCg2.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-7RypPZGx.js" as="script"><link rel="prefetch" href="/blog/assets/index.html--XgiAiTK.js" as="script"><link rel="prefetch" href="/blog/assets/001_langchain.html-KLXLK5Z1.js" as="script"><link rel="prefetch" href="/blog/assets/002_langchain_sourcecode.html--JWFw4f5.js" as="script"><link rel="prefetch" href="/blog/assets/003_streamlit.html-XYAeXNBe.js" as="script"><link rel="prefetch" href="/blog/assets/004_transformer.html-tlV0s4Tp.js" as="script"><link rel="prefetch" href="/blog/assets/005_llama.html--4ncz0Yn.js" as="script"><link rel="prefetch" href="/blog/assets/006_llm_leaderboard.html-jeKMYERG.js" as="script"><link rel="prefetch" href="/blog/assets/007_computer_use.html-McEa8nYA.js" as="script"><link rel="prefetch" href="/blog/assets/008_rag_challenge.html-t6Z5Tyoq.js" as="script"><link rel="prefetch" href="/blog/assets/009_llm_challenge.html-SFq9dk7k.js" as="script"><link rel="prefetch" href="/blog/assets/010_rag_workflow.html-4nGBR1tH.js" as="script"><link rel="prefetch" href="/blog/assets/011_vector_database.html-n8KhvvmX.js" as="script"><link rel="prefetch" href="/blog/assets/012_prompt_engineering.html--vhenbJs.js" as="script"><link rel="prefetch" href="/blog/assets/013_optimizing_llm.html-eJIzxi-r.js" as="script"><link rel="prefetch" href="/blog/assets/014_rag_evaluation.html-0_z0N4cn.js" as="script"><link rel="prefetch" href="/blog/assets/015_fine_tune.html-asxEThTF.js" as="script"><link rel="prefetch" href="/blog/assets/016_multimodal.html-v8Tf8NbJ.js" as="script"><link rel="prefetch" href="/blog/assets/017_agent_and_multiagent.html-hKis9eJ-.js" as="script"><link rel="prefetch" href="/blog/assets/018_autorag.html-w3pHD7fm.js" as="script"><link rel="prefetch" href="/blog/assets/019_ollama.html-a_fmLOJF.js" as="script"><link rel="prefetch" href="/blog/assets/020_neo4j.html-Z9QN3I5k.js" as="script"><link rel="prefetch" href="/blog/assets/021_microsoft_graphrag.html-lO9Yktq1.js" as="script"><link rel="prefetch" href="/blog/assets/023_agent_framework.html-6npfcKl0.js" as="script"><link rel="prefetch" href="/blog/assets/024_distribution_and_parallelism.html-cjWEF7OA.js" as="script"><link rel="prefetch" href="/blog/assets/025_distribution_and_parallelism_1.html-z5CSb0LW.js" as="script"><link rel="prefetch" href="/blog/assets/026_distribution_and_parallelism_2.html-BtwN9BTM.js" as="script"><link rel="prefetch" href="/blog/assets/027_distribution_and_parallelism_3.html-7_Y86UGw.js" as="script"><link rel="prefetch" href="/blog/assets/028_distribution_and_parallelism_4.html-oOKqU8GM.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-SUPOf1zR.js" as="script"><link rel="prefetch" href="/blog/assets/404.html-GyHXtMAi.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-is8-d0Ed.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-zjp-8UWR.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-6XBW8Ov3.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-ReszkuNd.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-I1KAZoJS.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-tGnEaYkR.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-9JOjCKuG.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-p096FpRm.js" as="script"><link rel="prefetch" href="/blog/assets/index.html--QWlevSp.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-KXM4afpz.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-64vzsvy1.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-CNPm0ezS.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-iXzmtIjD.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-w8OoKm6o.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Fiq11jHe.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Z7h9D0Jf.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-oREYj-a-.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-budu_xBX.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-If0V6QyO.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-RWY55qw7.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-UtL__lw1.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-jvBihG4-.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-ExwAseF_.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-kaGWF7Cx.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-paG2kzYt.js" as="script"><link rel="prefetch" href="/blog/assets/index.html--Llj_cs6.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-9IPCc-JI.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-gKNfe4Gs.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-PBrmCCvX.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-VMt1Fqv4.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-wnICfMXi.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-OOQkvOmw.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-oTXANWTI.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-PSeY-y79.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-j2ygMYLh.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-_V7D3_v_.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-KjISYaQI.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-jmjguAy1.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-erodNSeh.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-2TE--uqe.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-V9gGDnkt.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Biwg39Wn.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-UweT067v.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-piHHnfzq.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-2E9LwQB9.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-co_ZGbxH.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-IU3fDVGW.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-FEpI73em.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-PdvgQbUn.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-C1kxVAHO.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-wS8WdvrO.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-XVQ3rLg7.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-WtPaqBmM.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-VIOkao96.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-LY77Ty5E.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-uJnLyt6M.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-V_28uAsN.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-fsr-C8y0.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-am3MbFaJ.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-UF_ZR-BQ.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-jdjsnYbZ.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-xM6KW1wy.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-xMx166s4.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-5bylOvyD.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Mv5ChhRw.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-OGmfB8EP.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Gl7UPVqn.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-Im-IDi1W.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-nlTIfczW.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-RlYU_OE5.js" as="script"><link rel="prefetch" href="/blog/assets/index.html-xLNxKPlX.js" as="script"><link rel="prefetch" href="/blog/assets/photoswipe.esm-08_zHRDQ.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><!--[--><div class="theme-container no-sidebar has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand vp-brand" href="/blog/zh/"><img class="vp-nav-logo" src="/blog/blogger.png" alt><!----><span class="vp-site-name hide-in-pad">Liz</span></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a aria-label="首页" class="vp-link nav-link nav-link" href="/blog/zh/"><span class="font-icon icon fa-fw fa-sm fas fa-home" style=""></span>首页<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="项目" class="vp-link nav-link nav-link" href="/blog/zh/demo/"><span class="font-icon icon fa-fw fa-sm fas fa-star" style=""></span>项目<!----></a></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><div class="nav-item"><div class="dropdown-wrapper i18n-dropdown"><button type="button" class="dropdown-title" aria-label="选择语言"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon i18n-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="i18n icon" style="width:1rem;height:1rem;vertical-align:middle;"><path d="M379.392 460.8 494.08 575.488l-42.496 102.4L307.2 532.48 138.24 701.44l-71.68-72.704L234.496 460.8l-45.056-45.056c-27.136-27.136-51.2-66.56-66.56-108.544h112.64c7.68 14.336 16.896 27.136 26.112 35.84l45.568 46.08 45.056-45.056C382.976 312.32 409.6 247.808 409.6 204.8H0V102.4h256V0h102.4v102.4h256v102.4H512c0 70.144-37.888 161.28-87.04 210.944L378.88 460.8zM576 870.4 512 1024H409.6l256-614.4H768l256 614.4H921.6l-64-153.6H576zM618.496 768h196.608L716.8 532.48 618.496 768z"></path></svg><!--]--><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a aria-label="English" class="vp-link nav-link nav-link" href="/blog/posts/llm/022_llamaindex_graphrag.html"><!---->English<!----></a></li><li class="dropdown-item"><a aria-label="简体中文" class="vp-link nav-link active nav-link active" href="/blog/zh/posts/llm/022_llamaindex_graphrag.html"><!---->简体中文<!----></a></li></ul></button></div></div><div class="nav-item vp-repo"><a class="vp-repo-link" href="https://github.com/liz-in-tech" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="icon github-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="github icon" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M511.957 21.333C241.024 21.333 21.333 240.981 21.333 512c0 216.832 140.544 400.725 335.574 465.664 24.49 4.395 32.256-10.07 32.256-23.083 0-11.69.256-44.245 0-85.205-136.448 29.61-164.736-64.64-164.736-64.64-22.315-56.704-54.4-71.765-54.4-71.765-44.587-30.464 3.285-29.824 3.285-29.824 49.195 3.413 75.179 50.517 75.179 50.517 43.776 75.008 114.816 53.333 142.762 40.79 4.523-31.66 17.152-53.377 31.19-65.537-108.971-12.458-223.488-54.485-223.488-242.602 0-53.547 19.114-97.323 50.517-131.67-5.035-12.33-21.93-62.293 4.779-129.834 0 0 41.258-13.184 134.912 50.346a469.803 469.803 0 0 1 122.88-16.554c41.642.213 83.626 5.632 122.88 16.554 93.653-63.488 134.784-50.346 134.784-50.346 26.752 67.541 9.898 117.504 4.864 129.834 31.402 34.347 50.474 78.123 50.474 131.67 0 188.586-114.73 230.016-224.042 242.09 17.578 15.232 33.578 44.672 33.578 90.454v135.85c0 13.142 7.936 27.606 32.854 22.87C862.25 912.597 1002.667 728.747 1002.667 512c0-271.019-219.648-490.667-490.71-490.667z"></path></svg></a></div><div class="nav-item hide-in-mobile"><button type="button" id="appearance-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><form class="search-box" role="search"><input type="search" placeholder="搜索" autocomplete="off" spellcheck="false" value><!----></form><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!--[--><!----><!--]--><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>LlamaIndex + GraphRAG + Ollama + Neo4j</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="page-author-item" href="https://github.com/liz-in-tech" target="_blank" rel="noopener noreferrer">Liz</a></span><span property="author" content="Liz"></span></span><!----><span class="page-date-info" aria-label="写作日期📅" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="calendar icon"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 01-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 01-33.473-33.473V143.657H180.6A134.314 134.314 0 0046.66 277.595v535.756A134.314 134.314 0 00180.6 947.289h669.74a134.36 134.36 0 00133.94-133.938V277.595a134.314 134.314 0 00-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 01-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 01-33.472 33.473z"></path></svg><span><!----></span><meta property="datePublished" content="2025-02-22T00:00:00.000Z"></span><!----><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 11 分钟</span><meta property="timeRequired" content="PT11M"></span><span class="page-category-info" aria-label="分类🌈" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon category-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="category icon"><path d="M148.41 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H148.41c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.311-40.31zM147.556 553.478H429.73c22.263 0 40.311 18.048 40.311 40.31v282.176c0 22.263-18.048 40.312-40.31 40.312H147.555c-22.263 0-40.311-18.049-40.311-40.312V593.79c0-22.263 18.048-40.311 40.31-40.311zM593.927 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H593.927c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.31-40.31zM730.22 920.502H623.926c-40.925 0-74.22-33.388-74.22-74.425V623.992c0-41.038 33.387-74.424 74.425-74.424h222.085c41.038 0 74.424 33.226 74.424 74.067v114.233c0 10.244-8.304 18.548-18.547 18.548s-18.548-8.304-18.548-18.548V623.635c0-20.388-16.746-36.974-37.33-36.974H624.13c-20.585 0-37.331 16.747-37.331 37.33v222.086c0 20.585 16.654 37.331 37.126 37.331H730.22c10.243 0 18.547 8.304 18.547 18.547 0 10.244-8.304 18.547-18.547 18.547z"></path></svg><!--[--><span class="page-category-item category6 clickable" role="navigation">LLM</span><!--]--><meta property="articleSection" content="LLM"></span><span class="page-tag-info" aria-label="标签🏷" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon tag-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="tag icon"><path d="M939.902 458.563L910.17 144.567c-1.507-16.272-14.465-29.13-30.737-30.737L565.438 84.098h-.402c-3.215 0-5.726 1.005-7.634 2.913l-470.39 470.39a10.004 10.004 0 000 14.164l365.423 365.424c1.909 1.908 4.42 2.913 7.132 2.913s5.223-1.005 7.132-2.913l470.39-470.39c2.01-2.11 3.014-5.023 2.813-8.036zm-240.067-72.121c-35.458 0-64.286-28.828-64.286-64.286s28.828-64.285 64.286-64.285 64.286 28.828 64.286 64.285-28.829 64.286-64.286 64.286z"></path></svg><!--[--><span class="page-tag-item tag4 clickable" role="navigation">GraphRAG</span><span class="page-tag-item tag6 clickable" role="navigation">LlamaIndex</span><!--]--><meta property="keywords" content="GraphRAG,LlamaIndex"></span></div><hr></div><div class="toc-place-holder"><aside id="toc"><!--[--><!----><!--]--><div class="toc-header">此页内容<button type="button" class="print-button" title="打印"><svg xmlns="http://www.w3.org/2000/svg" class="icon print-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="print icon"><path d="M819.2 364.8h-44.8V128c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v236.8h-44.8C145.067 364.8 96 413.867 96 473.6v192c0 59.733 49.067 108.8 108.8 108.8h44.8V896c0 17.067 14.933 32 32 32h460.8c17.067 0 32-14.933 32-32V774.4h44.8c59.733 0 108.8-49.067 108.8-108.8v-192c0-59.733-49.067-108.8-108.8-108.8zM313.6 160h396.8v204.8H313.6V160zm396.8 704H313.6V620.8h396.8V864zM864 665.6c0 25.6-19.2 44.8-44.8 44.8h-44.8V588.8c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v121.6h-44.8c-25.6 0-44.8-19.2-44.8-44.8v-192c0-25.6 19.2-44.8 44.8-44.8h614.4c25.6 0 44.8 19.2 44.8 44.8v192z"></path></svg></button></div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_1-官方实现改进点">1. 官方实现改进点</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_2-整体流程">2. 整体流程</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_3-实现">3. 实现</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-1-安装需要的库">3.1. 安装需要的库</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-2-加载数据">3.2. 加载数据</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-3-抽取实体和关系">3.3. 抽取实体和关系</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-4-存储图信息到neo4j">3.4. 存储图信息到Neo4j</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-5-graphrag-索引">3.5. GraphRAG 索引</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-6-构建社区并生成社区摘要">3.6. 构建社区并生成社区摘要</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="#_3-7-graphrag-查询">3.7. GraphRAG 查询</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="#_4-参考链接">4. 参考链接</a></li><!----><!--]--></ul><div class="toc-marker" style="top:-1.7rem;"></div></div><!--[--><!----><!--]--></aside></div><!--[--><!----><!--]--><div class="theme-hope-content"><h1 id="llamaindex-graphrag-ollama-neo4j" tabindex="-1"><a class="header-anchor" href="#llamaindex-graphrag-ollama-neo4j" aria-hidden="true">#</a> LlamaIndex + GraphRAG + Ollama + Neo4j</h1><!-- more --><h2 id="_1-官方实现改进点" tabindex="-1"><a class="header-anchor" href="#_1-官方实现改进点" aria-hidden="true">#</a> 1. 官方实现改进点</h2><ul><li>将openai模型替换为ollama本地模型 <ul><li>llm: llama3</li><li>embedding model: nomic-embed-text</li></ul></li><li>使用本地neo4j图数据库</li><li>优化抽取图的实体和关系的prompt以及相应的解析函数</li></ul><h2 id="_2-整体流程" tabindex="-1"><a class="header-anchor" href="#_2-整体流程" aria-hidden="true">#</a> 2. 整体流程</h2><ul><li>1.加载数据，并将数据分割为文本块</li><li>2.从每一个文本块中抽取出实体和关系</li><li>3.汇总所有文本块的实体和关系，得到完整的图信息</li><li>4.存储图信息到Neo4j图数据库并创建索引</li><li>5.将图中相关的节点分组为一个个社区，并为每个社区生成摘要</li><li>6.检索社区摘要，从每个摘要生成答案，然后将这些答案聚合成最终响应</li></ul><h2 id="_3-实现" tabindex="-1"><a class="header-anchor" href="#_3-实现" aria-hidden="true">#</a> 3. 实现</h2><h3 id="_3-1-安装需要的库" tabindex="-1"><a class="header-anchor" href="#_3-1-安装需要的库" aria-hidden="true">#</a> 3.1. 安装需要的库</h3><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>!pip install -i https://pypi.tuna.tsinghua.edu.cn/simple llama-index-graph-stores-neo4j graspologic numpy scipy==1.12.0 future 
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_3-2-加载数据" tabindex="-1"><a class="header-anchor" href="#_3-2-加载数据" aria-hidden="true">#</a> 3.2. 加载数据</h3><h4 id="_3-2-1-加载csv文件-该文件有3列-分别是标题、日期和文本" tabindex="-1"><a class="header-anchor" href="#_3-2-1-加载csv文件-该文件有3列-分别是标题、日期和文本" aria-hidden="true">#</a> 3.2.1. 加载csv文件，该文件有3列，分别是标题、日期和文本</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>import pandas as pd
+from llama_index.core import Document
+
+news = pd.read_csv(
+    &quot;https://raw.githubusercontent.com/tomasonjo/blog-datasets/main/news_articles.csv&quot;
+)[:10]
+
+news.head()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><table><thead><tr><th>title</th><th>date</th><th>text</th></tr></thead><tbody><tr><td>0 Chevron: Best Of Breed</td><td>2031-04-06T01:36:32.000000000+00:00</td><td>JHVEPhoto Like many companies in the O&amp;G secto...</td></tr><tr><td>1 FirstEnergy (NYSE:FE) Posts Earnings Results</td><td>2030-04-29T06:55:28.000000000+00:00</td><td>FirstEnergy (NYSE:FE – Get Rating) posted its ...</td></tr><tr><td>2 Dáil almost suspended after Sinn Féin TD put p...</td><td>2023-06-15T14:32:11.000000000+00:00</td><td>The Dáil was almost suspended on Thursday afte...</td></tr><tr><td>3 Epic’s latest tool can animate hyperrealistic ...</td><td>2023-06-15T14:00:00.000000000+00:00</td><td>Today, Epic is releasing a new tool designed t...</td></tr><tr><td>4 EU to Ban Huawei, ZTE from Internal Commission...</td><td>2023-06-15T13:50:00.000000000+00:00</td><td>The European Commission is planning to ban equ...</td></tr></tbody></table><h4 id="_3-2-2-拼接title和text-得到documents" tabindex="-1"><a class="header-anchor" href="#_3-2-2-拼接title和text-得到documents" aria-hidden="true">#</a> 3.2.2. 拼接title和text，得到documents</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>documents = [Document(text=f&#39;{row[&#39;title&#39;]}:{row[&#39;text&#39;]}&#39;) for i,row in news.iterrows()]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="_3-2-3-分割文本块" tabindex="-1"><a class="header-anchor" href="#_3-2-3-分割文本块" aria-hidden="true">#</a> 3.2.3. 分割文本块</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>from llama_index.core.node_parser import SentenceSplitter
+
+splitter = SentenceSplitter(
+    chunk_size=1024,
+    chunk_overlap=20,
+)
+nodes = splitter.get_nodes_from_documents(documents)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-2-4-验证" tabindex="-1"><a class="header-anchor" href="#_3-2-4-验证" aria-hidden="true">#</a> 3.2.4. 验证</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>len(nodes)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>10</p></blockquote><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>print(nodes[0].text)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>Chevron: Best Of Breed:JHVEPhoto Like many companies in the O&amp;G sector, the stock of Chevron (NYSE:CVX) has declined about 10% over the past 90-days despite the fact that Q2 consensus earnings estimates have risen sharply (~25%) during that same time frame. Over the years, Chevron has kept a very strong balance sheet. That allowed the...</p></blockquote><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>print(nodes[1].text)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>FirstEnergy (NYSE:FE) Posts Earnings Results:FirstEnergy (NYSE:FE – Get Rating) posted its earnings results on Tuesday. The utilities provider reported $0.53 earnings per share for the quarter, topping the consensus estimate of $0.52 by $0.01, RTT News reports. FirstEnergy had a net margin of 10.85% and a return on equity of 17.17%. During the same period... If the content contained herein violates any of your rights, including those of copyright, you are requested to immediately notify us using via the following email address operanews-external(at)opera.com Top News</p></blockquote><h3 id="_3-3-抽取实体和关系" tabindex="-1"><a class="header-anchor" href="#_3-3-抽取实体和关系" aria-hidden="true">#</a> 3.3. 抽取实体和关系</h3><h4 id="_3-3-1-定义graphragextractor类" tabindex="-1"><a class="header-anchor" href="#_3-3-1-定义graphragextractor类" aria-hidden="true">#</a> 3.3.1. 定义GraphRAGExtractor类</h4><ul><li>GraphRAGExtractor类用于从文本中抽取实体 entities 和关系 relationships 的三元组subject-relation-object</li><li>关键组件 <ul><li>llm：抽取实体和关系采用的llm</li><li>extract_prompt：抽取实体和关系的prompt</li><li>parse_fn：将llm输出解析为结构化数据的解析函数</li><li>num_workers: 线程数，同时处理多个文本的数量</li></ul></li><li>主要方法 <ul><li><strong>call</strong>：处理入口</li><li>acall：call的异步版本</li><li>_aextract：核心方法</li></ul></li><li>每个文本块的抽取过程 <ul><li>1.将文本块和extract_prompt传给llm</li><li>2.得到llm的响应结果：抽取出的实体和关系以及对它们的描述</li><li>3.通过parse_fn解析llm的响应结果，得到EntityNode和Relation对象</li><li>4.将所有文本块解析出的实体和关系的信息添加到KG_NODES_KEY和KG_RELATIONS_KEY的节点元数据下</li></ul></li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>import asyncio
+import nest_asyncio
+
+nest_asyncio.apply()
+
+from typing import Any, List, Callable, Optional, Union, Dict
+from IPython.display import Markdown, display
+
+from llama_index.core.async_utils import run_jobs
+from llama_index.core.indices.property_graph.utils import (
+    default_parse_triplets_fn,
+)
+from llama_index.core.graph_stores.types import (
+    EntityNode,
+    KG_NODES_KEY,
+    KG_RELATIONS_KEY,
+    Relation,
+)
+from llama_index.core.llms.llm import LLM
+from llama_index.core.prompts import PromptTemplate
+from llama_index.core.prompts.default_prompts import (
+    DEFAULT_KG_TRIPLET_EXTRACT_PROMPT,
+)
+from llama_index.core.schema import TransformComponent, BaseNode
+from llama_index.core.bridge.pydantic import BaseModel, Field
+
+
+class GraphRAGExtractor(TransformComponent):
+    &quot;&quot;&quot;Extract triples from a graph.
+
+    Uses an LLM and a simple prompt + output parsing to extract paths (i.e. triples) and entity, relation descriptions from text.
+
+    Args:
+        llm (LLM):
+            The language model to use.
+        extract_prompt (Union[str, PromptTemplate]):
+            The prompt to use for extracting triples.
+        parse_fn (callable):
+            A function to parse the output of the language model.
+        num_workers (int):
+            The number of workers to use for parallel processing.
+        max_paths_per_chunk (int):
+            The maximum number of paths to extract per chunk.
+    &quot;&quot;&quot;
+
+    llm: LLM
+    extract_prompt: PromptTemplate
+    parse_fn: Callable
+    num_workers: int
+    max_paths_per_chunk: int
+
+    def __init__(
+        self,
+        llm: Optional[LLM] = None,
+        extract_prompt: Optional[Union[str, PromptTemplate]] = None,
+        parse_fn: Callable = default_parse_triplets_fn,
+        max_paths_per_chunk: int = 10,
+        num_workers: int = 4,
+    ) -&gt; None:
+        &quot;&quot;&quot;Init params.&quot;&quot;&quot;
+        from llama_index.core import Settings
+
+        if isinstance(extract_prompt, str):
+            extract_prompt = PromptTemplate(extract_prompt)
+
+        super().__init__(
+            llm=llm or Settings.llm,
+            extract_prompt=extract_prompt or DEFAULT_KG_TRIPLET_EXTRACT_PROMPT,
+            parse_fn=parse_fn,
+            num_workers=num_workers,
+            max_paths_per_chunk=max_paths_per_chunk,
+        )
+
+    @classmethod
+    def class_name(cls) -&gt; str:
+        return &quot;GraphExtractor&quot;
+
+    def __call__(
+        self, nodes: List[BaseNode], show_progress: bool = False, **kwargs: Any
+    ) -&gt; List[BaseNode]:
+        &quot;&quot;&quot;Extract triples from nodes.&quot;&quot;&quot;
+        return asyncio.run(
+            self.acall(nodes, show_progress=show_progress, **kwargs)
+        )
+
+    async def _aextract(self, node: BaseNode) -&gt; BaseNode:
+        &quot;&quot;&quot;Extract triples from a node.&quot;&quot;&quot;
+        assert hasattr(node, &quot;text&quot;)
+
+        text = node.get_content(metadata_mode=&quot;llm&quot;)
+        try:
+            llm_response = await self.llm.apredict(
+                self.extract_prompt,
+                text=text,
+                max_knowledge_triplets=self.max_paths_per_chunk,
+            )
+            print(f&#39;extract text ---&gt;:\n{text}&#39;)
+            entities, entities_relationship = self.parse_fn(llm_response)
+        except ValueError:
+            entities = []
+            entities_relationship = []
+
+        existing_nodes = node.metadata.pop(KG_NODES_KEY, [])
+        existing_relations = node.metadata.pop(KG_RELATIONS_KEY, [])
+        entity_metadata = node.metadata.copy()
+        for entity, entity_type, description in entities:
+            entity_metadata[&quot;entity_description&quot;] = description  
+            entity_node = EntityNode(
+                name=entity, label=entity_type, properties=entity_metadata
+            )
+            existing_nodes.append(entity_node)
+
+        relation_metadata = node.metadata.copy()
+        for triple in entities_relationship:
+            subj, obj, rel, description = triple
+            relation_metadata[&quot;relationship_description&quot;] = description
+            rel_node = Relation(
+                label=rel,
+                source_id=subj,
+                target_id=obj,
+                properties=relation_metadata,
+            )
+            existing_relations.append(rel_node)
+
+        node.metadata[KG_NODES_KEY] = existing_nodes
+        node.metadata[KG_RELATIONS_KEY] = existing_relations
+        return node
+
+    async def acall(
+        self, nodes: List[BaseNode], show_progress: bool = False, **kwargs: Any
+    ) -&gt; List[BaseNode]:
+        &quot;&quot;&quot;Extract triples from nodes async.&quot;&quot;&quot;
+        jobs = []
+        for node in nodes:
+            jobs.append(self._aextract(node))
+
+        return await run_jobs(
+            jobs,
+            workers=self.num_workers,
+            show_progress=show_progress,
+            desc=&quot;Extracting paths from text&quot;,
+        )
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-3-2-采用ollama本地模型-并设为全局llm" tabindex="-1"><a class="header-anchor" href="#_3-3-2-采用ollama本地模型-并设为全局llm" aria-hidden="true">#</a> 3.3.2. 采用ollama本地模型，并设为全局llm</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>import os
+from llama_index.llms.ollama import Ollama
+
+os.environ[&quot;no_proxy&quot;] = &quot;127.0.0.1,localhost&quot;
+
+llm = Ollama(model=&quot;llama3&quot;, request_timeout=660.0)
+
+Settings.llm = llm
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>测试是否能调通</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>response = llm.complete(&quot;What is the capital of France?&quot;)
+print(response)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>输出：</p><p>The capital of France is Paris.</p></blockquote><h4 id="_3-3-3-采用ollama本地embedding模型-并设为全局embed-model" tabindex="-1"><a class="header-anchor" href="#_3-3-3-采用ollama本地embedding模型-并设为全局embed-model" aria-hidden="true">#</a> 3.3.3. 采用ollama本地embedding模型，并设为全局embed_model</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>!pip install llama-index-embeddings-ollama
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>from llama_index.embeddings.ollama import OllamaEmbedding
+from llama_index.core import Settings
+
+ollama_embedding = OllamaEmbedding(
+    model_name=&quot;nomic-embed-text&quot;,
+    base_url=&quot;http://localhost:11434&quot;,
+    ollama_additional_kwargs={&quot;mirostat&quot;: 0},
+    request_timeout=660.0
+)
+
+# changing the global default
+Settings.embed_model = ollama_embedding
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-3-4-定义extract-prompt" tabindex="-1"><a class="header-anchor" href="#_3-3-4-定义extract-prompt" aria-hidden="true">#</a> 3.3.4. 定义extract_prompt</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>KG_TRIPLET_EXTRACT_TMPL = &quot;&quot;&quot;
+-Goal-
+Given a text document, identify all entities and their entity types from the text and all relationships among the identified entities.
+Given the text.
+
+-Steps-
+1. Identify all entities. For each identified entity, extract the following information:
+- entity_name: Name of the entity, capitalized
+- entity_type: Type of the entity
+- entity_description: Comprehensive description of the entity&#39;s attributes and activities
+
+2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
+For each pair of related entities, extract the following information:
+- source_entity: name of the source entity, as identified in step 1
+- target_entity: name of the target entity, as identified in step 1
+- relation: relationship between source_entity and target_entity
+- relationship_description: explanation as to why you think the source entity and the target entity are related to each other
+
+3. Output Formatting:
+- Return the result in valid JSON format with two keys: &#39;entities&#39; (list of entity objects) and &#39;relationships&#39; (list of relationship objects).
+- Exclude any text outside the JSON structure (e.g., no explanations or comments).
+- If no entities or relationships are identified, return empty lists: { &quot;entities&quot;: [], &quot;relationships&quot;: [] }.
+
+-An Output Example-
+{
+  &quot;entities&quot;: [
+    {
+      &quot;entity_name&quot;: &quot;Albert Einstein&quot;,
+      &quot;entity_type&quot;: &quot;Person&quot;,
+      &quot;entity_description&quot;: &quot;Albert Einstein was a theoretical physicist who developed the theory of relativity and made significant contributions to physics.&quot;
+    },
+    {
+      &quot;entity_name&quot;: &quot;Theory of Relativity&quot;,
+      &quot;entity_type&quot;: &quot;Scientific Theory&quot;,
+      &quot;entity_description&quot;: &quot;A scientific theory developed by Albert Einstein, describing the laws of physics in relation to observers in different frames of reference.&quot;
+    },
+    {
+      &quot;entity_name&quot;: &quot;Nobel Prize in Physics&quot;,
+      &quot;entity_type&quot;: &quot;Award&quot;,
+      &quot;entity_description&quot;: &quot;A prestigious international award in the field of physics, awarded annually by the Royal Swedish Academy of Sciences.&quot;
+    }
+  ],
+  &quot;relationships&quot;: [
+    {
+      &quot;source_entity&quot;: &quot;Albert Einstein&quot;,
+      &quot;target_entity&quot;: &quot;Theory of Relativity&quot;,
+      &quot;relation&quot;: &quot;developed&quot;,
+      &quot;relationship_description&quot;: &quot;Albert Einstein is the developer of the theory of relativity.&quot;
+    },
+    {
+      &quot;source_entity&quot;: &quot;Albert Einstein&quot;,
+      &quot;target_entity&quot;: &quot;Nobel Prize in Physics&quot;,
+      &quot;relation&quot;: &quot;won&quot;,
+      &quot;relationship_description&quot;: &quot;Albert Einstein won the Nobel Prize in Physics in 1921.&quot;
+    }
+  ]
+}
+
+-Real Data-
+######################
+text: {text}
+######################
+output:&quot;&quot;&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-3-5-定义parse-fn" tabindex="-1"><a class="header-anchor" href="#_3-3-5-定义parse-fn" aria-hidden="true">#</a> 3.3.5. 定义parse_fn</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>import json
+import re
+
+def parse_fn(response_str: str) -&gt; Any:
+    print(f&#39;parse_fn ---&gt; response_str:\n{response_str}&#39;)
+    json_pattern = r&#39;\{.*\}&#39;
+    match = re.search(json_pattern, response_str, re.DOTALL) 
+    entities = []
+    relationships = []
+    if not match: return entities, relationships      
+    json_str = match.group(0)
+    try:
+        data = json.loads(json_str)
+        entities = [(entity[&#39;entity_name&#39;], entity[&#39;entity_type&#39;], entity[&#39;entity_description&#39;]) for entity in data.get(&#39;entities&#39;, [])]
+        relationships = [(relation[&#39;source_entity&#39;], relation[&#39;target_entity&#39;], relation[&#39;relation&#39;], relation[&#39;relationship_description&#39;]) for relation in data.get(&#39;relationships&#39;, [])]
+        print(f&#39;parse_fn ---&gt; entities:\n{entities}&#39;)
+        print(f&#39;parse_fn ---&gt; relationships:\n{relationships}&#39;)
+        return entities, relationships
+    except json.JSONDecodeError as e:
+        print(&quot;Error parsing JSON:&quot;, e)
+        return entities, relationships
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-3-6-实例化graphragextractor为kg-extractor对象" tabindex="-1"><a class="header-anchor" href="#_3-3-6-实例化graphragextractor为kg-extractor对象" aria-hidden="true">#</a> 3.3.6. 实例化GraphRAGExtractor为kg_extractor对象</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>kg_extractor = GraphRAGExtractor(
+    llm=llm,
+    extract_prompt=KG_TRIPLET_EXTRACT_TMPL,
+    max_paths_per_chunk=2,
+    parse_fn=parse_fn,
+)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-4-存储图信息到neo4j" tabindex="-1"><a class="header-anchor" href="#_3-4-存储图信息到neo4j" aria-hidden="true">#</a> 3.4. 存储图信息到Neo4j</h3><h4 id="_3-4-1-定义graphragstore类" tabindex="-1"><a class="header-anchor" href="#_3-4-1-定义graphragstore类" aria-hidden="true">#</a> 3.4.1. 定义GraphRAGStore类</h4><p>关键方法</p><ul><li>build_communities() <ul><li>将内部图表示转换为 NetworkX 图</li><li>应用层次 Leiden 算法进行社区检测</li><li>收集每个社区的详细信息</li><li>为每个社区生成摘要</li></ul></li><li>generate_community_summary(text) <ul><li>使用 LLM 生成社区中关系的摘要</li><li>摘要包括实体名称和关系描述的综合</li></ul></li><li>_create_nx_graph() <ul><li>将内部图表示转换为 NetworkX 图，以便进行社区检测</li></ul></li><li>_collect_community_info(nx_graph, clusters) <ul><li>根据社区收集每个节点的详细信息</li><li>创建社区内每个关系的字符串表示</li></ul></li><li>_summarize_communities(community_info) <ul><li>使用 LLM 为每个社区生成并存储摘要</li></ul></li><li>get_community_summaries() <ul><li>返回社区摘要，如果尚未生成，则先构建它们</li></ul></li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>import re
+import networkx as nx
+from graspologic.partition import hierarchical_leiden
+from llama_index.core.llms import ChatMessage
+from collections import defaultdict
+from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
+
+
+class GraphRAGStore(Neo4jPropertyGraphStore):
+    community_summary = {}
+    max_cluster_size = 5
+    entity_info = None
+
+    def generate_community_summary(self, text):
+        &quot;&quot;&quot;Generate summary for a given text using an LLM.&quot;&quot;&quot;
+        messages = [
+            ChatMessage(
+                role=&quot;system&quot;,
+                content=(
+                    &quot;You are provided with a set of relationships from a knowledge graph, each represented as &quot;
+                    &quot;entity1-&gt;entity2-&gt;relation-&gt;relationship_description. Your task is to create a summary of these &quot;
+                    &quot;relationships. The summary should include the names of the entities involved and a concise synthesis &quot;
+                    &quot;of the relationship descriptions. The goal is to capture the most critical and relevant details that &quot;
+                    &quot;highlight the nature and significance of each relationship. Ensure that the summary is coherent and &quot;
+                    &quot;integrates the information in a way that emphasizes the key aspects of the relationships.&quot;
+                ),
+            ),
+            ChatMessage(role=&quot;user&quot;, content=text),
+        ]
+        response = llm.chat(messages)
+        clean_response = re.sub(r&quot;^assistant:\s*&quot;, &quot;&quot;, str(response)).strip()
+        return clean_response
+
+    def build_communities(self):
+        &quot;&quot;&quot;Builds communities from the graph and summarizes them.&quot;&quot;&quot;
+        nx_graph = self._create_nx_graph()
+        community_hierarchical_clusters = hierarchical_leiden(
+            nx_graph, max_cluster_size=self.max_cluster_size
+        )
+        self.entity_info, community_info = self._collect_community_info(
+            nx_graph, community_hierarchical_clusters
+        )
+        self._summarize_communities(community_info)
+
+    def _create_nx_graph(self):
+        &quot;&quot;&quot;Converts internal graph representation to NetworkX graph.&quot;&quot;&quot;
+        nx_graph = nx.Graph()
+        triplets = self.get_triplets()
+        for entity1, relation, entity2 in triplets:
+            nx_graph.add_node(entity1.name)
+            nx_graph.add_node(entity2.name)
+            nx_graph.add_edge(
+                relation.source_id,
+                relation.target_id,
+                relationship=relation.label,
+                description=relation.properties[&quot;relationship_description&quot;],
+            )
+        return nx_graph
+
+    def _collect_community_info(self, nx_graph, clusters):
+        &quot;&quot;&quot;
+        Collect information for each node based on their community,
+        allowing entities to belong to multiple clusters.
+        &quot;&quot;&quot;
+        entity_info = defaultdict(set)
+        community_info = defaultdict(list)
+        
+        for item in clusters:
+            node = item.node
+            cluster_id = item.cluster
+
+            # Update entity_info
+            entity_info[node].add(cluster_id)
+
+            for neighbor in nx_graph.neighbors(node):
+                edge_data = nx_graph.get_edge_data(node, neighbor)
+                if edge_data:
+                    detail = f&quot;{node} -&gt; {neighbor} -&gt; {edge_data[&#39;relationship&#39;]} -&gt; {edge_data[&#39;description&#39;]}&quot;
+                    community_info[cluster_id].append(detail)
+        
+        # Convert sets to lists for easier serialization if needed
+        entity_info = {k: list(v) for k, v in entity_info.items()}
+
+        return dict(entity_info), dict(community_info)
+
+    def _summarize_communities(self, community_info):
+        &quot;&quot;&quot;Generate and store summaries for each community.&quot;&quot;&quot;
+        for community_id, details in community_info.items():
+            details_text = (
+                &quot;\n&quot;.join(details) + &quot;.&quot;
+            )  # Ensure it ends with a period
+            self.community_summary[
+                community_id
+            ] = self.generate_community_summary(details_text)
+
+    def get_community_summaries(self):
+        &quot;&quot;&quot;Returns the community summaries, building them if not already done.&quot;&quot;&quot;
+        if not self.community_summary:
+            self.build_communities()
+        return self.community_summary
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-4-2-实例化graphragstore为graph-store对象-采用本地neo4j图数据库" tabindex="-1"><a class="header-anchor" href="#_3-4-2-实例化graphragstore为graph-store对象-采用本地neo4j图数据库" aria-hidden="true">#</a> 3.4.2. 实例化GraphRAGStore为graph_store对象，采用本地neo4j图数据库</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
+
+# Note: used to be `Neo4jPGStore`
+graph_store = GraphRAGStore(
+    username=&quot;neo4j&quot;, password=&quot;neo4j&quot;, url=&quot;bolt://localhost:7687&quot;
+)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-5-graphrag-索引" tabindex="-1"><a class="header-anchor" href="#_3-5-graphrag-索引" aria-hidden="true">#</a> 3.5. GraphRAG 索引</h3><h4 id="_3-5-1-创建索引" tabindex="-1"><a class="header-anchor" href="#_3-5-1-创建索引" aria-hidden="true">#</a> 3.5.1. 创建索引</h4><ul><li>nodes来自3.2.3</li><li>kg_extractor来自3.3.6</li><li>graph_store来自3.4.2</li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>from llama_index.core import PropertyGraphIndex
+
+index = PropertyGraphIndex(
+    nodes=nodes,
+    property_graph_store=graph_store,
+    kg_extractors=[kg_extractor],
+    show_progress=True,
+)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>每个文本块输出结果如下：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>extract text ---&gt;:
+Chevron: Best Of Breed:JHVEPhoto Like many companies in the O&amp;G sector, the stock of Chevron (NYSE:CVX) has declined about 10% over the past 90-days despite the fact that Q2 consensus earnings estimates have risen sharply (~25%) during that same time frame. Over the years, Chevron has kept a very strong balance sheet. That allowed the...
+parse_fn ---&gt; response_str:
+Here is the output for the given text:
+
+{
+  &quot;entities&quot;: [
+    {
+      &quot;entity_name&quot;: &quot;Chevron&quot;,
+      &quot;entity_type&quot;: &quot;Company&quot;,
+      &quot;entity_description&quot;: &quot;A multinational energy corporation that engages in the development of crude oil and natural gas resources.&quot;
+    },
+    {
+      &quot;entity_name&quot;: &quot;NYSE:CVX&quot;,
+      &quot;entity_type&quot;: &quot;Stock Ticker Symbol&quot;,
+      &quot;entity_description&quot;: &quot;The stock ticker symbol for Chevron Corporation&#39;s shares listed on the New York Stock Exchange.&quot;
+    }
+  ],
+  &quot;relationships&quot;: [
+    {
+      &quot;source_entity&quot;: &quot;Chevron&quot;,
+      &quot;target_entity&quot;: &quot;Chevron&quot;,
+      &quot;relation&quot;: &quot;has&quot;,
+      &quot;relationship_description&quot;: &quot;Chevron has a strong balance sheet.&quot;
+    }
+  ]
+}
+
+Note that I did not identify any other entities or relationships beyond the company and its stock ticker symbol. If you would like me to look for more entities and relationships, please let me know!
+parse_fn ---&gt; entities: 
+[(&#39;Chevron&#39;, &#39;Company&#39;, &#39;A multinational energy corporation that engages in the development of crude oil and natural gas resources.&#39;), (&#39;NYSE:CVX&#39;, &#39;Stock Ticker Symbol&#39;, &quot;The stock ticker symbol for Chevron Corporation&#39;s shares listed on the New York Stock Exchange.&quot;)]
+parse_fn ---&gt; relationships: 
+[(&#39;Chevron&#39;, &#39;Chevron&#39;, &#39;has&#39;, &#39;Chevron has a strong balance sheet.&#39;)]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-5-2-验证" tabindex="-1"><a class="header-anchor" href="#_3-5-2-验证" aria-hidden="true">#</a> 3.5.2. 验证</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>len(index.property_graph_store.get_triplets())
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>148</p></blockquote><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>index.property_graph_store.get_triplets()[10]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>[EntityNode(label=&#39;Company&#39;, embedding=None, properties={&#39;id&#39;: &#39;FirstEnergy&#39;, &#39;entity_description&#39;: &#39;FirstEnergy (NYSE:FE) is a utilities provider&#39;, &#39;triplet_source_id&#39;: &#39;144af8a1-4078-4991-a234-4fc930bcd029&#39;}, name=&#39;FirstEnergy&#39;), Relation(label=&#39;reported_by&#39;, source_id=&#39;FirstEnergy&#39;, target_id=&#39;RTT News&#39;, properties={&#39;relationship_description&#39;: &quot;FirstEnergy&#39;s earnings results were reported by RTT News&quot;, &#39;triplet_source_id&#39;: &#39;144af8a1-4078-4991-a234-4fc930bcd029&#39;}), EntityNode(label=&#39;News Source&#39;, embedding=None, properties={&#39;id&#39;: &#39;RTT News&#39;, &#39;entity_description&#39;: &#39;A news source reporting on earnings results and other financial information&#39;, &#39;triplet_source_id&#39;: &#39;144af8a1-4078-4991-a234-4fc930bcd029&#39;}, name=&#39;RTT News&#39;)]</p></blockquote><h3 id="_3-6-构建社区并生成社区摘要" tabindex="-1"><a class="header-anchor" href="#_3-6-构建社区并生成社区摘要" aria-hidden="true">#</a> 3.6. 构建社区并生成社区摘要</h3><p>使用社区检测算法将图中相关的节点分组，然后使用大语言模型 (LLM) 为每个社区生成摘要。</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>index.property_graph_store.build_communities()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_3-7-graphrag-查询" tabindex="-1"><a class="header-anchor" href="#_3-7-graphrag-查询" aria-hidden="true">#</a> 3.7. GraphRAG 查询</h3><h4 id="_3-7-1-定义graphragqueryengine类" tabindex="-1"><a class="header-anchor" href="#_3-7-1-定义graphragqueryengine类" aria-hidden="true">#</a> 3.7.1. 定义GraphRAGQueryEngine类</h4><ul><li>GraphRAGQueryEngine 类是一个定制的查询引擎，旨在使用 GraphRAG 方法处理查询。它利用 GraphRAGStore 生成的社区摘要来回答用户查询。</li><li>主要组件 <ul><li>graph_store：GraphRAGStore 的实例，包含社区摘要</li><li>llm：用于生成和聚合答案的语言模型</li></ul></li><li>关键方法 <ul><li>custom_query(query_str: str) <ul><li>查询的主入口</li><li>用于检索社区摘要，从每个摘要生成答案，然后将这些答案聚合成最终响应</li></ul></li><li>generate_answer_from_summary(community_summary, query) <ul><li>根据单个社区摘要为查询生成答案</li><li>使用 LLM 在查询的上下文中解释社区摘要</li></ul></li><li>aggregate_answers(community_answers) <ul><li>将来自不同社区的单个答案组合成一个连贯的最终响应</li><li>使用 LLM 将多个视角合成为一个简洁的答案</li></ul></li></ul></li><li>查询处理流程 <ul><li>1.从图存储中检索社区摘要</li><li>2.针对每个社区摘要，为查询生成特定的答案</li><li>3.将所有社区特定的答案聚合成一个最终的、连贯的响应</li></ul></li></ul><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>from llama_index.core.query_engine import CustomQueryEngine
+from llama_index.core.llms import LLM
+from llama_index.core import PropertyGraphIndex
+import re
+
+class GraphRAGQueryEngine(CustomQueryEngine):
+    graph_store: GraphRAGStore
+    llm: LLM
+    index: PropertyGraphIndex
+    similarity_top_k: int = 20
+
+    def custom_query(self, query_str: str) -&gt; str:
+        &quot;&quot;&quot;Process all community summaries to generate answers to a specific query.&quot;&quot;&quot;
+        
+        entities = self.get_entities(query_str, self.similarity_top_k)
+
+        community_ids = self.retrieve_entity_communities(
+            self.graph_store.entity_info, entities
+        )
+        
+        community_summaries = self.graph_store.get_community_summaries()
+        community_answers = [
+            self.generate_answer_from_summary(community_summary, query_str)
+            for id, community_summary in community_summaries.items()
+            if id in community_ids # 用聚类IDs进行过滤
+        ]
+
+        final_answer = self.aggregate_answers(community_answers)
+        return final_answer
+
+    def get_entities(self, query_str, similarity_top_k):
+        nodes_retrieved = self.index.as_retriever(
+            similarity_top_k=similarity_top_k
+        ).retrieve(query_str)
+
+        enitites = set()
+        pattern = (
+            r&quot;^(\w+(?:\s+\w+)*)\s*-&gt;\s*([a-zA-Z\s]+?)\s*-&gt;\s*(\w+(?:\s+\w+)*)$&quot;
+        )
+
+        for node in nodes_retrieved:
+            matches = re.findall(
+                pattern, node.text, re.MULTILINE | re.IGNORECASE
+            )
+
+            for match in matches:
+                subject = match[0]
+                obj = match[2]
+                enitites.add(subject)
+                enitites.add(obj)
+
+        return list(enitites)
+
+    def retrieve_entity_communities(self, entity_info, entities):
+        &quot;&quot;&quot;
+        Retrieve cluster information for given entities, allowing for multiple clusters per entity.
+
+        Args:
+        entity_info (dict): Dictionary mapping entities to their cluster IDs (list).
+        entities (list): List of entity names to retrieve information for.
+
+        Returns:
+        List of community or cluster IDs to which an entity belongs.
+        &quot;&quot;&quot;
+        community_ids = []
+
+        for entity in entities:
+            if entity in entity_info:
+                community_ids.extend(entity_info[entity])
+
+        return list(set(community_ids))
+    
+    def generate_answer_from_summary(self, community_summary, query):
+        &quot;&quot;&quot;Generate an answer from a community summary based on a given query using LLM.&quot;&quot;&quot;
+        prompt = (
+            f&quot;Given the community summary: {community_summary}, &quot;
+            f&quot;how would you answer the following query? Query: {query}&quot;
+        )
+        messages = [
+            ChatMessage(role=&quot;system&quot;, content=prompt),
+            ChatMessage(
+                role=&quot;user&quot;,
+                content=&quot;I need an answer based on the above information.&quot;,
+            ),
+        ]
+        response = self.llm.chat(messages)
+        cleaned_response = re.sub(r&quot;^assistant:\s*&quot;, &quot;&quot;, str(response)).strip()
+        return cleaned_response
+
+    def aggregate_answers(self, community_answers):
+        &quot;&quot;&quot;Aggregate individual community answers into a final, coherent response.&quot;&quot;&quot;
+        # intermediate_text = &quot; &quot;.join(community_answers)
+        prompt = &quot;Combine the following intermediate answers into a final, concise response.&quot;
+        messages = [
+            ChatMessage(role=&quot;system&quot;, content=prompt),
+            ChatMessage(
+                role=&quot;user&quot;,
+                content=f&quot;Intermediate answers: {community_answers}&quot;,
+            ),
+        ]
+        final_response = self.llm.chat(messages)
+        cleaned_final_response = re.sub(
+            r&quot;^assistant:\s*&quot;, &quot;&quot;, str(final_response)
+        ).strip()
+        return cleaned_final_response
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-7-2-实例化graphragqueryengine为query-engine对象" tabindex="-1"><a class="header-anchor" href="#_3-7-2-实例化graphragqueryengine为query-engine对象" aria-hidden="true">#</a> 3.7.2. 实例化GraphRAGQueryEngine为query_engine对象</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>query_engine = GraphRAGQueryEngine(
+    graph_store=index.property_graph_store, 
+    llm=llm,
+    index=index,
+    similarity_top_k=10
+)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-7-3-检索信息" tabindex="-1"><a class="header-anchor" href="#_3-7-3-检索信息" aria-hidden="true">#</a> 3.7.3. 检索信息</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>response = query_engine.query(
+    &quot;What are the main news discussed in the document?&quot;
+)
+display(Markdown(f&quot;{response.response}&quot;))
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>Here is the combined response: The main news discussed in the document is a debate on retained firefighters&#39; pay, with Sinn Féin TDs John Brady and Pearse Doherty advocating for their rights. Specifically, John Brady interrupted Minister for Housing Darragh O&#39;Brien&#39;s speech to emphasize the importance of retaining firefighters&#39; pay, while Pearse Doherty called on the minister to make an improved offer in relation to pay and meet with them outside of the House.</p></blockquote><h2 id="_4-参考链接" tabindex="-1"><a class="header-anchor" href="#_4-参考链接" aria-hidden="true">#</a> 4. 参考链接</h2><p><a href="https://docs.llamaindex.ai/en/stable/examples/cookbooks/GraphRAG_v1/" target="_blank" rel="noopener noreferrer">https://docs.llamaindex.ai/en/stable/examples/cookbooks/GraphRAG_v1/<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a></p><p><a href="https://docs.llamaindex.ai/en/stable/examples/cookbooks/GraphRAG_v2/" target="_blank" rel="noopener noreferrer">https://docs.llamaindex.ai/en/stable/examples/cookbooks/GraphRAG_v2/<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a></p></div><!--[--><!----><!--]--><footer class="page-meta"><!----><div class="meta-item git-info"><!----><!----></div></footer><nav class="vp-page-nav"><a aria-label="Langchain and LLamaindex Integration" class="vp-link nav-link prev nav-link prev" href="/blog/zh/posts/llm/023_agent_framework.html"><div class="hint"><span class="arrow start"></span>上一页</div><div class="link"><span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span>Langchain and LLamaindex Integration</div></a><a aria-label="微软GraphRAG源码解读" class="vp-link nav-link next nav-link next" href="/blog/zh/posts/llm/021_microsoft_graphrag.html"><div class="hint">下一页<span class="arrow end"></span></div><div class="link">微软GraphRAG源码解读<span class="font-icon icon fa-fw fa-sm fas fa-lightbulb" style=""></span></div></a></nav><!----><!--[--><!----><!--]--><!--]--></main><!--]--><!----></div><!--]--><!--]--><!----><!--]--></div>
+    <script type="module" src="/blog/assets/app-dpf1czaz.js" defer></script>
+  </body>
+</html>
