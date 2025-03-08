@@ -13,10 +13,11 @@ tag:
 # Llama源码解读
   - 1. About
   - 2. 模型总体架构
-  - 3. 超参数
-  - 4. 张量维度转换
-  - 5. 可训练参数量     
-  - 6. 源码
+  - 3. LLama代码逻辑
+  - 4. 超参数
+  - 5. 张量维度转换
+  - 6. 可训练参数量     
+  - 7. 源码
 <!-- more -->
 
 ## 1. About
@@ -37,19 +38,89 @@ https://github.com/huggingface/transformers/blob/main/src/transformers/models/ll
 
 ![Llama与Transformer的架构对比](../../../assets/005_llama_vs_transformer.png)
 
-## 3. 超参数
+## 3. LLama代码逻辑
+### 3.1. Llama推理代码逻辑
+注意点：
+- 1.推理过程中的batch_size，表示在一次推理过程中同时处理的样本数量。如果batch_size=8，则表示每8个prompt作为一个批次输入模型同时处理
+    - 这batch_size个prompt的token序列长度大小可能不一样
+        - 对齐序列长度
+            - 为了在同一批次（batch）中处理不同长度的token序列，通常会使用padding来将所有序列对齐到相同的长度
+            - Padding的过程通常是将额外的token位置填充为一个特定的标记（通常是[PAD]），这些填充的位置在模型计算时不会对结果产生影响。
+        - 注意力掩码忽略填充的位置
+            - 注意力掩码是一个与输入序列相同长度的二进制向量，用于标记哪些位置是有效的（即实际的token）以及哪些是填充位置。例如，填充位置在掩码中会标记为0，实际token的位置则为1。这可以确保模型在计算注意力时，忽略掉填充的位置。
+- 2.推理过程只会经过前向传播，不会有反向传播和更新参数的操作，只有训练过程中才有反向传播和更新参数的操作
+    - 为什么推理时不需要反向传播？
+        - 训练时：反向传播用于计算损失函数关于模型参数的梯度，并通过梯度下降更新模型参数。
+        - 推理时：推理的目的是基于已经训练好的模型进行推断和生成，因此不需要计算梯度，也不需要更新模型参数。推理过程仅依赖于已训练好的参数来生成结果。
+
+推理过程：自回归执行，每次输入是prompt再加上上一次自回归的预测token组成的token序列，每次输出是输入token序列后多预测了一位token的概率分布（假设都取最大概率的那个token）
+1.将prompt进行token化，转为token序列
+2.将token序列进行embedding，将每个token转为一个hidden_size大小的tensor
+3.将embed后的token序列作为输入，传入llama解码层，经过32层的前向传播，输出hidden_state
+4.把hidden_state映射到token词表，得到每个token作为下一个预测的token的概率分布
+5.然后把最大概率的token补到prompt后面继续进行自回归
+
+
+llama推理代码细节
+- 1.将prompt进行token化
+    - 也就是将prompt中每个词和位置信息一一对应一个token或几个token
+    - 普通token共128000个+特殊token共256个（如: "<|begin_of_text|>"和 "<|end_of_text|>"这两个特殊token分别表示了文本的开始和结束），组成128256个token的词表
+
+![](../../../assets/005_prompt_tokenizer.png)
+
+- 2.将token进行embedding化
+    - 也就是将每个token表示为一个hidden_size维度的张量
+    - "hidden_size": 4096
+    - (batch.size, seq.len)-> (batch.size, seq.len, 4096)
+        - batch.size : 一次处理多个prompt
+        - seq.len : 每个prompt在token化后的token个数
+        - 4096 : 每个token表示为4096维度的tensor
+
+- 3.32层解码层 LlamaDecoderLayer.forward() 
+    - 每层的输出hidden_state会作为下一层的输入
+    - 解码层有两大块：注意力块和MLP块
+    - 每层可更新的参数主要就是注意力块的4个线性映射和MLP块的3个线性映射，共 16 * h ^ 2 个 tensor
+        - 4 * h ^ 2 + 3 * 4 * h ^ 2 = 16 * h ^ 2
+    - 32层可更新的参数主要共 
+        - num_layers * 16 * h ^ 2 = 512 * h ^ 2
+
+- 4.注意力块
+    - 有4个线性映射：Q,K,V,O（query, key, value, output），也就是4个权重矩阵，每个都是hidden_size * hidden_size = hidden_size ^ 2
+
+- 5.MLP块 
+    - 有3个线性映射：gate,down,up，也就是3个权重矩阵，每个都是hidden_size * 4 hidden_size = 4 * hidden_size ^ 2
+    
+
+### 3.2. Llama训练代码逻辑
+训练过程：训练过程的关键在于通过前向传播计算损失（loss），然后通过反向传播计算梯度，并更新模型参数
+
+注意点
+- 1.多次训练epochs：数据集会被训练多次，一个训练周期（epoch）是指模型在整个训练数据集上进行一次完整的训练。
+- 2.分批训练batch_size：将整个训练数据集分成多个小批次（batch）, 每个批次的batch_size决定了同时输入到模型中的样本数量
+- 3.每个批次进行一次参数更新：每个批次都会执行一次前向传播、计算loss、反向传播、参数更新的完整步骤，因此模型参数会随着每个批次的训练而不断更新
+
+训练过程代码逻辑
+- 1.数据准备：输入文本token化并分批次处理
+- 2.数据集的多次训练epochs，每epoch会按batch_size分批训练
+- 3.每批的训练
+    - 3.1.前向传播（从第1层到第32层）：输入token序列通过嵌入层和解码器，生成每个token的隐藏表示
+    - 3.2.计算损失：根据模型预测的token概率分布与真实token计算损失（例如交叉熵损失）
+    - 3.3.反向传播（从第32层到第1层）：计算损失的梯度，并根据梯度执行反向传播
+    - 3.4.参数更新：使用优化器更新模型参数以减少损失
+
+## 4. 超参数
 ![超参数](../../../assets/005_llama_hyperparameters.png)
 
-## 4. 张量维度转换
+## 5. 张量维度转换
 ![张量维度转换](../../../assets/005_llama_dim_trans.png)
 
 ![张量维度转换细节](../../../assets/005_llama_for_causal_lm.png)
 
-## 5. 可训练参数量
+## 6. 可训练参数量
 ![可训练参数量](../../../assets/005_llama_trainable_parameters.png)
 
-## 6. 源码
-### 6.1. 入口
+## 7. 源码
+### 7.1. 入口
 ```python
 # 从model_id路径下载词表tokenizer.json,实例化tokenizer类
 tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -98,7 +169,7 @@ print(outputs)
 response = outputs[0][input_ids.shape[-1]:] # 获取outputs里去掉原样输出的input_ids（prompt）后的部分
 print(tokenizer.decode(response, skip_special_tokens=True)) # 将token转为字符，忽略特殊token
 ```
-### 6.2. GenerationMixin
+### 7.2. GenerationMixin
 ![LlamaForCausalLM与GenerationMixin的继承关系](../../../assets/005_inheritance.png)
 ```python
 class GenerationMixin:
@@ -173,7 +244,7 @@ class GenerationMixin:
                 )
 ```
 
-### 6.3. LlamaForCausalLM
+### 7.3. LlamaForCausalLM
 ```python
 class LlamaForCausalLM(LlamaPreTrainedModel):
     def __init__(self, config):
@@ -227,7 +298,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
         )
 ```
 
-### 6.4. LlamaModel
+### 7.4. LlamaModel
 ```python
 class LlamaModel(LlamaPreTrainedModel):
     def __init__(self, config: LlamaConfig):
@@ -282,7 +353,7 @@ class LlamaModel(LlamaPreTrainedModel):
         )
 ```
 
-### 6.5. LlamaDecoderLayer
+### 7.5. LlamaDecoderLayer
 ```python
 class LlamaDecoderLayer(nn.Module):
     def __init__(self, config: LlamaConfig, layer_idx: int):
@@ -336,7 +407,7 @@ class LlamaDecoderLayer(nn.Module):
 
         return outputs
 ```
-### 6.6. LlamaRMSNorm
+### 7.6. LlamaRMSNorm
 ```python
 class LlamaRMSNorm(nn.Module):
     def __init__(self, hidden_size, eps=1e-6):
@@ -355,7 +426,7 @@ class LlamaRMSNorm(nn.Module):
         return self.weight * hidden_states.to(input_dtype)
 ```
 
-### 6.7. LlamaSdpaAttention
+### 7.7. LlamaSdpaAttention
 ```python
 class LlamaSdpaAttention(LlamaAttention):
     """
@@ -453,7 +524,7 @@ class LlamaSdpaAttention(LlamaAttention):
         return attn_output, None, past_key_value
 ```
 
-### 6.8. LlamaRotaryEmbedding
+### 7.8. LlamaRotaryEmbedding
 ```python
 class LlamaRotaryEmbedding(nn.Module):
     def __init__(self, dim, max_position_embeddings=2048, base=10000, device=None, scaling_factor=1.0):
@@ -484,7 +555,7 @@ class LlamaRotaryEmbedding(nn.Module):
         return cos.to(dtype=x.dtype), sin.to(dtype=x.dtype)
 ```
 
-### 6.9. LlamaMLP
+### 7.9. LlamaMLP
 ```python
 class LlamaMLP(nn.Module):
     def __init__(self, config):

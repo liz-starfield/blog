@@ -13,10 +13,11 @@ tag:
 # Llama Source Code Exploration
   - 1. About
   - 2. Llama Overall Architecture
-  - 3. Hyperparameters
-  - 4. Tensor Dimensionality Transformation
-  - 5. Number of Trainable Parameters  
-  - 6. Source Code
+  - 3. Llama Code Logic
+  - 4. Hyperparameters
+  - 5. Tensor Dimensionality Transformation
+  - 6. Number of Trainable Parameters  
+  - 7. Source Code
 <!-- more -->
 
 ## 1. About
@@ -37,19 +38,80 @@ https://github.com/huggingface/transformers/blob/main/src/transformers/models/ll
 
 ![Llama vs Transformer](../../assets/005_llama_vs_transformer.png)
 
-## 3. Hyperparameters
+## 3. Llama Code Logic
+### 3.1. Llama Inference Code Logic
+Key Points:
+- 1. Batch_size during inference: Indicates the number of samples processed simultaneously. With batch_size=8, 8 prompts are processed as a batch
+    - These prompts may have different token sequence lengths
+        - Sequence alignment
+            - Padding is used to align sequences to the same length
+            - Padding tokens (typically [PAD]) don't affect model computations
+        - Attention mask ignores padding
+            - Binary vector marking valid tokens (1) vs padding (0), ensuring attention calculations skip padding
+- 2. Inference only involves forward propagation
+    - Why no backpropagation during inference?
+        - Training: Backprop calculates gradients for parameter updates
+        - Inference: Uses pre-trained parameters for generation without gradient calculations
+
+Inference Process (Autoregressive):
+1. Tokenize prompt into token sequence
+2. Embed tokens into hidden_size dimension tensors
+3. Process through 32 decoder layers
+4. Map final hidden states to vocabulary probabilities
+5. Append highest probability token and repeat
+
+Code Details:
+- 1. Tokenization
+    - 128,000 regular tokens + 256 special tokens (e.g., <|begin_of_text|>, <|end_of_text|>)
+    - Total vocabulary: 128,256 tokens
+
+![](../../assets/005_prompt_tokenizer.png)
+
+- 2. Embedding Layer
+    - hidden_size: 4096
+    - Shape transformation: (batch_size, seq_len) → (batch_size, seq_len, 4096)
+
+- 3. Decoder Layers (32x LlamaDecoderLayer)
+    - Each layer contains attention + MLP blocks
+    - Parameters per layer: 16h² (4h² from attention + 12h² from MLP)
+    - Total parameters: 32 × 16h² = 512h²
+
+- 4. Attention Block
+    - 4 linear projections: Q, K, V, O (each h×h)
+
+- 5. MLP Block
+    - 3 linear projections: gate, up, down (each h×4h)
+
+### 3.2. Llama Training Code Logic
+Training Process: Forward pass → Loss calculation → Backprop → Parameter updates
+
+Key Aspects:
+- 1. Multiple epochs: Full dataset passes
+- 2. Batch processing: Dataset divided into batches
+- 3. Per-batch updates: Parameters updated after each batch
+
+Training Workflow:
+1. Data preparation: Tokenization & batching
+2. Epoch loop
+3. Batch processing:
+    - 3.1 Forward pass (Layer 1→32)
+    - 3.2 Loss calculation (e.g., cross-entropy)
+    - 3.3 Backprop (Layer 32→1)
+    - 3.4 Parameter update (optimizer step)
+
+## 4. Hyperparameters
 ![Hyperparameters](../../assets/005_llama_hyperparameters.png)
 
-## 4. Tensor Dimensionality Transformation
+## 5. Tensor Dimensionality Transformation
 ![Tensor Dimension Transformation](../../assets/005_llama_dim_trans.png)
 
 ![Tensor Dimension Transformation Details](../../assets/005_llama_for_causal_lm.png)
 
-## 5. Number of Trainable Parameters
+## 6. Number of Trainable Parameters
 ![Number of Trainable Parameters](../../assets/005_llama_trainable_parameters.png)
 
-## 6. Source Code
-### 6.1. Entrance
+## 7. Source Code
+### 7.1. Entrance
 ```python
 # Download the vocabulary file tokenizer.json from the model_id path and instantiate the tokenizer class
 tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -97,7 +159,7 @@ print(outputs)
 response = outputs[0][input_ids.shape[-1]:] # Retrieve the part of the outputs that excludes the original output of input_ids (prompt)
 print(tokenizer.decode(response, skip_special_tokens=True)) # Convert tokens back into characters, ignoring special tokens
 ```
-### 6.2. GenerationMixin
+### 7.2. GenerationMixin
 ![Inherit Relation of LlamaForCausalLM and GenerationMixin](../../assets/005_inheritance.png)
 ```python
 class GenerationMixin:
@@ -172,7 +234,7 @@ class GenerationMixin:
                 )
 ```
 
-### 6.3. LlamaForCausalLM
+### 7.3. LlamaForCausalLM
 ```python
 class LlamaForCausalLM(LlamaPreTrainedModel):
     def __init__(self, config):
@@ -226,7 +288,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel):
         )
 ```
 
-### 6.4. LlamaModel
+### 7.4. LlamaModel
 ```python
 class LlamaModel(LlamaPreTrainedModel):
     def __init__(self, config: LlamaConfig):
@@ -281,7 +343,7 @@ class LlamaModel(LlamaPreTrainedModel):
         )
 ```
 
-### 6.5. LlamaDecoderLayer
+### 7.5. LlamaDecoderLayer
 ```python
 class LlamaDecoderLayer(nn.Module):
     def __init__(self, config: LlamaConfig, layer_idx: int):
@@ -335,7 +397,7 @@ class LlamaDecoderLayer(nn.Module):
 
         return outputs
 ```
-### 6.6. LlamaRMSNorm
+### 7.6. LlamaRMSNorm
 ```python
 class LlamaRMSNorm(nn.Module):
     def __init__(self, hidden_size, eps=1e-6):
@@ -354,7 +416,7 @@ class LlamaRMSNorm(nn.Module):
         return self.weight * hidden_states.to(input_dtype)
 ```
 
-### 6.7. LlamaSdpaAttention
+### 7.7. LlamaSdpaAttention
 ```python
 class LlamaSdpaAttention(LlamaAttention):
     """
@@ -452,7 +514,7 @@ class LlamaSdpaAttention(LlamaAttention):
         return attn_output, None, past_key_value
 ```
 
-### 6.8. LlamaRotaryEmbedding
+### 7.8. LlamaRotaryEmbedding
 ```python
 class LlamaRotaryEmbedding(nn.Module):
     def __init__(self, dim, max_position_embeddings=2048, base=10000, device=None, scaling_factor=1.0):
@@ -483,7 +545,7 @@ class LlamaRotaryEmbedding(nn.Module):
         return cos.to(dtype=x.dtype), sin.to(dtype=x.dtype)
 ```
 
-### 6.9. LlamaMLP
+### 7.9. LlamaMLP
 ```python
 class LlamaMLP(nn.Module):
     def __init__(self, config):

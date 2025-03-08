@@ -30,8 +30,8 @@ Arena Elo
 Elo, short for Elo rating system, is named after its inventor, Hungarian-American physicist Arpad Elo. It was originally developed for ranking chess players in the 1960s.
 
 Website:  
-https://chat.lmsys.org/  
-https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard  
+[https://chat.lmsys.org/](https://chat.lmsys.org/)  
+[https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard)  
 
 ### 1.2. LiveBench
 Organization:  
@@ -43,7 +43,7 @@ Properties:
 - LiveBench currently contains a set of 18 diverse tasks across 6 categories, and we will release new, harder tasks over time.
 
 Website:  
-https://livebench.ai/
+[https://livebench.ai/](https://livebench.ai/)
 
 ### 1.3. Fine-tuning Index
  The Fine-tuning Leaderboard compares the performance of GPT-4 and popular open-source models that They fine-tuned across a series of tasks. 
@@ -51,13 +51,13 @@ https://livebench.ai/
  Remarkably, most of the fine-tuned open-source models surpass GPT-4 with Llama-3, Phi-3 and Zephyr demonstrating the strongest performance.
 
 Website:  
-https://predibase.com/fine-tuning-index
+[https://predibase.com/fine-tuning-index](https://predibase.com/fine-tuning-index)
 
 ### 1.4. SuperCLUE
 Domestic Leaderboard
 
 Website:  
-https://www.superclueai.com/
+[https://www.superclueai.com/](https://www.superclueai.com/)
 
 ## 2. LLM Organization and Product
 | Organization | Product |OpenSource | Location |

@@ -2,10 +2,12 @@
 icon: lightbulb
 sidebar: false
 date: 2025-02-14
-prev: false
+prev: ./020_neo4j
 next: ./018_autorag
 category:
   - LLM
+tag:
+  - Ollama
 ---
 # Ollama User Guide
 <!-- more -->

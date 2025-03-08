@@ -16,7 +16,7 @@ tag:
 <!-- more -->
 
 ## 1. LLM性能评估平台
-### 1.1. LMSYS
+### 1.1. LMSYS（匿名 AB Test）
 组织:   
 LMSYS 和 UC Berkeley SkyLab
 
@@ -29,10 +29,10 @@ Arena Elo
 Elo 评级系统是以其发明者、匈牙利裔美国物理学家 Arpad Elo 的名字命名的。它最初是在 20 世纪 60 年代为评级国际象棋棋手开发的。
 
 网址:  
-https://chat.lmsys.org/  
-https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard  
+[https://chat.lmsys.org/](https://chat.lmsys.org/)  
+[https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard)  
 
-### 1.2. LiveBench
+### 1.2. LiveBench (一直更新测试数据库来减少污染)
 组织:  
 Abacus.AI
 
@@ -42,21 +42,21 @@ Abacus.AI
 - LiveBench 目前包含 6 个类别中的 18 个不同任务，将随着时间的推移发布新的、更困难的任务。
 
 网址:  
-https://livebench.ai/
+[https://livebench.ai/](https://livebench.ai/)
 
-### 1.3. Fine-tuning Index  
+### 1.3. Fine-tuning Index (微调能上升的幅度) 
 微调排行榜将受欢迎的在多个任务上进行微调的开源模型的性能与 GPT-4 进行了比较。
 
 值得注意的是，大多数经过微调的开源模型都优于 GPT-4，其中 Llama-3、Phi-3 和 Zephyr 表现最佳。
 
 网址:  
-https://predibase.com/fine-tuning-index
+[https://predibase.com/fine-tuning-index](https://predibase.com/fine-tuning-index)
 
 ### 1.4. SuperCLUE
 国内模型排行榜
 
 Website:  
-https://www.superclueai.com/
+[https://www.superclueai.com/](https://www.superclueai.com/)
 
 ## 2. LLM组织和模型
 | Organization | Product |OpenSource | Location |
