@@ -2,7 +2,7 @@
 icon: lightbulb
 sidebar: false
 date: 2024-11-12
-prev: ./018_autorag
+prev: ./018_huggingface
 next: ./016_multimodal
 category:
   - LLM

@@ -3,7 +3,7 @@ icon: lightbulb
 sidebar: false
 date: 2025-02-14
 prev: ./020_neo4j
-next: ./018_autorag
+next: ./018_huggingface
 category:
   - LLM
 tag:
