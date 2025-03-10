@@ -20,6 +20,9 @@ tag:
 
 ## 1. 微调 Fine-tuning 
 - 目标：放大所需能力同时，保持其他能力不变
+  - 更新知识：引入新的特定领域信息
+  - 定制行为：调整模型的语气、个性或反应风格
+  - 针对任务进行优化：提高特定用例的准确性和相关性
 - 价值：增强了相应的能力
 - 问题：遗忘问题 catastrophic forgetting（有可能在其他能力上会有所下降）
   - 解决思路
@@ -358,3 +361,5 @@ RLHF（Reinforcement Learning from Human Feedback）是一种结合了强化学�
 
 ## 10. References
 - [Mixtral-8x7B: Understanding and Running the Sparse Mixture of Experts](https://towardsdatascience.com/mixtral-8x7b-understanding-and-running-the-sparse-mixture-of-experts-0e3fc7fde818)
+
+- Unsloth微调指南：[https://docs.unsloth.ai/get-started/fine-tuning-guide](https://docs.unsloth.ai/get-started/fine-tuning-guide)

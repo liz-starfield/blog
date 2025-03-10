@@ -20,6 +20,9 @@ tag:
 
 ## 1. Fine-tuning
 - **Goal**: Amplify required abilities while keeping others unchanged
+  - Update Knowledge: Introduce new domain-specific information
+  - Customize Behavior: Adjust the model’s tone, personality, or response style
+  - Optimize for Tasks: Improve accuracy and relevance for specific use cases
 - **Value**: Enhances corresponding capabilities
 - **Issue**: Catastrophic Forgetting (risk of degradation in other abilities)
   - Solutions:
