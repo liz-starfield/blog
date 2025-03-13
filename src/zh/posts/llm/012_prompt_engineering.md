@@ -152,5 +152,8 @@ Few-shot + CoT + 多路径推理一致
 5. ...
 ```
 
-## 6. 参考
+## 6. 优质Prompt
+[LangChain Hub Prompt 参考：https://smith.langchain.com/hub](https://smith.langchain.com/hub)
+
+## 7. 参考
 https://www.promptingguide.ai/

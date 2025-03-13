@@ -153,5 +153,8 @@ You have the following skills in xxx:
 5. ...
 ```
 
-## Reference
+## 6. High Quality Prompts
+[LangChain Hub Prompts：https://smith.langchain.com/hub](https://smith.langchain.com/hub)
+
+## 7. Reference
 https://www.promptingguide.ai/
